@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "class": "Box",
+    "date": "11/3/2023"
+  },
+  {
+    "id": 2,
+    "class": "Karate",
+    "date": "9/16/2023"
+  },
+  {
+    "id": 3,
+    "class": "HITT",
+    "date": "6/22/2023"
+  },
+  {
+    "id": 4,
+    "class": "Crossfit",
+    "date": "11/14/2023"
+  },
+  {
+    "id": 5,
+    "class": "Yoga",
+    "date": "9/15/2023"
+  }
+]
