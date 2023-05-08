@@ -7,7 +7,7 @@ const members = require('../data/member.json');
 const apiMembers = express.Router();
 
 // Get member list
-apiMembers.get('/', (req, res) => {
+apiMembers.get('/get', (req, res) => {
   res.status(200).json({
     data: members,
   });
@@ -15,7 +15,7 @@ apiMembers.get('/', (req, res) => {
 
 // Put member list
 
-apiMembers.put('/:id', (req, res) => {
+apiMembers.put('/put/:id', (req, res) => {
   const idParam = req.params.id;
   const newName = req.body.first_name;
   const newLastName = req.body.last_name;
@@ -23,24 +23,67 @@ apiMembers.put('/:id', (req, res) => {
   const newPassword = req.body.password;
   const newBirthdate = req.body.birthdate;
   const newCity = req.body.city;
-  const newAdress = req.body.adress;
+  const newAddress = req.body.adress;
   const newPhone = req.body.phone;
   const newMemberships = req.body.memberships;
+  const nameRegex = /^[A-Za-z]+$/;
+  const emailRegex = /^\S+@\S+\.\S+$/;
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+  const birthdateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/\d{4}$/;
+  const cityRegex = /^[A-Za-z ]+$/;
+  const addressRegex = /^[A-Za-z0-9\s,'-]*$/;
+  const phoneRegex = /^[0-9]{10}$/;
+  const membershipRegex = /^(classic|basic|black)$/;
 
   const memberExists = members.some((member) => member.id === parseInt(idParam, 10));
 
   if (memberExists) {
     const member = members.find((index) => index.id === parseInt(idParam, 10));
-
-    member.first_name = newName || member.first_name;
-    member.last_name = newLastName || member.last_name;
-    member.email = newEmail || member.email;
-    member.password = newPassword || member.password;
-    member.birthdate = newBirthdate || member.birthdate;
-    member.city = newCity || member.city;
-    member.adress = newAdress || member.adress;
-    member.phone = newPhone || member.phone;
-    member.memberships = newMemberships || member.memberships;
+    if (newName) {
+      member.first_name = nameRegex.test(newName)
+        ? newName
+        : res.status(406).json({ msg: 'format name invalid' });
+    }
+    if (newLastName) {
+      member.last_name = nameRegex.test(newLastName)
+        ? newLastName
+        : res.status(406).json({ msg: 'format lastName invalid' });
+    }
+    if (newEmail) {
+      member.email = emailRegex.test(newEmail)
+        ? newEmail
+        : res.status(406).json({ msg: 'format email invalid' });
+    }
+    if (newPassword) {
+      member.password = passwordRegex.test(newPassword)
+        ? newPassword
+        : res.status(406).json({ msg: 'format password invalid' });
+    }
+    if (newBirthdate) {
+      member.birthdate = birthdateRegex.test(newBirthdate)
+        ? newBirthdate
+        : res.status(406).json({ msg: 'format birthdate invalid' });
+    }
+    if (newCity) {
+      member.city = cityRegex.test(newCity)
+        ? newCity
+        : res.status(406).json({ msg: 'format city invalid' });
+    }
+    if (newAddress) {
+      member.adress = addressRegex.test(newAddress)
+        ? newAddress
+        : res.status(406).json({ msg: 'format address invalid' });
+    }
+    if (newPhone) {
+      member.phone = phoneRegex.test(newPhone)
+        ? newPhone
+        : res.status(406).json({ msg: 'format phone invalid' });
+    }
+    if (newMemberships) {
+      member.memberships = membershipRegex.test(newMemberships)
+        ? newMemberships
+        : res.status(406).json({ msg: 'format memberships invalid' });
+    }
 
     fs.writeFileSync('./src/data/member.json', JSON.stringify(members));
 
