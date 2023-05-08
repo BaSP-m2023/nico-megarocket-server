@@ -7,7 +7,7 @@ const fs = require('fs');
 
 // Get all trainers
 router.get('/', (_, res) => {
-  if (trainers.length === 0) res.status(404).send('No trainers found'); res.send(trainers);
+  if (trainers.length === 0) res.send('No trainers found'); res.send(trainers);
 });
 
 // Filter for activity (filter?activity=Yoga)
@@ -20,9 +20,7 @@ router.get('/filter', (req, res) => {
 
   if (filterTrainers.length === 0) {
     res.status(404).send('No trainers found for the specified activity');
-  } else {
-    res.send(filterTrainers);
-  }
+  } res.send(filterTrainers);
 });
 
 // Modify trainer
@@ -33,22 +31,24 @@ router.put('/:id', (req, res) => {
 
   // Validate empty fields
   const emptyFields = Object.keys(newData).filter((key) => newData[key] === '');
+
   if (emptyFields.length > 0) {
     res.status(400).send(`Error: Fields '${emptyFields.join(', ')}' cannot be empty`);
-  } else if (!foundTrainer) {
-    res.status(404).send('Trainer not found!');
-  } else {
-    trainers[foundTrainer] = { ...trainers[foundTrainer], ...newData };
-
-    // write the changes in trainer.JSON
-    fs.writeFile('./src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => {
-      if (err) {
-        res.status(500).send('Error updating trainer data');
-      } else {
-        res.send(`Trainer id ${trainerId} data updated successfully `);
-      }
-    });
+    return;
   }
+
+  if (foundTrainer < 0) {
+    res.status(404).send('Trainer not found!');
+    return;
+  }
+
+  trainers[foundTrainer] = { ...trainers[foundTrainer], ...newData };
+
+  // write the changes in trainer.JSON
+  fs.writeFile('./src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => {
+    if (err) res.status(500).send('Error updating trainer data');
+    res.send(`Trainer id ${trainerId} data updated successfully`);
+  });
 });
 
 export default router;
