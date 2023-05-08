@@ -5,6 +5,8 @@ const classes = require('../data/subscription.json');
 
 const router = express.Router();
 
+const numberRegex = /^[0-9]+$/;
+
 // Create subscription
 
 router.post('/create', (req, res) => {
@@ -55,6 +57,11 @@ router.delete('/delete/:id', (req, res) => {
   const exist = classes.find((sub) => sub.id.toString() === subscriptionDelete);
   const newSubscriptionData = classes.filter((sub) => sub.id.toString() !== subscriptionDelete);
 
+  if (!numberRegex.test(subscriptionDelete)) {
+    res.status(400).send('Invalid ID');
+    return;
+  }
+
   if (!exist) {
     res.status(404).send('ID are not found');
     return;
@@ -74,6 +81,11 @@ router.delete('/delete/:id', (req, res) => {
 router.get('/:id', (req, res) => {
   const idSubscription = req.params.id;
   const exist = classes.filter((sub) => sub.id.toString() === idSubscription);
+
+  if (!numberRegex.test(idSubscription)) {
+    res.status(400).send('Invalid ID');
+    return;
+  }
 
   if (!exist) {
     res.status(404).send('Subscritpion are not found');
@@ -107,6 +119,11 @@ router.put('/edit/:id', (req, res) => {
   const foundId = classes.find((sub) => sub.id.toString() === getId);
   const newProps = Object.keys(req.body);
   const isDifferentProps = newProps.some((prop) => !requireProps.includes(prop));
+
+  if (!numberRegex.test(getId)) {
+    res.status(400).send('Invalid ID');
+    return;
+  }
 
   if (!foundId) {
     res.status(404).send('Subscription are not found for edit');
