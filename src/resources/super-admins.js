@@ -1,75 +1,100 @@
-const express = require("express");
-const sAdmins = require("../data/super-admins.json");
-const fs = require("fs");
+const express = require('express');
+const fs = require('fs');
+const sAdmins = require('../data/super-admins.json');
 
-function SpaceFounder() {
-  hasSpace = false;
-  for (let i = 0; i < sAdmins.length - 1; i++) {
-    if (sAdmins[i] === " ") {
-      hasSpace = true;
-    }
-  }
-}
+const router = express.Router();
 
-//GET
-express.get("/get", (req, res) => {
-  if (SpaceFounder(sAdmins) === false) {
-    response.send(sAdmins);
-  } else {
-    response.send("Dont include spaces please");
-  }
+// GET
+router.get('/get', (req, res) => {
+  if (sAdmins.length === 0) res.send('Admin not found');
+  res.send(sAdmins);
 });
 
-//GET BY ID
-express.get("/getById", (req, res) => {
-  console.log(req.params);
+// GET BY ID
+router.get('/getById/:id', (req, res) => {
   const sAdminId = req.params.id;
   const foundSAdmin = sAdmins.find(
     (sAdmins) => sAdmins.id.toString() === sAdminId
   );
   if (foundSAdmin) {
-    response.send(foundSAdmin);
+    res.send(foundSAdmin);
   } else {
-    res.send("Admin invalid");
+    res.send('Admin not found');
   }
 });
 
-//POST
-
-express.post("/post", (Req, resp) => {
-  const newSAdmin = req.body;
-  sAdmins.push(newSAdmin);
-  fs.writefile(
-    "..src/data/super-admins.json",
-    JSON.stringify(sAdmins),
-    (error) => {
-      if (error) {
-        res.send("Admin cant be created");
+// POST
+router.post('/post', (req, res) => {
+  const newAdmin = req.body;
+  const emptyFields = Object.keys(newAdmin).filter(
+    (key) => newAdmin[key] === ''
+  );
+  if (emptyFields.length > 0) {
+    res.send('Fields cant be empty');
+    return;
+  }
+  sAdmins.push(newAdmin);
+  fs.writeFile(
+    'src/data/super-admins.json',
+    JSON.stringify(sAdmins, null, 2),
+    (err) => {
+      if (err) {
+        res.send('Admin cant be created');
       } else {
-        res.send("Admin created");
+        res.send('Admin created');
       }
     }
   );
-  res.send(sAdmins);
 });
 
-//DELETE
-
-express.delete("/:id", (req, resp) => {
-  const sAdminsId = req.param.id;
+// DELETE
+router.delete('/delete/:id', (req, res) => {
+  const sAdminsId = req.params.id;
   const filteredsAdmins = sAdmins.filter(
-    (person) => person.id.toString() !== sAdmins.id
+    (admin) => admin.id.toString() !== sAdminsId
   );
-  fs.writefile(
-    "..src/data/super-admins.json",
-    JSON.stringify(filteredsAdmins),
-    (error) => {
-      if (error) {
-        res.send("Admin cant be delete");
+  fs.writeFile(
+    'src/data/super-admins.json',
+    JSON.stringify(filteredsAdmins, null, 2),
+    (err) => {
+      if (err) {
+        res.send('Admin cant be delete');
       } else {
-        res.send("Admin delete");
+        res.send('Admin delete');
       }
     }
   );
-  res.send(sAdmins);
 });
+
+// PUT
+router.put('/put/:id', (req, res) => {
+  const sAdminsId = req.params.id;
+  const newAdmin = req.body;
+  const emptyFields = Object.keys(newAdmin).filter(
+    (key) => newAdmin[key] === ''
+  );
+  if (emptyFields.length > 0) {
+    res.send('Fields cant be empty');
+    return;
+  }
+  console.log(req.body);
+  const found = sAdmins.findIndex(
+    (admin) => JSON.stringify(admin.id) === sAdminsId
+  );
+  if (found >= 0) {
+    sAdmins[found] = { ...sAdmins[found], ...newAdmin };
+    fs.writeFile(
+      './src/data/super-admins.json',
+      JSON.stringify(sAdmins, null, 2),
+      (err) => {
+        if (err) {
+          res.send('Id does not match any admin');
+        } else {
+          res.send('Admin updated');
+        }
+      }
+    );
+  }
+});
+
+module.exports = router;
