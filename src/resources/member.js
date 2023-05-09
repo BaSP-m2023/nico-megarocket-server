@@ -42,47 +42,47 @@ apiMembers.put('/put/:id', (req, res) => {
     if (newName) {
       member.first_name = nameRegex.test(newName)
         ? newName
-        : res.status(406).json({ msg: 'format name invalid' });
+        : res.status(400).json({ msg: 'invalid name format' });
     }
     if (newLastName) {
       member.last_name = nameRegex.test(newLastName)
         ? newLastName
-        : res.status(406).json({ msg: 'format lastName invalid' });
+        : res.status(400).json({ msg: 'invalid lastName format' });
     }
     if (newEmail) {
       member.email = emailRegex.test(newEmail)
         ? newEmail
-        : res.status(406).json({ msg: 'format email invalid' });
+        : res.status(400).json({ msg: 'invalid email format' });
     }
     if (newPassword) {
       member.password = passwordRegex.test(newPassword)
         ? newPassword
-        : res.status(406).json({ msg: 'format password invalid' });
+        : res.status(400).json({ msg: 'invalid password format' });
     }
     if (newBirthdate) {
       member.birthdate = birthdateRegex.test(newBirthdate)
         ? newBirthdate
-        : res.status(406).json({ msg: 'format birthdate invalid' });
+        : res.status(400).json({ msg: 'invalid birthdate format' });
     }
     if (newCity) {
       member.city = cityRegex.test(newCity)
         ? newCity
-        : res.status(406).json({ msg: 'format city invalid' });
+        : res.status(400).json({ msg: 'invalid city format' });
     }
     if (newAddress) {
       member.adress = addressRegex.test(newAddress)
         ? newAddress
-        : res.status(406).json({ msg: 'format address invalid' });
+        : res.status(400).json({ msg: 'invalid address format' });
     }
     if (newPhone) {
       member.phone = phoneRegex.test(newPhone)
         ? newPhone
-        : res.status(406).json({ msg: 'format phone invalid' });
+        : res.status(400).json({ msg: 'invalid phone format' });
     }
     if (newMemberships) {
       member.memberships = membershipRegex.test(newMemberships)
         ? newMemberships
-        : res.status(406).json({ msg: 'format memberships invalid' });
+        : res.status(400).json({ msg: 'invalid memberships format' });
     }
 
     fs.writeFileSync('./src/data/member.json', JSON.stringify(members));
