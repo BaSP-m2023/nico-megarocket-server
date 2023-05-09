@@ -1,9 +1,11 @@
 // use "import" to import libraries
 import express from 'express';
 import cors from 'cors';
+import trainerRouter from './resources/trainer';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
+const subscription = require('./resources/subscription');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -12,6 +14,7 @@ const sAdminsRouter = require('./resources/super-admins');
 
 app.use(cors());
 app.use(express.json());
+app.use('/subscription', subscription);
 
 app.use('/sAdmins', sAdminsRouter);
 
@@ -24,6 +27,8 @@ app.get('/admins', (req, res) => {
     data: admins,
   });
 });
+
+app.use('/trainer', trainerRouter);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console

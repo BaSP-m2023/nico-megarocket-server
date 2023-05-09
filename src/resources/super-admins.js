@@ -75,7 +75,6 @@ router.delete('/delete/:id', (req, res) => {
 
 // PUT
 router.put('/put/:id', (req, res) => {
-  console.log('params', req.params);
   const sAdminId = req.params.id;
 
   const newSAdmin = req.body;
