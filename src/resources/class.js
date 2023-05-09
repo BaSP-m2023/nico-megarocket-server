@@ -27,7 +27,7 @@ router.put('/:id', (req, res) => {
 
         fs.writeFile('src/data/class.json', JSON.stringify(classes, null, 2), (err) => {
           if (err) {
-            res.status(400).json({ msg: 'Error! Class cant be updated' });
+            res.status(500).json({ msg: 'Error! Class cant be updated' });
           } else {
             res.status(200).json({ msg: 'Class updated' });
           }
