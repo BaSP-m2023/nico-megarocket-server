@@ -18,6 +18,10 @@ app.use(express.json());
 app.use('/subscription', subscription);
 app.use('/class', classes);
 
+const classesRouter = require('./resources/class');
+
+app.use('/class', classesRouter);
+
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
