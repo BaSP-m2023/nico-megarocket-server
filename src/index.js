@@ -5,12 +5,14 @@ import trainerRouter from './resources/trainer';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
+const subscription = require('./resources/subscription');
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/subscription', subscription);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
