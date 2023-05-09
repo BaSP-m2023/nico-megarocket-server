@@ -1,54 +1,51 @@
-import express from 'express';
-
-import trainers from '../data/trainer.json';
-
-const router = express.Router();
+const express = require('express');
 const fs = require('fs');
 
-// Get all trainers
-router.get('/', (_, res) => {
-  if (trainers.length === 0) res.send('No trainers found'); res.send(trainers);
-});
+const trainers = require('../data/trainer.json');
 
-// Filter for activity (filter?activity=Yoga)
-router.get('/filter', (req, res) => {
-  const { activity } = req.query;
+const router = express.Router();
 
-  let filterTrainers = trainers;
-
-  if (activity) filterTrainers = filterTrainers.filter((trainer) => trainer.activity === activity);
-
-  if (filterTrainers.length === 0) {
-    res.status(404).send('No trainers found for the specified activity');
-  } res.send(filterTrainers);
-});
-
-// Modify trainer
-router.put('/:id', (req, res) => {
-  const newData = req.body;
+router.get('/:id', (req, res) => {
   const trainerId = req.params.id;
-  const foundTrainer = trainers.findIndex((trainer) => trainer.id.toString() === trainerId);
+  if (!trainerId) {
+    return res.status(400).send('Error! Trainer ID cannot be empty');
+  }
+  const foundTrainer = trainers.find((trainer) => trainer.id.toString() === trainerId);
+  if (foundTrainer) {
+    return res.send(foundTrainer);
+  }
+  return res.send('Trainer not found!');
+});
 
-  // Validate empty fields
-  const emptyFields = Object.keys(newData).filter((key) => newData[key] === '');
-
+// eslint-disable-next-line consistent-return
+router.post('/', (req, res) => {
+  const newTrainer = req.body;
+  const emptyFields = Object.keys(newTrainer).filter((key) => newTrainer[key] === '');
   if (emptyFields.length > 0) {
-    res.status(400).send(`Error: Fields '${emptyFields.join(', ')}' cannot be empty`);
-    return;
+    return res.status(400).send('Error! Fields cannot be empty');
   }
-
-  if (foundTrainer < 0) {
-    res.status(404).send('Trainer not found!');
-    return;
-  }
-
-  trainers[foundTrainer] = { ...trainers[foundTrainer], ...newData };
-
-  // write the changes in trainer.JSON
-  fs.writeFile('./src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => {
-    if (err) res.status(500).send('Error updating trainer data');
-    res.send(`Trainer id ${trainerId} data updated successfully`);
+  trainers.push(newTrainer);
+  fs.writeFile('./src/data/trainer.json', JSON.stringify(trainers), (err) => {
+    if (err) {
+      return res.status(500).send('Error! Trainer cannot be created');
+    }
+    return res.send('Trainer created');
   });
 });
 
-export default router;
+// eslint-disable-next-line consistent-return
+router.delete('/:id', (req, res) => {
+  const trainerId = req.params.id;
+  if (!trainerId) {
+    return res.status(400).send('Error! Trainer ID cannot be empty');
+  }
+  const filteredTrainers = trainers.filter((trainer) => trainer.id.toString() !== trainerId);
+  fs.writeFile('./src/data/trainer.json', JSON.stringify(filteredTrainers, null, 2), (err) => {
+    if (err) {
+      return res.status(500).send('Error! Trainer cannot be deleted');
+    }
+    return res.send('Trainer deleted');
+  });
+});
+
+module.exports = router;

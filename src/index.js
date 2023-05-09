@@ -8,6 +8,7 @@ const admins = require('./data/admins.json');
 const adminsRouter = require('./resources/admins');
 const subscription = require('./resources/subscription');
 const classes = require('./resources/class');
+// eslint-disable-next-line import/newline-after-import
 const classesRouter = require('./resources/class');
 const app = express();
 const port = process.env.PORT || 4000;
