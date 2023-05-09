@@ -3,14 +3,12 @@ import express from 'express';
 import cors from 'cors';
 
 const admins = require('./data/admins.json');
-const classes = require('./resources/class');
 
 const app = express();
 const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
-app.use('/class', classes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
