@@ -1,10 +1,11 @@
 // use "import" to import libraries
 import express from 'express';
 import cors from 'cors';
+import apiMembers from './resources/member';
 import trainerRouter from './resources/trainer';
 
 const admins = require('./data/admins.json');
-const userRouter = require('./resources/member');
+// const userRouter = require('./resources/member');
 const subscription = require('./resources/subscription');
 const classes = require('./resources/class');
 
@@ -13,7 +14,7 @@ const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
-app.use('/member', userRouter);
+// app.use('/member', userRouter);
 app.use('/subscription', subscription);
 app.use('/class', classes);
 
@@ -27,6 +28,7 @@ app.get('/admins', (req, res) => {
   });
 });
 
+app.use('/members', apiMembers);
 app.use('/trainer', trainerRouter);
 
 app.listen(port, () => {
