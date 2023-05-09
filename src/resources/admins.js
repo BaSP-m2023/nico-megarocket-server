@@ -4,7 +4,11 @@ const fs = require('fs')
 const router = express.Router ()
 
 router.get ('/get', (req, res)=>{
-    return res.send(adminsUser)
+    if (adminsUser.length === 0) {
+        res.send('No admins list no found')
+    } else {
+        res.send(adminsUser)
+    }
 })
 
 router.put ('/put/:id', (req, res)=>{
