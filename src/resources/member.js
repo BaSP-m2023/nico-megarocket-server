@@ -8,9 +8,13 @@ const apiMembers = express.Router();
 
 // Get member list
 apiMembers.get('/get', (req, res) => {
-  res.status(200).json({
-    data: members,
-  });
+  if (members.length) {
+    res.status(200).json({
+      data: members,
+    });
+  } else {
+    res.status(200).json({ msg: 'empty member list' });
+  }
 });
 
 // Put member list
