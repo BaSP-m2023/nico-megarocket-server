@@ -12,12 +12,16 @@ const classesRouter = require('./resources/class');
 const app = express();
 const port = process.env.PORT || 4000;
 
+const sAdminsRouter = require('./resources/super-admins');
+
 app.use(cors());
 app.use(express.json());
 app.use('/admins', adminsRouter);
 app.use('/subscription', subscription);
 app.use('/class', classes);
 app.use('/class', classesRouter);
+
+app.use('/sAdmins', sAdminsRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
