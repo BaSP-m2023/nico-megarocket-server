@@ -17,7 +17,7 @@ mongoose
   .then(() => console.log('Db connected'))
   .catch((error) => console.log('Error : ', error));
 
-app.use('/', router);
+app.use('/api', router);
 
 app.listen(port, () => {
 // eslint-disable-next-line no-console

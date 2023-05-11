@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "02ecf89a-86b6-4758-b728-b56f0a999204",
+		"name": "Classes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27235298"
+	},
+	"item": [
+		{
+			"name": "Activity",
+			"item": []
+		},
+		{
+			"name": "Admins",
+			"item": []
+		},
+		{
+			"name": "Class",
+			"item": []
+		},
+		{
+			"name": "Gym",
+			"item": []
+		},
+		{
+			"name": "Members",
+			"item": []
+		},
+		{
+			"name": "Subscriptions",
+			"item": []
+		},
+		{
+			"name": "Super-admins",
+			"item": []
+		},
+		{
+			"name": "Trainer",
+			"item": []
+		}
+	]
+}
