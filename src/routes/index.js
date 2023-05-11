@@ -4,6 +4,6 @@ const router = express.Router();
 
 const superAdmin = require('../controllers/super-admins');
 
-router.use('/Superadmin', superAdmin);
+router.use('/superadmin', superAdmin);
 
 module.exports = router;
