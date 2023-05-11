@@ -1,40 +1,23 @@
-// use "import" to import libraries
-import express from 'express';
-import cors from 'cors';
-import apiMembers from './resources/member';
-import trainerRouter from './resources/trainer';
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
 
-const admins = require('./data/admins.json');
-const adminsRouter = require('./resources/admins');
-const subscription = require('./resources/subscription');
-const classes = require('./resources/class');
-const classesRouter = require('./resources/class');
+const router = require('./routes');
+
 const app = express();
 const port = process.env.PORT || 4000;
 
-const sAdminsRouter = require('./resources/super-admins');
-
 app.use(cors());
 app.use(express.json());
-app.use('/admins', adminsRouter);
-app.use('/subscription', subscription);
-app.use('/class', classes);
-app.use('/class', classesRouter);
 
-app.use('/sAdmins', sAdminsRouter);
+const DB_URL = 'mongodb+srv://nico-team:UcLQ3ogL9TCSIMH2@megarocket-databases.inpprte.mongodb.net/';
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+mongoose
+  .connect(DB_URL)
+  .then(() => console.log('Db connected'))
+  .catch((error) => console.log('Error : ', error));
 
-app.get('/admins', (req, res) => {
-  res.status(200).json({
-    data: admins,
-  });
-});
-
-app.use('/members', apiMembers);
-app.use('/trainer', trainerRouter);
+app.use('/', router);
 
 app.listen(port, () => {
 // eslint-disable-next-line no-console
