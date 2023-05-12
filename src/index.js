@@ -10,7 +10,7 @@ const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
-const DB_URL = 'mongodb+srv://nico-team:UcLQ3ogL9TCSIMH2@megarocket-databases.inpprte.mongodb.net/';
+const DB_URL = 'mongodb+srv://nico-team:UcLQ3ogL9TCSIMH2@megarocket-databases.inpprte.mongodb.net/nico-database';
 
 mongoose
   .connect(DB_URL)
