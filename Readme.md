@@ -54,10 +54,8 @@ npm run lint:fix
 | <img src="https://avatars.githubusercontent.com/u/121574110?v=4" height="50" width="50"> |   Enrique Anastasini    |    Enrianastasini@gmail.com    |   [@enriqueanastasini](https://github.com/enriqueanastasini)   |
 | <img src="https://avatars.githubusercontent.com/u/127548159?v=4" height="50" width="50"> |    Santiago Menendez    |      santi.mm11@gmail.com      |     [@santimenendez98](https://github.com/santimenendez98)     |
 
-# <<<<<<< Updated upstream
 
 <br>
->>>>>>> Stashed changes
-### License & Copyright
+License & Copyright
 
 © Radium Rocket "Become a Software Professional 2023"
