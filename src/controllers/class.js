@@ -7,12 +7,6 @@ const getClasses = (req, res) => {
         res.status(200).json({
           message: 'All classes',
           data,
-          error: false,
-        });
-      } else {
-        res.status(401).json({
-          message: data.message,
-          error: true,
         });
       }
     })

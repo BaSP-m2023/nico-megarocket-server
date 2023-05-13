@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const validateId = (req, res, next) => {
-  const classValidation = Joi.string().regex(/^[a-zA-Z0-9-]+$/).empty().min(24);
+  const classValidation = Joi.string().regex(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i).empty().min(24);
 
   const validateClassId = classValidation.validate(req.params.id);
 
