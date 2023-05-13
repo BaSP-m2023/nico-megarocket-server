@@ -1,3 +1,4 @@
+/*
 const express = require('express')
 const adminsUser = require('../data/admins.json')
 const fs = require('fs')
@@ -38,5 +39,5 @@ router.put ('/put/:id', (req, res)=>{
         }
   });
 })
-
 module.exports=router
+*/
