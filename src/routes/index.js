@@ -1,9 +1,8 @@
 const express = require('express');
 
-const router = express.Router();
-
-const superAdmin = require('./super-admins');
 const admins = require('./admins');
+
+const router = express.Router();
 
 router.use('/admins', admins);
 

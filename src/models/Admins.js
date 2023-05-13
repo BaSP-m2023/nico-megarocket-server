@@ -3,16 +3,16 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const adminsSchema = new Schema({
-  first_name: {
+  firstName: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 3,
     maxlength: 15,
     match: /^[A-Za-z]+$/,
   },
-  last_name: {
+  lastName: {
     type: String,
-    minlength: 5,
+    minlength: 3,
     maxlength: 15,
     match: /^[A-Za-z]+$/,
     required: true,
@@ -42,7 +42,7 @@ const adminsSchema = new Schema({
   },
   password: {
     type: String,
-    match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+    match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
     required: true,
   },
 });

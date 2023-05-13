@@ -1,7 +1,12 @@
 const express = require('express');
 
+const validationsAdmin = require('../validations/admins');
+
+const controllersAdmin = require('../controllers/admins');
+
 const router = express.Router();
 
-const validations = require('../validations/admins');
+router
+  .post('/', validationsAdmin.validateCreation, controllersAdmin.createAdmin);
 
-router.post('/', validations.validateCreation);
+module.exports = router;
