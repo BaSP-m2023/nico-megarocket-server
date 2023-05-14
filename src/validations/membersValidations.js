@@ -11,7 +11,7 @@ const validateCreation = (req, res, next) => {
         'number.min': 'Phone number must be at least 10 digits',
         'number.max': 'Phone number must be at most 10 digits',
       }),
-    email: Joi.string().email().required().required(),
+    email: Joi.string().email().required(),
     city: Joi.string().required(),
     postal_code: Joi.number().min(1000).max(99999).required()
       .messages({
