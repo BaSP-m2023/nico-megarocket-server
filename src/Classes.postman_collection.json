@@ -35,8 +35,42 @@
 			"item": []
 		},
 		{
-			"name": "Trainer",
-			"item": []
-		}
+			"name": "Get all trainers",
+			"request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "localhost:4000/api/trainer",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000",
+                    "path": [
+                        "api",
+                        "trainer"
+                    ]
+                    }
+		            },
+                    "response": []
+        },
+        {
+            "name": "Get trainer by id",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "localhost:4000/api/trainer",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000",
+                    "path": [
+                        "api",
+                        "trainer"
+                    ]
+                }
+            },
+            "response": []
+        }
 	]
 }

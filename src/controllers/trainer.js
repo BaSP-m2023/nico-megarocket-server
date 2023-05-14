@@ -1,54 +1,46 @@
-import express from 'express';
+const trainers = require('../models/trainer');
 
-import trainers from '../data/trainer.json';
+const getAllTrainers = (req, res) => {
+  trainers.find()
+    .then((data) => {
+      if (data) {
+        res.status(200).json({
+          message: 'This are all our trainers',
+          data,
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'Error, a problem has occurred',
+      error,
+    }));
+};
 
-const router = express.Router();
-const fs = require('fs');
+// Get trainers by id
+const getTrainerById = (req, res) => {
+  const { id } = req.params;
 
-// Get all trainers
-router.get('/', (_, res) => {
-  if (trainers.length === 0) res.send('No trainers found'); res.send(trainers);
-});
+  trainers.findById(id)
+    .then((data) => {
+      if (data) {
+        res.status(200).json({
+          message: 'Trainer Found',
+          data,
+          error: false,
+        });
+      } else {
+        res.status(500).json({
+          message: 'Class not found',
+          error: true,
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'An error ocurred',
+        error: error.msg,
+      });
+    });
+};
 
-// Filter for activity (filter?activity=Yoga)
-router.get('/filter', (req, res) => {
-  const { activity } = req.query;
-
-  let filterTrainers = trainers;
-
-  if (activity) filterTrainers = filterTrainers.filter((trainer) => trainer.activity === activity);
-
-  if (filterTrainers.length === 0) {
-    res.status(404).send('No trainers found for the specified activity');
-  } res.send(filterTrainers);
-});
-
-// Modify trainer
-router.put('/:id', (req, res) => {
-  const newData = req.body;
-  const trainerId = req.params.id;
-  const foundTrainer = trainers.findIndex((trainer) => trainer.id.toString() === trainerId);
-
-  // Validate empty fields
-  const emptyFields = Object.keys(newData).filter((key) => newData[key] === '');
-
-  if (emptyFields.length > 0) {
-    res.status(400).send(`Error: Fields '${emptyFields.join(', ')}' cannot be empty`);
-    return;
-  }
-
-  if (foundTrainer < 0) {
-    res.status(404).send('Trainer not found!');
-    return;
-  }
-
-  trainers[foundTrainer] = { ...trainers[foundTrainer], ...newData };
-
-  // write the changes in trainer.JSON
-  fs.writeFile('./src/data/trainer.json', JSON.stringify(trainers, null, 2), (err) => {
-    if (err) res.status(500).send('Error updating trainer data');
-    res.send(`Trainer id ${trainerId} data updated successfully`);
-  });
-});
-
-export default router;
+module.exports = { getAllTrainers, getTrainerById };
