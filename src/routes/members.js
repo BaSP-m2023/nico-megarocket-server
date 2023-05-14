@@ -7,6 +7,8 @@ const validations = require('../validations/membersValidations');
 const router = express.Router();
 
 router
-  .post('/', validations.validateCreation, memberController.createMember);
+  .post('/', validations.validateCreation, memberController.createMember)
+  .get('/', memberController.getAllMembers)
+  .get('/:id', memberController.getById);
 
 module.exports = router;
