@@ -1,9 +1,9 @@
-import express from 'express';
-
-import trainers from '../data/trainer.json';
+const express = require('express');
+const fs = require('fs');
+const trainers = require('../data/trainer.json');
+const Trainers = require('../models/Trainer');
 
 const router = express.Router();
-const fs = require('fs');
 
 // Get all trainers
 router.get('/', (_, res) => {
@@ -51,4 +51,35 @@ router.put('/:id', (req, res) => {
   });
 });
 
-export default router;
+const updateTrainers = (req, res) => {
+  const { id } = req.params;
+  const {
+    firstName, lastName, dni, phone, email, city, salary, isActive,
+  } = req.body;
+
+  Trainers.findByIdAndUpdate(
+    id,
+    {
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      city,
+      salary,
+      isActive,
+    },
+    { new: true },
+  )
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          msg: `The id ${id} was not found`,
+        });
+      }
+      return res.status(200).json(result);
+    })
+    .catch((error) => res.status(400).json(error));
+};
+
+module.exports = updateTrainers;
