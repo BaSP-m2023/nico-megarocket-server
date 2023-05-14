@@ -2,7 +2,9 @@ const Activity = require('../models/Activity');
 
 const updateActivity = (req, res) => {
   const { id } = req.params;
-  const { name, description, active } = req.body;
+  const {
+    name, description, active, assignedTo,
+  } = req.body;
 
   Activity.findByIdAndUpdate(
     id,
@@ -10,6 +12,7 @@ const updateActivity = (req, res) => {
       name,
       description,
       active,
+      assignedTo,
     },
     { new: true },
   )
