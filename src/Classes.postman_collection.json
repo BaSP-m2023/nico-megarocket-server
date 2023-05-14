@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "02ecf89a-86b6-4758-b728-b56f0a999204",
+		"_postman_id": "56ca8d9c-32c4-49fd-8a52-ca7f75149e6b",
 		"name": "Classes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "27235298"
@@ -45,7 +45,44 @@
 		},
 		{
 			"name": "Class",
-			"item": []
+			"item": [
+				{
+					"name": "Get all classes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4000/api/class"
+					},
+					"response": []
+				},
+				{
+					"name": "Get class by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/class/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"class",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5cdd3217a3f5a71aaf5a7dd4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Gym",

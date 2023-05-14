@@ -9,4 +9,4 @@ const router = express.Router();
 router
   .post('/', validationsAdmin.validateCreation, controllersAdmin.createAdmin);
 
-  module.exports = router;
+module.exports = router;
