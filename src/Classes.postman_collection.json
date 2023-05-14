@@ -52,6 +52,15 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create Class",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:4000/api/class/"
+					},
+					"response": []
 				}
 			]
 		},

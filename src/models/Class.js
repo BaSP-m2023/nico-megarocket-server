@@ -16,9 +16,8 @@ const classSchema = new Schema({
     required: true,
   },
   activity: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
-    enum: Schema.Types.ObjectId,
   },
   slots: {
     type: Number,
