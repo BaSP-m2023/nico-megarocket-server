@@ -20,7 +20,10 @@ const createAdmin = (req, res) => {
     city,
     password,
   })
-    .then((result) => res.status(201).json(result))
+    .then((result) => res.status(201).json({
+      message: 'Admin created',
+      result,
+    }))
     .catch((error) => res.status(400).json({
       message: 'Error ocurred',
       error,
