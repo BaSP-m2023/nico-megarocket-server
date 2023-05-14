@@ -9,6 +9,7 @@ const activitySchema = new Schema({
   },
   is_active: {
     type: Boolean,
+    default: false,
   },
   description: {
     type: String,

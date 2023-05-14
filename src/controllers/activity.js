@@ -10,7 +10,7 @@ const getAllActivities = (req, res) => {
       });
     })
     .catch((error) => {
-      res.status(400).json({
+      res.status(500).json({
         message: 'there is an error here',
         error,
       });
@@ -27,7 +27,7 @@ const getActivityById = (req, res) => {
       });
     })
     .catch((error) => {
-      res.status(400).json({
+      res.status(500).json({
         message: 'there is an error here',
         error,
       });
