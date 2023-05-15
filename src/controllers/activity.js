@@ -1,4 +1,4 @@
-const activity = require('../models/activity');
+const activity = require('../models/Activity');
 
 const getAllActivities = (req, res) => {
   activity.find()
