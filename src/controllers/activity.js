@@ -56,9 +56,15 @@ const updateActivity = (req, res) => {
           error: true,
         });
       }
-      return res.status(201).json(result);
+      return res.status(201).json({
+        message: 'Activity updated successfully',
+        result,
+      });
     })
-    .catch((error) => res.status(400).json(error));
+    .catch((error) => res.status(400).json({
+      message: 'Error updating activity',
+      error,
+    }));
 };
 
 module.exports = {
