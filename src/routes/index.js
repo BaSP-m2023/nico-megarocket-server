@@ -1,11 +1,17 @@
 const express = require('express');
 
+const activities = require('./activity');
+
+const admins = require('./admins');
+
+const classes = require('./class');
+
 const router = express.Router();
 
-// const superAdmin = require('./super-admins');
-const activity = require('./activity');
+router.use('/activity', activities);
 
-// router.use('/superadmin', superAdmin);
-router.use('/activity', activity);
+router.use('/admins', admins);
+
+router.use('/class', classes);
 
 module.exports = router;
