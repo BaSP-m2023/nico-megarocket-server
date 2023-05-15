@@ -3,11 +3,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const memberSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   firstName: {
     type: String,
     required: true,
@@ -25,7 +20,7 @@ const memberSchema = new Schema({
     required: true,
   },
   phone: {
-    type: Number,
+    type: String,
     required: true,
   },
   email: {

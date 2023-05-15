@@ -31,7 +31,7 @@ const updateMember = (req, res) => {
       }
       return res.status(201).json(result);
     })
-    .catch((error) => res.status(400).json(error));
+    .catch((error) => res.status(500).json(error));
 };
 
 module.exports = {

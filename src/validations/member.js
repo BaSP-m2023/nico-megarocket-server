@@ -4,7 +4,11 @@ const validateUpdate = (req, res, next) => {
   const memberValidation = Joi.object({
     firstName: Joi.string().min(3).max(50),
     lastName: Joi.string().min(3).max(50),
-    dni: Joi.number().min(6).max(8),
+    dni: Joi.number()
+      .positive()
+      .integer()
+      .min(10000000)
+      .max(99999999),
     birthday: Joi.date().max('now').custom((value, helpers) => {
       const age = new Date().getFullYear() - new Date(value).getFullYear();
       if (age < 12) {
@@ -12,7 +16,11 @@ const validateUpdate = (req, res, next) => {
       }
       return value;
     }),
-    phone: Joi.number().min(8).max(12),
+    phone: Joi.number()
+      .positive()
+      .integer()
+      .min(10000000)
+      .max(99999999),
     email: Joi.string().email(),
     city: Joi.string().min(3).max(20),
     postalCode: Joi.string().min(3).max(5),
