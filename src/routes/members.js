@@ -2,7 +2,7 @@ const express = require('express');
 
 const memberController = require('../controllers/member');
 
-const validations = require('../validations/membersValidations');
+const validations = require('../validations/members');
 
 const router = express.Router();
 

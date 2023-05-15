@@ -24,7 +24,11 @@ const createMember = (req, res) => {
     isActive,
     membership,
   })
-    .then((result) => res.status(200).json(result))
+    .then((result) => res.status(201).json({
+      message: 'Member created successfuly',
+      data: result,
+      error: false,
+    }))
     .catch((error) => res.status(500).json({
       message: 'An error ocurred',
       error,
