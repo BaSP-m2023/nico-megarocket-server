@@ -42,4 +42,18 @@ const getAdmins = (req, res) => {
     }));
 };
 
-module.exports = { createAdmin, getAdmins };
+const getAdminsById = (req, res) => {
+  const { id } = req.params;
+  Admin.findById(id)
+    .then((admin) => res.status(200).json({
+      message: 'Admin found',
+      data: admin,
+      error: false,
+    }))
+    .catch((error) => res.status(400).json({
+      message: 'Error in the request',
+      error,
+    }));
+};
+
+module.exports = { createAdmin, getAdmins, getAdminsById };
