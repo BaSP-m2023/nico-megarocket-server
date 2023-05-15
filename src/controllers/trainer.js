@@ -35,7 +35,7 @@ const getTrainerById = (req, res) => {
       }
     })
     .catch((error) => {
-      res.status(500).json({
+      res.status(404).json({
         message: 'An error ocurred',
         error: error.msg,
       });
