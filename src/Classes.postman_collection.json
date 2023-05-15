@@ -12,7 +12,36 @@
 		},
 		{
 			"name": "Admins",
-			"item": []
+            "item": [
+                {
+                    "name": "Create Admin",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "    {\r\n        \"firstName\":\"Carla\", \r\n        \"lastName\":\"Perez\",\r\n        \"dni\": 22676305,\r\n        \"phone\":3417854385,\r\n        \"email\":\"carlaperez@gmail.com\",\r\n        \"city\":\"Rosario\",\r\n        \"password\":\"AbcdeF12G456\"\r\n    }",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "localhost:4000/api/admins",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "4000",
+                            "path": [
+                                "api",
+                                "admins"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
 		},
 		{
 			"name": "Class",
