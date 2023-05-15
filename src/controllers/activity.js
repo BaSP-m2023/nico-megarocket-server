@@ -78,7 +78,9 @@ const deleteActivity = (req, res) => {
           error: true,
         });
       }
-      return res.status(204).send();
+      return res.status(200).json({
+        message: `Activity with the id: ${id} was successfully deleted.`,
+      });
     })
     .catch((error) => res.status(400).json({
       message: 'Oops! There was an error!',
