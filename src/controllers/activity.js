@@ -34,7 +34,25 @@ const getActivityById = (req, res) => {
     });
 };
 
+const createActivity = (req, res) => {
+  const { name, isActive, description } = req.body;
+  activity.create({
+    name,
+    isActive,
+    description,
+  })
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'it cannot be created',
+        error,
+      });
+    });
+};
 module.exports = {
   getAllActivities,
   getActivityById,
+  createActivity,
 };

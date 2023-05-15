@@ -7,7 +7,7 @@ const activitySchema = new Schema({
     type: String,
     required: true,
   },
-  is_active: {
+  isActive: {
     type: Boolean,
     default: false,
   },
