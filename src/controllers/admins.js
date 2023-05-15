@@ -51,7 +51,7 @@ const getAdminsById = (req, res) => {
         });
       }
     })
-    .catch((error) => res.status(400).json({
+    .catch((error) => res.status(500).json({
       message: 'Error in the request',
       error,
     }));
