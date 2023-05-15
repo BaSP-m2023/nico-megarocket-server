@@ -14,9 +14,15 @@ const DB_URL = 'mongodb+srv://nico-team:UcLQ3ogL9TCSIMH2@megarocket-databases.in
 
 mongoose
   .connect(DB_URL)
+<<<<<<< HEAD
 // eslint-disable-next-line no-console
   .then(() => console.log('Db connected'))
 // eslint-disable-next-line no-console
+=======
+  // eslint-disable-next-line no-console
+  .then(() => console.log('Db connected'))
+  // eslint-disable-next-line no-console
+>>>>>>> 6ee9a1ddc60cb7d4e64e267abc9a0a803f6f84a6
   .catch((error) => console.log('Error : ', error));
 
 app.use('/api', router);
