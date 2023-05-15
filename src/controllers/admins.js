@@ -1,58 +1,9 @@
-/* const express = require('express');
-const fs = require('fs');
-const adminsUser = require('../data/admins.json');
-
-const router = express.Router();
-
-router.get('/get', (req, res) => {
-  if (adminsUser.length === 0) {
-    res.send('No admins list no found');
-  } else {
-    res.send(adminsUser);
-  }
-});
-
-router.put('/put/:id', (req, res) => {
-  const idParam = req.params.id;
-  const { body } = req;
-  const regex = /^[0-9]+$/;
-  const search = adminsUser.find((admins) => admins.id === parseInt(idParam));
-  if (regex.test(idParam)) {
-    console.log('Admin user id valid.');
-  } else {
-    res.status(404).send('Admin user id not valid. Only numbers.');
-    return;
-  }
-  if (!search) {
-    return res.status(404).send('User not found');
-  }
-  search.first_name = body.first_name;
-  search.last_name = body.last_name;
-  search.email = body.email;
-  search.address = body.address;
-  search.phone = body.phone;
-  fs.writeFile('src/data/admins.json', JSON.stringify(adminsUser, null, 2), (error) => {
-    if (error) {
-      return res.send('User cannot be edited');
-    }
-    return res.send('user has been edited');
-  });
-});
-
-module.exports = router; */
 const Admin = require('../models/Admins');
 
 const createAdmin = (req, res) => {
-  const
-    {
-      firstName,
-      lastName,
-      dni,
-      phone,
-      email,
-      city,
-      password,
-    } = req.body;
+  const {
+    firstName, lastName, dni, phone, email, city, password,
+  } = req.body;
   Admin.create({
     firstName,
     lastName,
@@ -71,5 +22,39 @@ const createAdmin = (req, res) => {
       error,
     }));
 };
+const getAdmins = (req, res) => {
+  Admin.find()
+    .then((admins) => res.status(200).json({
+      message: 'Obtained all the admins from the list.',
+      data: admins,
+      error: false,
+    }))
+    .catch((error) => res.status(500).json({
+      message: 'Error in the server.',
+      error,
+    }));
+};
 
-module.exports = { createAdmin };
+const getAdminsById = (req, res) => {
+  const { id } = req.params;
+  Admin.findById(id)
+    .then((admin) => {
+      if (admin) {
+        res.status(200).json({
+          message: 'Admin found',
+          data: admin,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Admin not found',
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'Error in the request',
+      error,
+    }));
+};
+
+module.exports = { createAdmin, getAdmins, getAdminsById };

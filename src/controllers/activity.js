@@ -1,4 +1,38 @@
-const Activity = require('../models/Activity');
+const activity = require('../models/Activity');
+
+const getAllActivities = (req, res) => {
+  activity.find()
+    .then((activities) => {
+      res.status(200).json({
+        message: 'here is the activities list',
+        data: activities,
+        error: false,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'there is an error here',
+        error,
+      });
+    });
+};
+const getActivityById = (req, res) => {
+  const Id = req.params.id;
+  activity.findById(Id, 'name description')
+    .then((activities) => {
+      res.status(200).json({
+        message: `activity ${activities.name} was found`,
+        data: activities,
+        error: false,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'there is an error here',
+        error,
+      });
+    });
+};
 
 const updateActivity = (req, res) => {
   const { id } = req.params;
@@ -6,7 +40,7 @@ const updateActivity = (req, res) => {
     name, description, isActive,
   } = req.body;
 
-  Activity.findByIdAndUpdate(
+  activity.findByIdAndUpdate(
     id,
     {
       name,
@@ -22,15 +56,21 @@ const updateActivity = (req, res) => {
           error: true,
         });
       }
-      return res.status(201).json(result);
+      return res.status(201).json({
+        message: 'Activity updated successfully',
+        result,
+      });
     })
-    .catch((error) => res.status(400).json(error));
+    .catch((error) => res.status(500).json({
+      message: 'Error updating activity',
+      error,
+    }));
 };
 
 const deleteActivity = (req, res) => {
   const { id } = req.params;
 
-  Activity.findByIdAndDelete(id)
+  activity.findByIdAndDelete(id)
     .then((result) => {
       if (!result) {
         return res.status(404).json({
@@ -47,6 +87,8 @@ const deleteActivity = (req, res) => {
 };
 
 module.exports = {
+  getAllActivities,
+  getActivityById,
   updateActivity,
   deleteActivity,
 };
