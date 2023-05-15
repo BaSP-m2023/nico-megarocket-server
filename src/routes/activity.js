@@ -7,7 +7,6 @@ const controller = require('../controllers/activity');
 const router = express.Router();
 
 router
-  // .delete('/:id', activityController.deleteActivity)
   .put('/:id', validations.validateUpdate, activityController.updateActivity)
   .get('/', controller.getAllActivities)
   .get('/:id', controller.getActivityById);
