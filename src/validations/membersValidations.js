@@ -2,18 +2,17 @@ const Joi = require('joi');
 
 const validateCreation = (req, res, next) => {
   const memberValidation = Joi.object({
-    firstName: Joi.string().min(3).max(50).required(),
-    lastName: Joi.string().min(3).max(50).required(),
+    firstName: Joi.string().min(3).max(15).required(),
+    lastName: Joi.string().min(3).max(15).required(),
     birthday: Joi.date().required(),
-    phone: Joi.number().integer().min(1000000000).max(9999999999)
-      .required()
+    phone: Joi.string().length(10).required()
       .messages({
         'number.min': 'Phone number must be at least 10 digits',
         'number.max': 'Phone number must be at most 10 digits',
       }),
     email: Joi.string().email().required(),
-    city: Joi.string().required(),
-    postal_code: Joi.number().min(1000).max(99999).required()
+    city: Joi.string().min(3).max(15).required(),
+    postal_code: Joi.string().min(4).max(5).required()
       .messages({
         'number.min': 'Postal code must be at least 4 digits',
         'number.max': 'Postal code must be at most 5 digits',
