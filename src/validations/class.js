@@ -17,7 +17,7 @@ const validateCreateClass = (req, res, next) => {
   const day = Joi.string().regex(/^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/).required();
   const trainer = Joi.string().regex(/^[a-zA-Z]+$/).min(3).max(10)
     .required();
-  const activity = Joi.string().regex(/^[0-9a-fA-F]{24}$/).required();
+  const activity = Joi.hex.min(24).required();
   const slots = Joi.number().required();
 
   const hourValidation = hour.validate(req.body.hour);
