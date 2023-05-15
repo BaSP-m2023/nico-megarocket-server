@@ -33,7 +33,7 @@ const getActivityById = (req, res) => {
       });
     });
 };
-// const Activity = require('../models/Activity');
+// const Activity = require('../models/Activity'); that was mi code before the PULL,with "A"ctivity
 
 const updateActivity = (req, res) => {
   const { id } = req.params;
