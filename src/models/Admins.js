@@ -6,14 +6,14 @@ const adminsSchema = new Schema({
   firstName: {
     type: String,
     required: true,
-    minlength: 3,
-    maxlength: 15,
+    minLength: 3,
+    maxLength: 15,
     match: /^[A-Za-z]+$/,
   },
   lastName: {
     type: String,
-    minlength: 3,
-    maxlength: 15,
+    minLength: 3,
+    maxLength: 15,
     match: /^[A-Za-z]+$/,
     required: true,
   },
@@ -35,7 +35,7 @@ const adminsSchema = new Schema({
   city: {
     type: String,
     minlength: 2,
-    maxlength: 10,
+    maxLength: 10,
     required: true,
   },
   password: {

@@ -8,9 +8,13 @@ const classes = require('./class');
 
 const member = require('./members');
 
+const trainer = require('./trainer');
+
 const router = express.Router();
 
 router.use('/member', member);
+
+router.use('/trainer', trainer);
 
 router.use('/activity', activities);
 
