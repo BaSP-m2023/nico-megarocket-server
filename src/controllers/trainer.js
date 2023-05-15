@@ -10,13 +10,12 @@ const getAllTrainers = (req, res) => {
         });
       }
     })
-    .catch((error) => res.status(500).json({
+    .catch((error) => res.status(404).json({
       message: 'Error, a problem has occurred',
       error,
     }));
 };
 
-// Get trainers by id
 const getTrainerById = (req, res) => {
   const { id } = req.params;
 
@@ -30,7 +29,7 @@ const getTrainerById = (req, res) => {
         });
       } else {
         res.status(500).json({
-          message: 'Class not found',
+          message: 'Trainer not found',
           error: true,
         });
       }
