@@ -4,8 +4,7 @@ const validateUpdate = (req, res, next) => {
   const activityValidation = Joi.object({
     name: Joi.string().regex(/^[a-zA-Z]{3,}$/),
     description: Joi.string().regex(/^[a-zA-Z0-9]{5,}$/),
-    active: Joi.boolean(),
-    assignedTo: Joi.string().optional(),
+    isActive: Joi.boolean(),
   });
   const validation = activityValidation.validate(req.body);
 
