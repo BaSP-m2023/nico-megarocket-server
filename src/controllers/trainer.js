@@ -28,14 +28,14 @@ const getTrainerById = (req, res) => {
           error: false,
         });
       } else {
-        res.status(500).json({
+        res.status(404).json({
           message: 'Trainer not found',
           error: true,
         });
       }
     })
     .catch((error) => {
-      res.status(404).json({
+      res.status(500).json({
         message: 'An error ocurred',
         error: error.msg,
       });
