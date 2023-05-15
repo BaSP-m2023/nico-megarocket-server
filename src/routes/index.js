@@ -6,9 +6,13 @@ const admins = require('./admins');
 
 const classes = require('./class');
 
-const router = express.Router();
+const member = require('./member');
 
 const trainer = require('./trainer');
+
+const router = express.Router();
+
+router.use('/member', member);
 
 router.use('/trainer', trainer);
 
