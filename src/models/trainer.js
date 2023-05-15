@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const trainerSchema = new Schema({
-  firt_name: {
+  firstName: {
     type: String,
     minLength: 3,
     require: true,
     match: /^[A-Za-z]+$/,
   },
-  last_name: {
+  lastName: {
     type: String,
     minLength: 3,
     require: true,
@@ -42,7 +42,7 @@ const trainerSchema = new Schema({
     type: Number,
     require: true,
   },
-  is_active: {
+  isActive: {
     type: Boolean,
     default: false,
     require: true,

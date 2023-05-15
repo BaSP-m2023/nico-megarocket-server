@@ -2,14 +2,14 @@ const Joi = require('joi');
 
 const validateCreation = (req, res, next) => {
   const trainerValidation = Joi.object({
-    first_name: Joi.string().min(3).required(),
-    last_name: Joi.string().min(3).required(),
+    firstName: Joi.string().min(3).required(),
+    lastName: Joi.string().min(3).required(),
     dni: Joi.number().required().min(8).max(8),
     phone: Joi.number().required().min(10),
     email: Joi.string().lowercase().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
     city: Joi.string().required().min(3).max(15),
     salary: Joi.number().required(),
-    is_active: Joi.boolean,
+    isActive: Joi.boolean,
   });
 
   const validation = trainerValidation.validate(req.body);

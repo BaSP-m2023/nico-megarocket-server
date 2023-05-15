@@ -50,8 +50,8 @@
                         "trainer"
                     ]
                     }
-		            },
-                    "response": []
+		        },
+            "response": []
         },
         {
             "name": "Get trainer by id",
