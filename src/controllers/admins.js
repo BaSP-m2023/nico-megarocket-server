@@ -1,17 +1,44 @@
 /*
+<<<<<<< HEAD
 const express = require('express')
 const adminsUser = require('../data/admins.json')
 const fs = require('fs')
 const router = express.Router ()
+=======
+const Admin = require('../models/Admins');
+>>>>>>> master
 
-router.get ('/get', (req, res)=>{
-    if (adminsUser.length === 0) {
-        res.send('No admins list no found')
-    } else {
-        res.send(adminsUser)
-    }
-})
+const createAdmin = (req, res) => {
+  const
+    {
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      city,
+      password,
+    } = req.body;
+  Admin.create({
+    firstName,
+    lastName,
+    dni,
+    phone,
+    email,
+    city,
+    password,
+  })
+    .then((result) => res.status(201).json({
+      message: 'Admin created',
+      result,
+    }))
+    .catch((error) => res.status(400).json({
+      message: 'Error ocurred',
+      error,
+    }));
+};
 
+<<<<<<< HEAD
 router.put ('/put/:id', (req, res)=>{
     const idParam = req.params.id
     const body = req.body
@@ -40,4 +67,7 @@ router.put ('/put/:id', (req, res)=>{
   });
 })
 module.exports=router
+=======
+module.exports = { createAdmin };
+>>>>>>> master
 */
