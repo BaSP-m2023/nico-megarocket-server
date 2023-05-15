@@ -1,42 +1,49 @@
-const express = require('express')
-const adminsUser = require('../data/admins.json')
-const fs = require('fs')
-const router = express.Router ()
+const Admin = require('../models/Admins');
 
-router.get ('/get', (req, res)=>{
-    if (adminsUser.length === 0) {
-        res.send('No admins list no found')
-    } else {
-        res.send(adminsUser)
-    }
-})
+const updateAdmin = (req, res) => {
+  const adminId = req.params.id;
+  const
+    {
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      city,
+      password,
+    } = req.body;
 
-router.put ('/put/:id', (req, res)=>{
-    const idParam = req.params.id
-    const body = req.body
-    const regex = /^[0-9]+$/;
-    const search = adminsUser.find((admins) => admins.id === parseInt(idParam));
-    if (regex.test(idParam)) {
-        console.log('Admin user id valid.');
-    } else {
-        res.status(404).send('Admin user id not valid. Only numbers.')
-        return
-    }
-    if (!search) {
-        return res.status(404).send('User not found');
-    }
-    search.first_name=body.first_name
-    search.last_name=body.last_name
-    search.email=body.email
-    search.address=body.address
-    search.phone=body.phone
-    fs.writeFile('src/data/admins.json', JSON.stringify(adminsUser, null, 2), (error) => {
-        if (error) {
-        return res.send('User cannot be edited');
-        } else {
-        return res.send('user has been edited');
-        }
-  });
-})
+  Admin.findByIdAndUpdate(
+    adminId,
+    {
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      city,
+      password,
+    },
+    { new: true },
+  )
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          message: `Admin with ID ${adminId} not found`,
+          data: null,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'Admin updated!',
+        data: result,
+        error: false,
+      });
+    })
+    .catch((error) => res.status(400).json({
+      message: 'Error occurred while updating admin',
+      error,
+    }));
+};
 
-module.exports=router
+module.exports = { updateAdmin };
