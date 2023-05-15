@@ -13,7 +13,6 @@ const activitySchema = new Schema({
   },
   isActive: {
     type: Boolean,
-    required: true,
     default: false,
   },
 });
