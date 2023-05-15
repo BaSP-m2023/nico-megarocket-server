@@ -2,8 +2,8 @@ const Joi = require('joi');
 
 const validateCreation = (req, res, next) => {
   const trainerValidation = Joi.object({
-    firstName: Joi.string().min(3).required(),
-    lastName: Joi.string().min(3).required(),
+    firstName: Joi.string().min(3).max(15).required(),
+    lastName: Joi.string().min(3).max(15).required(),
     dni: Joi.number().required().min(8).max(8),
     phone: Joi.number().required().min(10),
     email: Joi.string().lowercase().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),

@@ -6,12 +6,14 @@ const trainerSchema = new Schema({
   firstName: {
     type: String,
     minLength: 3,
+    maxLength: 15,
     require: true,
     match: /^[A-Za-z]+$/,
   },
   lastName: {
     type: String,
     minLength: 3,
+    maxLength: 15,
     require: true,
     match: /^[A-Za-z]+$/,
   },
@@ -45,7 +47,6 @@ const trainerSchema = new Schema({
   isActive: {
     type: Boolean,
     default: false,
-    require: true,
   },
 });
 
