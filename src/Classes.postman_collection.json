@@ -40,7 +40,26 @@
                         }
                     },
                     "response": []
-                }
+                },
+                {
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				}
             ]
 		},
 		{

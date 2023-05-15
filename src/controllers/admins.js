@@ -29,5 +29,17 @@ const createAdmin = (req, res) => {
       error,
     }));
 };
+const getAdmins = (req, res) => {
+  Admin.find()
+    .then((admins) => res.status(200).json({
+      message: 'Obtained all the admins from the list.',
+      data: admins,
+      error: false,
+    }))
+    .catch((error) => res.status(500).json({
+      message: 'Error in the server.',
+      error,
+    }));
+};
 
-module.exports = { createAdmin };
+module.exports = { createAdmin, getAdmins };

@@ -7,6 +7,7 @@ const controllersAdmin = require('../controllers/admins');
 const router = express.Router();
 
 router
-  .post('/', validationsAdmin.validateCreation, controllersAdmin.createAdmin);
+  .post('/', validationsAdmin.validateCreation, controllersAdmin.createAdmin)
+  .get('/', controllersAdmin.getAdmins);
 
 module.exports = router;
