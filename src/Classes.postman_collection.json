@@ -8,7 +8,37 @@
   "item": [
     {
       "name": "Activity",
-      "item": []
+      "item": [
+        {
+          "name": "Update an Activity",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Gym bro\",\r\n    \"description\": \"bicicle\",\r\n    \"isActive\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "activity",
+                "645ff5edf01fd3a2938b702b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     },
     {
       "name": "Admins",

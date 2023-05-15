@@ -6,14 +6,22 @@ const memberSchema = new Schema({
   firstName: {
     type: String,
     required: true,
+    minLength: 3,
+    maxLength: 15,
+    match: /^[A-Za-z]+$/,
   },
   lastName: {
     type: String,
     required: true,
+    minLength: 3,
+    maxLength: 15,
+    match: /^[A-Za-z]+$/,
   },
   dni: {
     type: Number,
     required: true,
+    minlength: 7,
+    maxLength: 8,
   },
   birthday: {
     type: Date,
@@ -22,6 +30,8 @@ const memberSchema = new Schema({
   phone: {
     type: String,
     required: true,
+    minlength: 9,
+    maxLength: 12,
   },
   email: {
     type: String,
@@ -31,10 +41,14 @@ const memberSchema = new Schema({
   city: {
     type: String,
     required: true,
+    minlength: 2,
+    maxLength: 15,
   },
   postalCode: {
     type: String,
     required: true,
+    minlength: 3,
+    maxLength: 5,
   },
   isActive: {
     type: Boolean,
