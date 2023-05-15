@@ -2,10 +2,11 @@ const Joi = require('joi');
 
 const validateUpdate = (req, res, next) => {
   const activityValidation = Joi.object({
-    name: Joi.string().regex(/^[a-zA-Z]{3,}$/),
+    name: Joi.string().pattern(/^[A-Za-z\s]+$/).min(2).messages({
+      'string.pattern.base': 'The name must contain only letters',
+    }),
     description: Joi.string().regex(/^[a-zA-Z0-9]{5,}$/),
-    active: Joi.boolean(),
-    assignedTo: Joi.string().optional(),
+    isActive: Joi.boolean(),
   });
   const validation = activityValidation.validate(req.body);
 
