@@ -1,12 +1,11 @@
 /*
-<<<<<<< HEAD
+
 const express = require('express')
 const adminsUser = require('../data/admins.json')
 const fs = require('fs')
 const router = express.Router ()
-=======
+
 const Admin = require('../models/Admins');
->>>>>>> master
 
 const createAdmin = (req, res) => {
   const
@@ -38,7 +37,6 @@ const createAdmin = (req, res) => {
     }));
 };
 
-<<<<<<< HEAD
 router.put ('/put/:id', (req, res)=>{
     const idParam = req.params.id
     const body = req.body
@@ -67,7 +65,5 @@ router.put ('/put/:id', (req, res)=>{
   });
 })
 module.exports=router
-=======
 module.exports = { createAdmin };
->>>>>>> master
 */

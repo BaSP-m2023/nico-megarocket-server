@@ -6,9 +6,9 @@ const admins = require('./admins');
 
 const classes = require('./class');
 
-const router = express.Router();
-
 const member = require('./members');
+
+const router = express.Router();
 
 router.use('/member', member);
 
