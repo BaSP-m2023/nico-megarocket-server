@@ -1,10 +1,14 @@
 const express = require('express');
 
+const activities = require('./activity');
+
 const admins = require('./admins');
+
+const classes = require('./class');
 
 const router = express.Router();
 
-const classes = require('./class');
+router.use('/activity', activities);
 
 router.use('/admins', admins);
 
