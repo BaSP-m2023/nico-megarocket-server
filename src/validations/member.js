@@ -16,7 +16,7 @@ const validateUpdate = (req, res, next) => {
       }
       return value;
     }),
-    phone: Joi.number()
+    phone: Joi.string()
       .positive()
       .integer()
       .min(10000000)
