@@ -1,10 +1,17 @@
 {
 	"info": {
+<<<<<<< HEAD
 		"_postman_id": "d25b3f89-584c-44cc-b4e7-f550adae59bb",
 		"name": "Classes",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26662840",
 		"_collection_link": "https://orange-rocket-504088.postman.co/workspace/Team-Workspace~3878e157-1740-4f60-8ef5-4cbb4cfafb67/collection/26662840-d25b3f89-584c-44cc-b4e7-f550adae59bb?action=share&creator=26662840&source=collection_link"
+=======
+		"_postman_id": "56ca8d9c-32c4-49fd-8a52-ca7f75149e6b",
+		"name": "MEGA ROCKET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27235298"
+>>>>>>> 6ee9a1ddc60cb7d4e64e267abc9a0a803f6f84a6
 	},
 	"item": [
 		{

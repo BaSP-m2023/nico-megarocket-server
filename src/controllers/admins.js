@@ -1,16 +1,9 @@
 const Admin = require('../models/Admins');
 
 const createAdmin = (req, res) => {
-  const
-    {
-      firstName,
-      lastName,
-      dni,
-      phone,
-      email,
-      city,
-      password,
-    } = req.body;
+  const {
+    firstName, lastName, dni, phone, email, city, password,
+  } = req.body;
   Admin.create({
     firstName,
     lastName,
