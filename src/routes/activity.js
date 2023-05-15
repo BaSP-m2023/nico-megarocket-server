@@ -2,7 +2,7 @@ const express = require('express');
 const activityController = require('../controllers/activity');
 const validations = require('../validations/activity');
 
-const router = express.router();
+const router = express.Router();
 
 router
   .delete('/:id', activityController.deleteActivity)
