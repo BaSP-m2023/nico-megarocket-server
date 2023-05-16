@@ -1,4 +1,5 @@
 const express = require('express');
+const trainerRoutes = require('./trainer');
 
 const activities = require('./activity');
 
@@ -21,5 +22,5 @@ router.use('/activity', activities);
 router.use('/admins', admins);
 
 router.use('/class', classes);
-
+router.use('/trainer', trainerRoutes);
 module.exports = router;
