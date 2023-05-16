@@ -1,11 +1,15 @@
 const express = require('express');
 
-const validations = require('../validations/admins');
+const validationsAdmin = require('../validations/admins');
+
 const controllersAdmin = require('../controllers/admins');
 
 const router = express.Router();
 
 router
-  .put('/:id', validations.validateUpdate, controllersAdmin.updateAdmin);
+  .put('/:id', validationsAdmin.validateUpdate, controllersAdmin.updateAdmin)
+  .post('/', validationsAdmin.validateCreation, controllersAdmin.createAdmin)
+  .get('/', controllersAdmin.getAdmins)
+  .get('/:id', controllersAdmin.getAdminsById);
 
 module.exports = router;

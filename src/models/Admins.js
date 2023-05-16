@@ -1,4 +1,3 @@
-// Will be filled on its respective ticket
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
