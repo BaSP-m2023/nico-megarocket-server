@@ -9,6 +9,7 @@ const router = express.Router();
 router
   .get('/', controller.getAllActivities)
   .get('/:id', controller.getActivityById)
-  .post('/', validation.validateCreation, controller.createActivity);
+  .post('/', validation.validateCreation, controller.createActivity)
+  .put('/:id', validation.validateUpdate, controller.updateActivity);
 
 module.exports = router;

@@ -7,13 +7,13 @@ const activitySchema = new Schema({
     type: String,
     required: true,
   },
-  isActive: {
-    type: Boolean,
-    default: true,
-  },
   description: {
     type: String,
     required: true,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
   },
 });
 
