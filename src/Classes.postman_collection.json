@@ -1,47 +1,115 @@
 {
 	"info": {
-		"_postman_id": "56ca8d9c-32c4-49fd-8a52-ca7f75149e6b",
-		"name": "Classes",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "27235298"
+		"_postman_id": "f26aae74-96c0-44da-a646-5b60c78bcc21",
+		"name": "MEGA ROCKET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Activity",
-			"item": []
+			"item": [
+				{
+					"name": "Update an Activity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gym bro\",\r\n    \"description\": \"bicicle\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity",
+								"645ff5edf01fd3a2938b702b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Admins",
-            "item": [
-                {
-                    "name": "Create Admin",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "    {\r\n        \"firstName\":\"Carla\", \r\n        \"lastName\":\"Perez\",\r\n        \"dni\": 22676305,\r\n        \"phone\":3417854385,\r\n        \"email\":\"carlaperez@gmail.com\",\r\n        \"city\":\"Rosario\",\r\n        \"password\":\"AbcdeF12G456\"\r\n    }",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "url": {
-                            "raw": "localhost:4000/api/admins",
-                            "host": [
-                                "localhost"
-                            ],
-                            "port": "4000",
-                            "path": [
-                                "api",
-                                "admins"
-                            ]
-                        }
-                    },
-                    "response": []
-                }
-            ]
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"firstName\":\"Carla\", \r\n        \"lastName\":\"Perez\",\r\n        \"dni\": 22676305,\r\n        \"phone\":3417854385,\r\n        \"email\":\"carlaperez@gmail.com\",\r\n        \"city\":\"Rosario\",\r\n        \"password\":\"AbcdeF12G456\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/admins",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admins ByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/645fd03f7abeabf9a2a430f9",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								"645fd03f7abeabf9a2a430f9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Class",
@@ -51,7 +119,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:4000/api/class"
+						"url": {
+							"raw": "http://localhost:4000/api/class",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"class"
+							]
+						}
 					},
 					"response": []
 				},
@@ -92,7 +171,7 @@
 			"name": "Members",
 			"item": [
 				{
-					"name": "Create member",
+					"name": "Create Member",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},
@@ -101,7 +180,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"José\",\r\n    \"lastName\": \"Rodríguez\",\r\n    \"birthday\": \"09/28/2002\",\r\n    \"phone\": \"1676778392\",\r\n    \"email\": \"isabelgomez@yahoo.com\",\r\n    \"city\": \"Mar del Plata\",\r\n    \"postal_code\": \"3000\",\r\n    \"is_active\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Robert\",\r\n    \"lastName\": \"Lopez\",\r\n    \"dni\": 12345678,\r\n    \"birthday\": \"09/28/2000\",\r\n    \"phone\": \"1676778391\",\r\n    \"email\": \"robert@yahoo.com\",\r\n    \"city\": \"Cordoba\",\r\n    \"postalCode\": \"5000\",\r\n    \"isActive\": true,\r\n    \"membership\": \"Classic\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -123,7 +202,56 @@
 					"response": []
 				},
 				{
-					"name": "Get all members",
+					"name": "Update Member",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Roberto\",\r\n    \"lastName\": \"Lopez\",\r\n    \"dni\": 12345678,\r\n    \"birthday\": \"09/28/2000\",\r\n    \"phone\": \"1676778391\",\r\n    \"email\": \"robert@yahoo.com\",\r\n    \"city\": \"Cordoba\",\r\n    \"postalCode\": \"4000\",\r\n    \"isActive\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Members",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -140,26 +268,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Get member by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/member/64602c7bcab61db4a57ae7d8",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"member",
-								"64602c7bcab61db4a57ae7d8"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -169,11 +277,119 @@
 		},
 		{
 			"name": "Super-admins",
-			"item": []
+			"item": [
+				{
+					"name": "Get All Super-Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/super-admin",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id Super-Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/super-admin/646395ee58ff7aa8c559c800",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admin",
+								"646395ee58ff7aa8c559c800"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Trainer",
-			"item": []
+			"item": [
+				{
+					"name": "Get all trainers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/trainer",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post trainer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"gshjjjjl0@miibeyyyian.yu\",\r\n  \"phone\": \"213637909066\",\r\n  \"firstName\": \"Dany\",\r\n  \"lastName\": \"Doe\",\r\n  \"city\": \"Rio de Janeiro\",\r\n  \"dni\": 38504999,\r\n  \"salary\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/trainer",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get trainer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99f4",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer",
+								"64613b33bc57874f5ddf99f4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
