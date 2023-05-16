@@ -99,5 +99,8 @@ const postTrainer = (req, res) => {
 };
 
 module.exports = {
-  getAllTrainers, getTrainerById, updateTrainer, postTrainer,
+  getAllTrainers,
+  getTrainerById,
+  updateTrainer,
+  postTrainer,
 };
