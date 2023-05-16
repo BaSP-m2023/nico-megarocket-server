@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const { validate } = require('../models/Trainer');
 
 const validateUpdate = (req, res, next) => {
   const trainerValidation = Joi.object({
@@ -11,12 +10,33 @@ const validateUpdate = (req, res, next) => {
     city: Joi.string().min(5).max(25),
     salary: Joi.number(),
   });
+  const validation = trainerValidation.validate(req.body);
+
+  if (!validation.error) return next();
+  return res.status(400).json({
+    message: `There was an error ${validation.error.details[0].message}`,
+    data: undefined,
+    error: true,
+  });
+};
+
+const validateCreation = (req, res, next) => {
+  const trainerValidation = Joi.object({
+    firstName: Joi.string().min(3).max(15).required(),
+    lastName: Joi.string().min(3).max(15).required(),
+    dni: Joi.number().required().min(8).max(8),
+    phone: Joi.number().required().min(10),
+    email: Joi.string().lowercase().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+    city: Joi.string().required().min(3).max(15),
+    salary: Joi.number().required(),
+    isActive: Joi.boolean,
+  });
 
   const validation = trainerValidation.validate(req.body);
 
-  if (!validate.error) return next();
+  if (!validation.error) return next();
   return res.status(400).json({
-    msg: `There was an error: ${validation.error.details[0].message}`,
+    message: `There was an error ${validation.error.details[0].message}`,
     data: undefined,
     error: true,
   });
@@ -24,4 +44,5 @@ const validateUpdate = (req, res, next) => {
 
 module.exports = {
   validateUpdate,
+  validateCreation,
 };
