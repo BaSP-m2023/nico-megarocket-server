@@ -1,4 +1,4 @@
-const superAdmin = require('../models/Super-Admin');
+const superAdmin = require('../models/SuperAdmin');
 
 const createSuperAdmin = (req, res) => {
   const {
@@ -23,7 +23,7 @@ const getAllSuperAdmin = (req, res) => {
     .then((data) => {
       if (data) {
         res.status(200).json({
-          message: 'This are all the super-admin',
+          message: 'This are all the super admin',
           data,
         });
       }

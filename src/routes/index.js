@@ -10,7 +10,7 @@ const member = require('./member');
 
 const trainer = require('./trainer');
 
-const superAdmin = require('./super-admin');
+const SuperAdmin = require('./SuperAdmin');
 
 const router = express.Router();
 
@@ -24,6 +24,6 @@ router.use('/admins', admins);
 
 router.use('/class', classes);
 
-router.use('/super-admin', superAdmin);
+router.use('/SuperAdmin', SuperAdmin);
 
 module.exports = router;

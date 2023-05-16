@@ -145,6 +145,47 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Trainer",
+			"item": [
+				{
+					"name": "Get all trainers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:4000/api/trainer"
+					},
+					"response": []
+				},
+				{
+					"name": "Post trainer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"gshjjjjl0@miibeyyyian.yu\",\r\n  \"phone\": \"213637909066\",\r\n  \"firstName\": \"Dany\",\r\n  \"lastName\": \"Doe\",\r\n  \"city\": \"Rio de Janeiro\",\r\n  \"dni\": 38504999,\r\n  \"salary\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:4000/api/trainer"
+					},
+					"response": []
+				},
+				{
+					"name": "Get trainer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:4000/api/trainer/64613b33bc57874f5ddf99f4"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
