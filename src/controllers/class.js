@@ -54,7 +54,6 @@ const createClass = (req, res) => {
     activity,
     slots,
   })
-
     .then((data) => {
       res.status(200).json({
         message: 'Class created',
@@ -63,7 +62,7 @@ const createClass = (req, res) => {
       });
     })
     .catch((error) => {
-      res.status(400).json({
+      res.status(500).json({
         message: 'An error ocurred',
         error,
       });
