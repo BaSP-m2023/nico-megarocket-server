@@ -1,4 +1,4 @@
-const trainers = require('../models/trainer');
+const trainers = require('../models/Trainer');
 
 const getAllTrainers = (req, res) => {
   trainers.find()
@@ -42,4 +42,35 @@ const getTrainerById = (req, res) => {
     });
 };
 
-module.exports = { getAllTrainers, getTrainerById };
+const updateTrainer = (req, res) => {
+  const { id } = req.params;
+  const {
+    firstName, lastName, dni, phone, email, city, salary, isActive,
+  } = req.body;
+
+  trainers.findByIdAndUpdate(
+    id,
+    {
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      city,
+      salary,
+      isActive,
+    },
+    { new: true },
+  )
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          msg: `The id ${id} was not found`,
+        });
+      }
+      return res.status(200).json(result);
+    })
+    .catch((error) => res.status(500).json(error));
+};
+
+module.exports = { getAllTrainers, getTrainerById, updateTrainer };
