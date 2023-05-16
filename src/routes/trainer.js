@@ -7,6 +7,7 @@ const router = express.Router();
 router
   .put('/:id', validation.validateUpdate, trainerController.updateTrainer)
   .get('/', trainerController.getAllTrainers)
+  .delete('/:id', trainerController.deleteTrainer)
   .get('/:id', trainerController.getTrainerById)
   .post('/', validation.validateCreation, trainerController.postTrainer);
 
