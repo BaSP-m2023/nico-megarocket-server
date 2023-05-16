@@ -1,11 +1,12 @@
 const express = require('express');
-const validateUpdate = require('../validations/trainer');
+// const validateUpdate = require('../validations/trainer');
+const validateTrainer = require('../validations/trainer');
 const trainerController = require('../controllers/trainer');
 
 const router = express.Router();
 
 router
-  .put('/:id', validateUpdate, trainerController.updateTrainer)
+  .put('/:id', validateTrainer.validateUpdate, trainerController.updateTrainer)
   .get('/', trainerController.getAllTrainers)
   .get('/:id', trainerController.getTrainerById);
 
