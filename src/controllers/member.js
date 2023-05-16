@@ -106,8 +106,28 @@ const getById = (req, res) => {
     }));
 };
 
+const deleteMember = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const memberExist = await Member.findById(id);
+
+    if (!memberExist) {
+      return res.status(404).send('ID was not found');
+    }
+
+    await Member.findByIdAndDelete(id);
+
+    res.send('Member has been deleted');
+  } catch (error) {
+    res.status(500).send('Member could not be deleted');
+  }
+  return null;
+};
+
 module.exports = {
   updateMember,
+  deleteMember,
   createMember,
   getAllMembers,
   getById,

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f26aae74-96c0-44da-a646-5b60c78bcc21",
+		"_postman_id": "6455d3da-6eef-47a3-a8bf-4293a90c4493",
 		"name": "MEGA ROCKET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -8,6 +8,97 @@
 		{
 			"name": "Activity",
 			"item": [
+				{
+					"name": "GET BY ID Activity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity",
+								"645ff5edf01fd3a2938b702b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Activity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"name\": \"swimming\",\r\n    \"isActive\": \"true\",\r\n    \"description\": \"pool\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Activity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Update an Activity",
 					"request": {
@@ -268,50 +359,55 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Member",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Subscriptions",
-			"item": []
-		},
-		{
-			"name": "Super-admins",
 			"item": [
 				{
-					"name": "Get All Super-Admin",
+					"name": "Post Subscription",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classId\": \"64614f4715062fbd70b9f149\",\r\n    \"members\": \"6462dad987c004710e02764f\",\r\n    \"date\": \"12/21/2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:4000/api/super-admin",
+							"raw": "localhost:4000/api/subscription",
 							"host": [
 								"localhost"
 							],
 							"port": "4000",
 							"path": [
 								"api",
-								"super-admin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get by id Super-Admin",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/super-admin/646395ee58ff7aa8c559c800",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"super-admin",
-								"646395ee58ff7aa8c559c800"
+								"subscription"
 							]
 						}
 					},
@@ -320,7 +416,11 @@
 			]
 		},
 		{
-			"name": "Trainer",
+			"name": "Super-admins",
+			"item": []
+		},
+		{
+			"name": "Trainers",
 			"item": [
 				{
 					"name": "Get all trainers",
@@ -342,40 +442,12 @@
 					"response": []
 				},
 				{
-					"name": "Post trainer",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"gshjjjjl0@miibeyyyian.yu\",\r\n  \"phone\": \"213637909066\",\r\n  \"firstName\": \"Dany\",\r\n  \"lastName\": \"Doe\",\r\n  \"city\": \"Rio de Janeiro\",\r\n  \"dni\": 38504999,\r\n  \"salary\": 1000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/trainer",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"trainer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get trainer by id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99f4",
+							"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
 							"host": [
 								"localhost"
 							],
@@ -383,7 +455,7 @@
 							"path": [
 								"api",
 								"trainer",
-								"64613b33bc57874f5ddf99f4"
+								"64613b33bc57874f5ddf99fa"
 							]
 						}
 					},
