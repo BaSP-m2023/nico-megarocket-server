@@ -10,7 +10,7 @@ const classSchema = new Schema({
   },
   day: {
     type: String,
-    enum: ['Monday', 'Tuesday', 'Wendesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday'],
+    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday'],
     required: true,
   },
   trainer: {

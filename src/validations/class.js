@@ -21,7 +21,10 @@ const validateUpdate = (req, res, next) => {
         'The field must be a valid hour(for example 09:30 )',
       }),
     day: Joi.string()
-      .valid('Monday', 'Tuesday', 'Wendesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday'),
+      .valid('Monday', 'Tuesday', 'Wednesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday')
+      .messages({
+        'any.only': 'The days can only be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday',
+      }),
     trainer: Joi.string()
       .hex()
       .min(24),
