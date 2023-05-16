@@ -1,7 +1,5 @@
 const express = require('express');
 
-// const trainerRoutes = require('./trainer');
-
 const activities = require('./activity');
 
 const admins = require('./admins');
@@ -23,7 +21,5 @@ router.use('/activity', activities);
 router.use('/admins', admins);
 
 router.use('/class', classes);
-
-// router.use('/trainer', trainerRoutes);
 
 module.exports = router;
