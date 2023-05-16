@@ -9,8 +9,6 @@ const validateUpdate = (req, res, next) => {
       .min(3)
       .max(50),
     dni: Joi.number()
-      .positive()
-      .integer()
       .min(10000000)
       .max(99999999),
     birthday: Joi.date()
@@ -23,8 +21,6 @@ const validateUpdate = (req, res, next) => {
         return value;
       }),
     phone: Joi.string()
-      .positive()
-      .integer()
       .min(10000000)
       .max(99999999),
     email: Joi.string()
