@@ -14,4 +14,4 @@ const superAdminsSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Super-admin', superAdminsSchema);
+module.exports = mongoose.model('SuperAdmin', superAdminsSchema);
