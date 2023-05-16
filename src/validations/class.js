@@ -21,11 +21,10 @@ const validateCreateClass = (req, res, next) => {
         'string.pattern.base': 'Hour format is HH:mm',
       }),
 
-    day: Joi.string()
-      .regex(/^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/)
+    day: Joi.date()
       .required()
       .messages({
-        'string.pattern.base': 'Day format is dd/mm/yyyy',
+        'date.base': 'Day format is mm/dd/yyyy',
       }),
 
     trainer: Joi.string()

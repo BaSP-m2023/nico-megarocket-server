@@ -55,7 +55,7 @@ const createClass = (req, res) => {
     slots,
   })
     .then((data) => {
-      res.status(200).json({
+      res.status(201).json({
         message: 'Class created',
         data,
         error: false,
