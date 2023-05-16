@@ -17,7 +17,7 @@ const validateUpdate = (req, res, next) => {
       .min(1000000000)
       .max(9999999999),
     email: Joi.string()
-      .pattern(/^[^@]+@[^@]+.[a-zA-Z]{2,}$/),
+      .email(),
     city: Joi.string()
       .min(2)
       .max(10),

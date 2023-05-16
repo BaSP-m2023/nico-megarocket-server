@@ -6,13 +6,13 @@ const adminsSchema = new Schema({
   firstName: {
     type: String,
     required: true,
-    minLength: 5,
+    minLength: 3,
     maxLength: 15,
     match: /^[A-Za-z]+$/,
   },
   lastName: {
     type: String,
-    minLength: 5,
+    minLength: 3,
     maxLength: 15,
     match: /^[A-Za-z]+$/,
     required: true,
