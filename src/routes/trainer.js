@@ -1,5 +1,5 @@
 const express = require('express');
-const validateUpdate = require('../validations/trainer');
+const { validateUpdate } = require('../validations/trainer');
 const trainerController = require('../controllers/trainer');
 
 const router = express.Router();
