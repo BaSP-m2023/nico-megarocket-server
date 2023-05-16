@@ -87,10 +87,22 @@ const getAllMembers = (req, res) => {
 const getById = (req, res) => {
   const { id } = req.params;
   Member.findById(id)
-    .then((member) => res.status(200).json({
-      message: 'Member found!',
-      data: member,
-      error: false,
+    .then((member) => {
+      if (member) {
+        res.status(200).json({
+          message: 'Member found!',
+          data: member,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Member not found',
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      error,
     }));
 };
 
