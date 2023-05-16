@@ -1,207 +1,207 @@
 {
-  "info": {
-    "_postman_id": "c0f8d49a-7b81-49ab-8c26-f79eaffe323e",
-    "name": "MEGA ROCKET",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "27282004"
-  },
-  "item": [
-    {
-      "name": "Activity",
-      "item": [
-        {
-          "name": "GET BY ID Activity",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "activity",
-                "645ff5edf01fd3a2938b702b"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "POST Activity",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": " {\r\n    \"name\": \"swimming\",\r\n    \"isActive\": \"true\",\r\n    \"description\": \"pool\"\r\n }",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:4000/api/activity",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "activity"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET Activity",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:4000/api/activity",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "activity"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update an Activity",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"name\": \"Gym bro\",\r\n    \"description\": \"bicicle\",\r\n    \"isActive\": true\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "activity",
-                "645ff5edf01fd3a2938b702b"
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Admins",
-      "item": [
-        {
-          "name": "Create Admin",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "    {\r\n        \"firstName\":\"Carla\", \r\n        \"lastName\":\"Perez\",\r\n        \"dni\": 22676305,\r\n        \"phone\":3417854385,\r\n        \"email\":\"carlaperez@gmail.com\",\r\n        \"city\":\"Rosario\",\r\n        \"password\":\"AbcdeF12G456\"\r\n    }",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:4000/api/admins",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "admins"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get All Admins",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:4000/api/admins",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "admins"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get Admins ByID",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:4000/api/admins/645fd03f7abeabf9a2a430f9",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "admins",
-                "645fd03f7abeabf9a2a430f9"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
+	"info": {
+		"_postman_id": "c552edc9-db2c-48d7-a152-ae43df1ff229",
+		"name": "MEGA ROCKET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27282468"
+	},
+	"item": [
+		{
+			"name": "Activity",
+			"item": [
+				{
+					"name": "GET BY ID Activity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity",
+								"645ff5edf01fd3a2938b702b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Activity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"name\": \"swimming\",\r\n    \"isActive\": \"true\",\r\n    \"description\": \"pool\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Activity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Activity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gym bro\",\r\n    \"description\": \"bicicle\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity",
+								"645ff5edf01fd3a2938b702b"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admins",
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"firstName\":\"Carla\", \r\n        \"lastName\":\"Perez\",\r\n        \"dni\": 22676305,\r\n        \"phone\":3417854385,\r\n        \"email\":\"carlaperez@gmail.com\",\r\n        \"city\":\"Rosario\",\r\n        \"password\":\"AbcdeF12G456\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/admins",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admins ByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/645fd03f7abeabf9a2a430f9",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								"645fd03f7abeabf9a2a430f9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update an Admin",
 					"request": {
 						"method": "PUT",
@@ -229,158 +229,178 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete admin ById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/646243e1c024fbfc7109d058",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								"646243e1c024fbfc7109d058"
+							]
+						}
+					},
+					"response": []
 				}
-      ]
-    },
-    {
-      "name": "Class",
-      "item": [
-        {
-          "name": "Get all classes",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:4000/api/class",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "class"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get class by id",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:4000/api/class/:id",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "class",
-                ":id"
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "5cdd3217a3f5a71aaf5a7dd4"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Gym",
-      "item": []
-    },
-    {
-      "name": "Members",
-      "item": [
-        {
-          "name": "Create Member",
-          "protocolProfileBehavior": {
-            "disabledSystemHeaders": {}
-          },
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"firstName\": \"José\",\r\n    \"lastName\": \"Rodríguez\",\r\n    \"birthday\": \"09/28/2002\",\r\n    \"phone\": \"1676778392\",\r\n    \"email\": \"isabelgomez@yahoo.com\",\r\n    \"city\": \"Mar del Plata\",\r\n    \"postal_code\": \"3000\",\r\n    \"is_active\": true,\r\n    \"membership\": \"Classic\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:4000/api/member",
-              "host": [
-                "localhost"
-              ],
-              "port": "4000",
-              "path": [
-                "api",
-                "member"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update Member",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": ""
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Subscriptions",
-      "item": []
-    },
-    {
-      "name": "Super-admins",
-      "item": []
-    },
-    {
-      "name": "Get all trainers",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:4000/api/trainer",
-          "host": [
-            "localhost"
-          ],
-          "port": "4000",
-          "path": [
-            "api",
-            "trainer"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get trainer by id",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
-          "host": [
-            "localhost"
-          ],
-          "port": "4000",
-          "path": [
-            "api",
-            "trainer",
-            "64613b33bc57874f5ddf99fa"
-          ]
-        }
-      },
-      "response": []
-    }
-  ]
+			]
+		},
+		{
+			"name": "Class",
+			"item": [
+				{
+					"name": "Get all classes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/class",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get class by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/class/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"class",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5cdd3217a3f5a71aaf5a7dd4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gym",
+			"item": []
+		},
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "Create Member",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"José\",\r\n    \"lastName\": \"Rodríguez\",\r\n    \"birthday\": \"09/28/2002\",\r\n    \"phone\": \"1676778392\",\r\n    \"email\": \"isabelgomez@yahoo.com\",\r\n    \"city\": \"Mar del Plata\",\r\n    \"postal_code\": \"3000\",\r\n    \"is_active\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/member",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Member",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": []
+		},
+		{
+			"name": "Super-admins",
+			"item": []
+		},
+		{
+			"name": "Get all trainers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/trainer",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"trainer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get trainer by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"trainer",
+						"64613b33bc57874f5ddf99fa"
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }
