@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "b5917b1e-5266-4509-a5ee-9f610f6453c5",
+		"_postman_id": "3c6a9c2c-0404-4798-b486-7bf5b6d1447f",
 		"name": "MEGA ROCKET",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27269560"
 	},
 	"item": [
 		{
@@ -22,6 +23,26 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity",
+								"645ff5edf01fd3a2938b702b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Activity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
 						"url": {
 							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
 							"host": [
@@ -65,45 +86,6 @@
 							"path": [
 								"api",
 								"admins"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Admins",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/admins",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Admins ByID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/admins/645fd03f7abeabf9a2a430f9",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins",
-								"645fd03f7abeabf9a2a430f9"
 							]
 						}
 					},
@@ -223,43 +205,8 @@
 			"item": []
 		},
 		{
-			"name": "Get all trainers",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:4000/api/trainer",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"trainer"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get trainer by id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"trainer",
-						"64613b33bc57874f5ddf99fa"
-					]
-				}
-			},
-			"response": []
+			"name": "Trainer",
+			"item": []
 		}
 	]
 }

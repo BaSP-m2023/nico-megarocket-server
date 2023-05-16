@@ -67,8 +67,30 @@ const updateActivity = (req, res) => {
     }));
 };
 
+const deleteActivity = (req, res) => {
+  const { id } = req.params;
+
+  activity.findByIdAndDelete(id)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          message: `Activity with the id: ${id} was not found, please try with another one`,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: `Activity with the id: ${id} was successfully deleted.`,
+      });
+    })
+    .catch((error) => res.status(400).json({
+      message: 'Oops! There was an error!',
+      error,
+    }));
+};
+
 module.exports = {
   getAllActivities,
   getActivityById,
   updateActivity,
+  deleteActivity,
 };
