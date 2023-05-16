@@ -8,6 +8,7 @@ const router = express.Router();
 
 router
   .put('/:id', validations.validateUpdate, activityController.updateActivity)
+  .delete('/:id', activityController.deleteActivity)
   .get('/', controller.getAllActivities)
   .get('/:id', controller.getActivityById);
 
