@@ -1,5 +1,4 @@
 const express = require('express');
-// const validateUpdate = require('../validations/trainer');
 const validateTrainer = require('../validations/trainer');
 const trainerController = require('../controllers/trainer');
 
