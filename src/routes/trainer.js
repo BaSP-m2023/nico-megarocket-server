@@ -1,14 +1,14 @@
 const express = require('express');
-
-const validateTrainer = require('../validations/trainer');
-
 const trainerController = require('../controllers/trainer');
+const validation = require('../validations/trainer');
 
 const router = express.Router();
 
 router
-  .put('/:id', validateTrainer.validateUpdate, trainerController.updateTrainer)
+  .put('/:id', validation.validateUpdate, trainerController.updateTrainer)
   .get('/', trainerController.getAllTrainers)
-  .get('/:id', trainerController.getTrainerById);
+  .delete('/:id', trainerController.deleteTrainer)
+  .get('/:id', trainerController.getTrainerById)
+  .post('/', validation.validateCreation, trainerController.postTrainer);
 
 module.exports = router;
