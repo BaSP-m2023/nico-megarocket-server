@@ -109,4 +109,11 @@ const createClass = (req, res) => {
     });
 };
 
-module.exports = { getClasses, getClassById, createClass, updateClass };
+// test eslint
+
+module.exports = {
+  getClasses,
+  getClassById,
+  createClass,
+  updateClass,
+};
