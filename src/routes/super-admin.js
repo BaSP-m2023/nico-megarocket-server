@@ -1,6 +1,6 @@
 const express = require('express');
 
-const controllersSuperAdmin = require('../controllers/SuperAdmin');
+const controllersSuperAdmin = require('../controllers/super-admin');
 
 const router = express.Router();
 

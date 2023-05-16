@@ -6,6 +6,10 @@ const memberController = require('../controllers/member');
 
 const middleware = require('../validations/member');
 
-router.put('/:id', middleware.validateUpdate, memberController.updateMember);
+router
+  .post('/', middleware.validateCreation, memberController.createMember)
+  .put('/:id', middleware.validateUpdate, memberController.updateMember);
+
+router.delete('/:id', memberController.deleteMember);
 
 module.exports = router;
