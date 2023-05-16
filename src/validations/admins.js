@@ -12,10 +12,9 @@ const validateUpdate = (req, res, next) => {
       .positive()
       .min(10000000)
       .max(99999999),
-    phone: Joi.number()
-      .positive()
-      .min(1000000000)
-      .max(9999999999),
+    phone: Joi.string()
+      .min(9)
+      .max(12),
     email: Joi.string()
       .email(),
     city: Joi.string()
@@ -24,7 +23,7 @@ const validateUpdate = (req, res, next) => {
     password: Joi.string()
       .min(8)
       .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
-  }).min(1);
+  });
 
   const validation = adminValidation.validate(req.body);
   if (!validation.error) return next();
@@ -58,10 +57,9 @@ const validateCreation = (req, res, next) => {
       .min(10000000)
       .max(99999999)
       .required(),
-    phone: Joi.number()
-      .positive()
-      .min(1000000000)
-      .max(9999999999)
+    phone: Joi.string()
+      .min(9)
+      .max(12)
       .required(),
     email: Joi.string()
       .pattern(/^[^@]+@[^@]+.[a-zA-Z]{2,}$/)
