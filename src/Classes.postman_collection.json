@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "cdaf8a90-9311-44cd-995c-5934c838496e",
+		"_postman_id": "45585f64-5d6a-4dfa-92f5-667f9c6e3758",
 		"name": "MEGA ROCKET",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27303064"
 	},
 	"item": [
 		{
@@ -417,7 +418,37 @@
 		},
 		{
 			"name": "Super-admins",
-			"item": []
+			"item": [
+				{
+					"name": "PUT Update SuperAdmin Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"oscarl@gmail.com\",\r\n    \"password\": \"LrY492ww\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/superadmin/64639d848958b1ca63f4f47c",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"superadmin",
+								"64639d848958b1ca63f4f47c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Trainers",
