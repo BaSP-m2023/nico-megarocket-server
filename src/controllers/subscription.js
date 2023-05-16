@@ -22,7 +22,7 @@ const updateSuscription = (req, res) => {
           error: true,
         });
       }
-      return res.status(201).json({
+      return res.status(200).json({
         message: 'Subscription updated successfully',
         result,
       });

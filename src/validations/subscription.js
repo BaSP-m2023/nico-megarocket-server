@@ -5,9 +5,10 @@ const validateUpdate = (req, res, next) => {
     classId: Joi.string()
       .hex()
       .min(24),
-    members: Joi.string(),
-    date: Joi.date()
-      .max('now'),
+    members: Joi.string()
+      .hex()
+      .min(24),
+    date: Joi.date(),
   });
   const validation = subscriptionValidate.validate(req.body);
   if (!validation.error) return next();
