@@ -29,18 +29,19 @@ const validateCreateClass = (req, res, next) => {
       }),
 
     trainer: Joi.string()
-      .regex(/^[a-zA-Z]+$/)
-      .required()
-      .messages({
-        'string.pattern.base': 'Trainer has to be a letters',
-      }),
-
-    activity: Joi.string()
-      .alphanum()
+      .hex()
       .length(24)
       .required()
       .messages({
-        'string.alphanum': 'Activity has to be a alphanumeric ID',
+        'string.hex': 'Trainer has to be a alphanumeric ID',
+      }),
+
+    activity: Joi.string()
+      .hex()
+      .length(24)
+      .required()
+      .messages({
+        'string.hex': 'Activity has to be a alphanumeric ID',
         'string.length': 'Activity has 24 characters',
       }),
 
