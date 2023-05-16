@@ -1,8 +1,10 @@
 {
 	"info": {
-		"_postman_id": "cdaf8a90-9311-44cd-995c-5934c838496e",
+		"_postman_id": "950cfb6e-23ad-42c8-92df-41c3de1140ff",
 		"name": "MEGA ROCKET",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26662840",
+		"_collection_link": "https://orange-rocket-504088.postman.co/workspace/Team-Workspace~3878e157-1740-4f60-8ef5-4cbb4cfafb67/collection/26662840-950cfb6e-23ad-42c8-92df-41c3de1140ff?action=share&creator=26662840&source=collection_link"
 	},
 	"item": [
 		{
@@ -259,7 +261,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"hour\": \"21:40\",\r\n    \"day\": \"09/12/2023\",\r\n    \"trainer\": \"60a2c7df25d91f5127e6ce1d\",\r\n    \"activity\" : \"60a2c7df22d99f5127e6ce1d\",\r\n    \"slots\": \"18\"\r\n}",
+							"raw": "{\r\n    \"hour\": \"21:40\",\r\n    \"day\": \"Monday\",\r\n    \"trainer\": \"60a2c7df25d91f5127e6ce1d\",\r\n    \"activity\" : \"60a2c7df22d99f5127e6ce1d\",\r\n    \"slots\": \"18\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -21,11 +21,7 @@ const validateUpdate = (req, res, next) => {
         'The field must be a valid hour(for example 09:30 )',
       }),
     day: Joi.string()
-      .pattern(/^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/)
-      .messages({
-        'string.pattern.base':
-          'The field must be a valid day(for example 05/12/2023)',
-      }),
+      .valid('Monday', 'Tuesday', 'Wendesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday'),
     trainer: Joi.string()
       .hex()
       .min(24),
