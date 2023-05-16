@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const validateUpdate = (req, res, next) => {
-  const trainerValidation = Joi.object({
+  const adminValidation = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string()
       .min(8)
@@ -12,7 +12,7 @@ const validateUpdate = (req, res, next) => {
           'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
       }),
   });
-  const validation = trainerValidation.validate(req.body);
+  const validation = adminValidation.validate(req.body);
 
   if (!validation.error) return next();
   return res.status(400).json({

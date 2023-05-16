@@ -1,4 +1,4 @@
-const sAdmins = require('../data/super-admins.json');
+const sAdmins = require('../models/SuperAdmin');
 
 const updateAdmin = (req, res) => {
   const { id } = req.params;
