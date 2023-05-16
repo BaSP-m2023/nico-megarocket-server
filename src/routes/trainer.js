@@ -1,5 +1,7 @@
 const express = require('express');
+
 const validateTrainer = require('../validations/trainer');
+
 const trainerController = require('../controllers/trainer');
 
 const router = express.Router();
