@@ -1,7 +1,7 @@
 const Admin = require('../models/Admins');
 
 const updateAdmin = (req, res) => {
-  const adminId = req.params.id;
+  const { id } = req.params;
   const
     {
       firstName,
@@ -14,7 +14,7 @@ const updateAdmin = (req, res) => {
     } = req.body;
 
   Admin.findByIdAndUpdate(
-    adminId,
+    id,
     {
       firstName,
       lastName,
@@ -29,7 +29,7 @@ const updateAdmin = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Admin with ID ${adminId} not found`,
+          message: `Admin with ID ${id} not found`,
           data: null,
           error: true,
         });
@@ -40,7 +40,7 @@ const updateAdmin = (req, res) => {
         error: false,
       });
     })
-    .catch((error) => res.status(400).json({
+    .catch((error) => res.status(500).json({
       message: 'Error occurred while updating admin',
       error,
     }));

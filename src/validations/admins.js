@@ -4,18 +4,10 @@ const validateUpdate = (req, res, next) => {
   const adminValidation = Joi.object({
     firstName: Joi.string()
       .min(3)
-      .max(15)
-      .pattern(/^[A-Za-z]+$/)
-      .messages({
-        'string.pattern.base': 'The name must contain only letters',
-      }),
+      .max(15),
     lastName: Joi.string()
       .min(3)
-      .max(15)
-      .pattern(/^[A-Za-z]+$/)
-      .messages({
-        'string.pattern.base': 'The lastName must contain only letters',
-      }),
+      .max(15),
     dni: Joi.number()
       .positive()
       .min(10000000)
