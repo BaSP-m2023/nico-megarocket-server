@@ -82,4 +82,31 @@ const updateClass = (req, res) => {
     }));
 };
 
-module.exports = { getClasses, getClassById, updateClass };
+const createClass = (req, res) => {
+  const {
+    hour, day, trainer, activity, slots,
+  } = req.body;
+
+  classes.create({
+    hour,
+    day,
+    trainer,
+    activity,
+    slots,
+  })
+    .then((data) => {
+      res.status(201).json({
+        message: 'Class created',
+        data,
+        error: false,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'An error ocurred',
+        error,
+      });
+    });
+};
+
+module.exports = { getClasses, getClassById, createClass, updateClass };

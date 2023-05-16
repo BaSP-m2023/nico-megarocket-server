@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "950cfb6e-23ad-42c8-92df-41c3de1140ff",
+		"_postman_id": "61b96375-4e85-4586-a6e9-299f2a759a6a",
 		"name": "MEGA ROCKET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26662840",
-		"_collection_link": "https://orange-rocket-504088.postman.co/workspace/Team-Workspace~3878e157-1740-4f60-8ef5-4cbb4cfafb67/collection/26662840-950cfb6e-23ad-42c8-92df-41c3de1140ff?action=share&creator=26662840&source=collection_link"
+		"_collection_link": "https://orange-rocket-504088.postman.co/workspace/Team-Workspace~3878e157-1740-4f60-8ef5-4cbb4cfafb67/collection/26662840-61b96375-4e85-4586-a6e9-299f2a759a6a?action=share&creator=26662840&source=collection_link"
 	},
 	"item": [
 		{
@@ -255,13 +255,42 @@
 					"response": []
 				},
 				{
+					"name": "Post class",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hour\": \"14:20\",\r\n    \"day\": \"Sunday\",\r\n    \"trainer\": \"64614f4715062fbd70b9f149\",\r\n    \"activity\": \"64614f4715062fbd70b9f149\",\r\n    \"slots\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/class",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Update Class",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"hour\": \"21:40\",\r\n    \"day\": \"Monday\",\r\n    \"trainer\": \"60a2c7df25d91f5127e6ce1d\",\r\n    \"activity\" : \"60a2c7df22d99f5127e6ce1d\",\r\n    \"slots\": \"18\"\r\n}",
+							"raw": "{\r\n    \"hour\": \"21:40\",\r\n    \"day\": \"09/12/2023\",\r\n    \"trainer\": \"60a2c7df25d91f5127e6ce1d\",\r\n    \"activity\" : \"60a2c7df22d99f5127e6ce1d\",\r\n    \"slots\": \"18\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

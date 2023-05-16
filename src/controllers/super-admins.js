@@ -1,4 +1,4 @@
-const express = require('express');
+/* const express = require('express');
 const fs = require('fs');
 const sAdmins = require('../data/super-admins.json');
 
@@ -104,4 +104,4 @@ router.put('/put/:id', (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router; */
