@@ -63,16 +63,16 @@ const updateClass = (req, res) => {
     },
     { new: true },
   )
-    .then((data) => {
-      if (data) {
+    .then((result) => {
+      if (result) {
         res.status(201).json({
           message: 'Class Updated',
-          data,
+          result,
           error: false,
         });
       } else {
         res.status(404).json({
-          message: ' Class not found',
+          message: 'Class not found',
         });
       }
     })
