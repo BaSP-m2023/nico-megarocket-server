@@ -21,11 +21,12 @@ const validateCreateClass = (req, res, next) => {
         'string.pattern.base': 'Hour format is HH:mm',
       }),
 
-    day: Joi.date()
-      .required()
+    day: Joi.string()
+      .valid('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satueday', 'Sunday')
       .messages({
-        'date.base': 'Day format is mm/dd/yyyy',
-      }),
+        'any.only': 'The Day property has to be a day of the week',
+      })
+      .required(),
 
     trainer: Joi.string()
       .hex()

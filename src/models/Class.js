@@ -8,8 +8,9 @@ const classSchema = new Schema({
     required: true,
   },
   day: {
-    type: Date,
+    type: String,
     required: true,
+    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satueday', 'Sunday'],
   },
   trainer: {
     type: Schema.Types.ObjectId,
