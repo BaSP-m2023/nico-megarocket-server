@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c552edc9-db2c-48d7-a152-ae43df1ff229",
+		"_postman_id": "59875672-a96e-4c5c-b264-1843ad22e325",
 		"name": "MEGA ROCKET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27282468"
+		"_exporter_id": "27281667"
 	},
 	"item": [
 		{
@@ -200,55 +200,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Update an Admin",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Kiketo\",\r\n        \"lastName\": \"Anast\",\r\n        \"dni\": 40140033,\r\n        \"phone\": 3413822255,\r\n        \"email\": \"chad@gmail.com\",\r\n        \"city\": \"Agaland\",\r\n        \"password\": \"AAss123456\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/admins/645fd03f7abeabf9a2a430f9",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins",
-								"645fd03f7abeabf9a2a430f9"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete admin ById",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/admins/646243e1c024fbfc7109d058",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins",
-								"646243e1c024fbfc7109d058"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -321,7 +272,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"José\",\r\n    \"lastName\": \"Rodríguez\",\r\n    \"birthday\": \"09/28/2002\",\r\n    \"phone\": \"1676778392\",\r\n    \"email\": \"isabelgomez@yahoo.com\",\r\n    \"city\": \"Mar del Plata\",\r\n    \"postal_code\": \"3000\",\r\n    \"is_active\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Robert\",\r\n    \"lastName\": \"Lopez\",\r\n    \"dni\": 12345678,\r\n    \"birthday\": \"09/28/2000\",\r\n    \"phone\": \"1676778391\",\r\n    \"email\": \"robert@yahoo.com\",\r\n    \"city\": \"Cordoba\",\r\n    \"postalCode\": \"5000\",\r\n    \"isActive\": true,\r\n    \"membership\": \"Classic\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -345,10 +296,67 @@
 				{
 					"name": "Update Member",
 					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Roberto\",\r\n    \"lastName\": \"Lopez\",\r\n    \"dni\": 12345678,\r\n    \"birthday\": \"09/28/2000\",\r\n    \"phone\": \"1676778391\",\r\n    \"email\": \"robert@yahoo.com\",\r\n    \"city\": \"Cordoba\",\r\n    \"postalCode\": \"4000\",\r\n    \"isActive\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member Id",
+					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/member",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member"
+							]
 						}
 					},
 					"response": []
@@ -357,50 +365,84 @@
 		},
 		{
 			"name": "Subscriptions",
-			"item": []
+			"item": [
+				{
+					"name": "Post Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classId\": \"64614f4715062fbd70b9f149\",\r\n    \"members\": \"6462dad987c004710e02764f\",\r\n    \"date\": \"12/21/2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/subscription",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Super-admins",
 			"item": []
 		},
 		{
-			"name": "Get all trainers",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:4000/api/trainer",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"trainer"
-					]
+			"name": "Trainers",
+			"item": [
+				{
+					"name": "Get all trainers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/trainer",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get trainer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer",
+								"64613b33bc57874f5ddf99fa"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get trainer by id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"api",
-						"trainer",
-						"64613b33bc57874f5ddf99fa"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }
