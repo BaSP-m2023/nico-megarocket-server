@@ -7,6 +7,7 @@ const router = express.Router();
 router
   .put('/:id', validateUpdate, trainerController.updateTrainer)
   .get('/', trainerController.getAllTrainers)
+  .delete('/:id', trainerController.deleteTrainer)
   .get('/:id', trainerController.getTrainerById);
 
 module.exports = router;
