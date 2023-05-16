@@ -6,42 +6,50 @@ const memberSchema = new Schema({
   firstName: {
     type: String,
     required: true,
-    minLenght: 3,
-    maxLenght: 15,
+    minLength: 3,
+    maxLength: 15,
     match: /^[A-Za-z]+$/,
   },
   lastName: {
     type: String,
     required: true,
-    minLenght: 3,
-    maxLenght: 15,
+    minLength: 3,
+    maxLength: 15,
     match: /^[A-Za-z]+$/,
+  },
+  dni: {
+    type: Number,
+    required: true,
+    minlength: 7,
+    maxLength: 8,
   },
   birthday: {
     type: Date,
     required: true,
-    Lenght: 10,
   },
   phone: {
-    type: Number,
+    type: String,
     required: true,
-    length: 10,
+    minlength: 9,
+    maxLength: 12,
   },
   email: {
     type: String,
     required: true,
     match: /^[^@]+@[^@]+.[a-zA-Z]{2,}$/,
+    unique: true,
   },
   city: {
     type: String,
     required: true,
-    minlength: 3,
+    minlength: 2,
+    maxLength: 15,
   },
   postalCode: {
     type: String,
     required: true,
-    minLenght: 4,
-    maxLenght: 5,
+    minlength: 3,
+    maxLength: 5,
   },
   isActive: {
     type: Boolean,
@@ -49,8 +57,8 @@ const memberSchema = new Schema({
   },
   membership: {
     type: String,
-    required: true,
     enum: ['Black', 'Classic', 'Only_classes'],
+    required: true,
   },
 });
 

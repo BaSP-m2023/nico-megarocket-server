@@ -6,7 +6,7 @@ const admins = require('./admins');
 
 const classes = require('./class');
 
-const member = require('./members');
+const member = require('./member');
 
 const trainer = require('./trainer');
 
