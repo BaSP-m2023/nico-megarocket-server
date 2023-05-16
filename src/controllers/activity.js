@@ -1,4 +1,4 @@
-const activity = require('../models/activity');
+const activity = require('../models/Activity');
 
 const getAllActivities = (req, res) => {
   activity.find()
@@ -34,7 +34,41 @@ const getActivityById = (req, res) => {
     });
 };
 
+const updateActivity = (req, res) => {
+  const { id } = req.params;
+  const {
+    name, description, isActive,
+  } = req.body;
+
+  activity.findByIdAndUpdate(
+    id,
+    {
+      name,
+      description,
+      isActive,
+    },
+    { new: true },
+  )
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          message: `Activity with the id: ${id} was not found, please try with another one`,
+          error: true,
+        });
+      }
+      return res.status(201).json({
+        message: 'Activity updated successfully',
+        result,
+      });
+    })
+    .catch((error) => res.status(500).json({
+      message: 'Error updating activity',
+      error,
+    }));
+};
+
 module.exports = {
   getAllActivities,
   getActivityById,
+  updateActivity,
 };

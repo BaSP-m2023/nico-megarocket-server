@@ -6,7 +6,15 @@ const admins = require('./admins');
 
 const classes = require('./class');
 
+const member = require('./member');
+
+const trainer = require('./trainer');
+
 const router = express.Router();
+
+router.use('/member', member);
+
+router.use('/trainer', trainer);
 
 router.use('/activity', activities);
 

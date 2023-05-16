@@ -2,47 +2,52 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const adminsSchema = new Schema({
+const trainerSchema = new Schema({
   firstName: {
     type: String,
-    required: true,
     minLength: 3,
     maxLength: 15,
+    require: true,
     match: /^[A-Za-z]+$/,
   },
   lastName: {
     type: String,
     minLength: 3,
     maxLength: 15,
+    require: true,
     match: /^[A-Za-z]+$/,
-    required: true,
   },
   dni: {
     type: Number,
-    length: 8,
-    required: true,
+    minLength: 8,
+    maxLength: 8,
+    require: true,
   },
   phone: {
     type: Number,
-    length: 10,
-    required: true,
+    minLength: 10,
+    require: true,
   },
   email: {
     type: String,
+    require: true,
+    lowercase: true,
     match: /^[^@]+@[^@]+.[a-zA-Z]{2,}$/,
-    required: true,
   },
   city: {
     type: String,
-    minlength: 2,
-    maxLength: 10,
-    required: true,
+    minLength: 3,
+    maxLength: 15,
+    require: true,
   },
-  password: {
-    type: String,
-    match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-    required: true,
+  salary: {
+    type: Number,
+    require: true,
+  },
+  isActive: {
+    type: Boolean,
+    default: false,
   },
 });
 
-module.exports = mongoose.model('Admin', adminsSchema);
+module.exports = mongoose.model('trainer', trainerSchema);
