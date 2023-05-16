@@ -12,7 +12,7 @@ const classSchema = new Schema({
     required: true,
   },
   trainer: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   activity: {
