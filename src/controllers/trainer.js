@@ -88,12 +88,15 @@ const deleteTrainer = (req, res) => {
         message: `Trainer with the id: ${id} was successfully deleted.`,
       });
     })
-    .catch((error) => res.status(400).json({
+    .catch((error) => res.status(500).json({
       message: 'There was an mistake!',
       error,
     }));
 };
 
 module.exports = {
-  getAllTrainers, getTrainerById, updateTrainer, deleteTrainer,
+  getAllTrainers,
+  getTrainerById,
+  updateTrainer,
+  deleteTrainer,
 };
