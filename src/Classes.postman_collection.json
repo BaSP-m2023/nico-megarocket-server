@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f26aae74-96c0-44da-a646-5b60c78bcc21",
+		"_postman_id": "def2f1f6-1575-4d90-ac67-bdb37fee9b75",
 		"name": "MEGA ROCKET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -273,7 +273,65 @@
 		},
 		{
 			"name": "Subscriptions",
-			"item": []
+			"item": [
+				{
+					"name": "Post Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classId\": \"64614f4715062fbd70b9f149\",\r\n    \"members\": \"6462dad987c004710e02764f\",\r\n    \"date\": \"12/21/2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/subscription",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Subscription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classId\": \"64614f4715062fbd70b9f149\",\r\n    \"members\": \"6462dad987c004710e02764f\",\r\n    \"date\": \"12/21/2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/subscription/6463bd8b193b69d2dd9b16a7",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscription",
+								"6463bd8b193b69d2dd9b16a7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Super-admins",
