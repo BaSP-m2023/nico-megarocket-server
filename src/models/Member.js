@@ -20,7 +20,7 @@ const memberSchema = new Schema({
   dni: {
     type: Number,
     required: true,
-    minlength: 7,
+    minLength: 7,
     maxLength: 8,
   },
   birthday: {
@@ -30,24 +30,25 @@ const memberSchema = new Schema({
   phone: {
     type: String,
     required: true,
-    minlength: 9,
+    minLength: 9,
     maxLength: 12,
   },
   email: {
     type: String,
     required: true,
+    match: /^[^@]+@[^@]+.[a-zA-Z]{2,}$/,
     unique: true,
   },
   city: {
     type: String,
     required: true,
-    minlength: 2,
+    minLength: 2,
     maxLength: 15,
   },
   postalCode: {
     type: String,
     required: true,
-    minlength: 3,
+    minLength: 3,
     maxLength: 5,
   },
   isActive: {
