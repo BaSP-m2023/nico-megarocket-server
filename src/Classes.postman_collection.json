@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3c6a9c2c-0404-4798-b486-7bf5b6d1447f",
+		"_postman_id": "1f1f8aed-9f28-4211-a3a4-82d67f6171b6",
 		"name": "MEGA ROCKET",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "27269560"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27289317"
 	},
 	"item": [
 		{
@@ -23,38 +23,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"activity",
-								"645ff5edf01fd3a2938b702b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete an Activity",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"activity",
-								"645ff5edf01fd3a2938b702b"
-							]
-						}
+						"url": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b"
 					},
 					"response": []
 				}
@@ -77,17 +46,25 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:4000/api/admins",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"admins"
-							]
-						}
+						"url": "localhost:4000/api/admins"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:4000/api/admins"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admins ByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:4000/api/admins/645fd03f7abeabf9a2a430f9"
 					},
 					"response": []
 				}
@@ -101,18 +78,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "http://localhost:4000/api/class",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"class"
-							]
-						}
+						"url": "http://localhost:4000/api/class"
 					},
 					"response": []
 				},
@@ -151,50 +117,7 @@
 		},
 		{
 			"name": "Members",
-			"item": [
-				{
-					"name": "Create Member",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"José\",\r\n    \"lastName\": \"Rodríguez\",\r\n    \"birthday\": \"09/28/2002\",\r\n    \"phone\": \"1676778392\",\r\n    \"email\": \"isabelgomez@yahoo.com\",\r\n    \"city\": \"Mar del Plata\",\r\n    \"postal_code\": \"3000\",\r\n    \"is_active\": true,\r\n    \"membership\": \"Classic\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/member",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"member"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Member",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
-					},
-					"response": []
-				}
-			]
+			"item": []
 		},
 		{
 			"name": "Subscriptions",
@@ -202,11 +125,67 @@
 		},
 		{
 			"name": "Super-admins",
-			"item": []
+			"item": [
+				{
+					"name": "Get All Super-Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:4000/api/super-admin"
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id Super-Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:4000/api/super-admin/646395ee58ff7aa8c559c800"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Trainer",
-			"item": []
+			"item": [
+				{
+					"name": "Get all trainers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:4000/api/trainer"
+					},
+					"response": []
+				},
+				{
+					"name": "Post trainer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"gshjjjjl0@miibeyyyian.yu\",\r\n  \"phone\": \"213637909066\",\r\n  \"firstName\": \"Dany\",\r\n  \"lastName\": \"Doe\",\r\n  \"city\": \"Rio de Janeiro\",\r\n  \"dni\": 38504999,\r\n  \"salary\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:4000/api/trainer"
+					},
+					"response": []
+				},
+				{
+					"name": "Get trainer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "localhost:4000/api/trainer/64613b33bc57874f5ddf99f4"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
