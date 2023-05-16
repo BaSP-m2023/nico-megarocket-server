@@ -1,14 +1,16 @@
 const express = require('express');
-const activityController = require('../controllers/activity');
-const validations = require('../validations/activity');
 
 const controller = require('../controllers/activity');
+
+const validation = require('../validations/activity');
 
 const router = express.Router();
 
 router
-  .put('/:id', validations.validateUpdate, activityController.updateActivity)
+  .delete('/:id', controller.deleteActivity)
   .get('/', controller.getAllActivities)
-  .get('/:id', controller.getActivityById);
+  .get('/:id', controller.getActivityById)
+  .post('/', validation.validateCreation, controller.createActivity)
+  .put('/:id', validation.validateUpdate, controller.updateActivity);
 
 module.exports = router;
