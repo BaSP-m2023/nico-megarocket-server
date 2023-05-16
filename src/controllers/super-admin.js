@@ -12,7 +12,7 @@ const createSuperAdmin = (req, res) => {
       message: 'Super Admin created',
       result,
     }))
-    .catch((error) => res.status(400).json({
+    .catch((error) => res.status(500).json({
       message: 'Error ocurred',
       error,
     }));
@@ -28,7 +28,7 @@ const getAllSuperAdmin = (req, res) => {
         });
       }
     })
-    .catch((error) => res.status(404).json({
+    .catch((error) => res.status(500).json({
       message: 'Error, a problem has occurred',
       error,
     }));
