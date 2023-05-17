@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const superAdminsSchema = new Schema({
   email: {
     type: String,
+    match: /^[^@]+@[^@]+.[a-zA-Z]{2,}$/,
     required: true,
   },
   password: {
