@@ -503,6 +503,31 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Super-admins",
+          "item": [
+            {
+              "name": "Delete SuperAdmin ById",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "localhost:4000/api/superadmin/6463fe00e31f825759c36753",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "superadmin",
+                    "6463fe00e31f825759c36753"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
         }
       ]
     },

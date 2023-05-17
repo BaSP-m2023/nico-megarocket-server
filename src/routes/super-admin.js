@@ -8,6 +8,7 @@ router
   .put('/:id', superAdminValidation.validateUpdate, controllersSuperAdmin.updateAdmin)
   .get('/', controllersSuperAdmin.getAllSuperAdmin)
   .get('/:id', controllersSuperAdmin.getSuperAdminById)
-  .post('/', superAdminValidation.createSuperAdminValidation, controllersSuperAdmin.createSuperAdmin);
+  .post('/', superAdminValidation.createSuperAdminValidation, controllersSuperAdmin.createSuperAdmin)
+  .delete('/:id', controllersSuperAdmin.deleteSuperAdmin);
 
 module.exports = router;
