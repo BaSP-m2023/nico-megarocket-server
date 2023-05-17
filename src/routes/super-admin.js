@@ -1,11 +1,14 @@
 const express = require('express');
 
-const router = express.Router();
-
-const superAdminController = require('../controllers/super-admin');
+const controllersSuperAdmin = require('../controllers/super-admin');
 
 const superAdminValidation = require('../validations/super-admin');
 
-router.post('/', superAdminValidation.createSuperAdminValidation, superAdminController.createSuperAdmin);
+const router = express.Router();
+
+router
+  .get('/', controllersSuperAdmin.getAllSuperAdmin)
+  .get('/:id', controllersSuperAdmin.getSuperAdminById)
+  .post('/', superAdminValidation.createSuperAdminValidation, controllersSuperAdmin.createSuperAdmin);
 
 module.exports = router;
