@@ -13,7 +13,7 @@ app.use(express.json());
 const DB_URL = 'mongodb+srv://nico-team:UcLQ3ogL9TCSIMH2@megarocket-databases.inpprte.mongodb.net/nico-database';
 
 mongoose
-  .connect(DB_URL)
+  .connect(DB_URL, { maxPoolSize: process.env.MONGO_POOLSIZE || 1})
   .then(() => console.log('Db connected'))
   .catch((error) => console.log('Error : ', error));
 
