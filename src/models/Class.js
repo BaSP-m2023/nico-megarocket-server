@@ -6,23 +6,27 @@ const classSchema = new Schema({
   hour: {
     type: String,
     required: true,
+    match: /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/,
   },
   day: {
     type: String,
+    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday'],
     required: true,
   },
   trainer: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
+
   },
   activity: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
-    enum: Schema.Types.ObjectId,
   },
   slots: {
     type: Number,
     required: true,
+    minlength: 1,
+    maxlength: 20,
   },
 });
 
