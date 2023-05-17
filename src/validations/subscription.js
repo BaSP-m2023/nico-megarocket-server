@@ -6,6 +6,8 @@ const validateCreation = (req, res, next) => {
       .hex()
       .min(24),
     members: Joi.string()
+      .hex()
+      .min(24)
       .required(),
     date: Joi.date()
       .required(),
