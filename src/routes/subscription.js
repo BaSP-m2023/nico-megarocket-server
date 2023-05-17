@@ -1,11 +1,17 @@
 const express = require('express');
 
-const router = express.Router();
-
 const subscriptionController = require('../controllers/subscription');
 
-const middleware = require('../validations/subscription');
+const validations = require('../validations/subscription');
 
-router.post('/', middleware.validateCreation, subscriptionController.createSubscription);
+const controller = require('../controllers/subscription');
+
+const router = express.Router();
+
+router
+  .post('/', validations.validateCreation, subscriptionController.createSubscription)
+  .put('/:id', validations.validateUpdate, subscriptionController.updateSubscription)
+  .get('/', controller.getAllSubscriptions)
+  .get('/:id', controller.getSubscriptionById);
 
 module.exports = router;

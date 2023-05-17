@@ -71,6 +71,41 @@ const updateMember = (req, res) => {
     .catch((error) => res.status(500).json(error));
 };
 
+const getAllMembers = (req, res) => {
+  Member.find()
+    .then((members) => res.status(200).json({
+      message: 'Complete members list',
+      data: members,
+      error: false,
+    }))
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      error,
+    }));
+};
+
+const getById = (req, res) => {
+  const { id } = req.params;
+  Member.findById(id)
+    .then((member) => {
+      if (member) {
+        res.status(200).json({
+          message: 'Member found!',
+          data: member,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Member not found',
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      error,
+    }));
+};
+
 const deleteMember = async (req, res) => {
   try {
     const { id } = req.params;
@@ -94,4 +129,6 @@ module.exports = {
   updateMember,
   deleteMember,
   createMember,
+  getAllMembers,
+  getById,
 };

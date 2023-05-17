@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "864c8be9-cc19-40e8-9f06-1128bf65e5e6",
+		"_postman_id": "1f015f96-1ca8-47c2-bb7c-18c93676cfe8",
 		"name": "MEGA ROCKET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27281667"
@@ -252,6 +252,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/class/6461627f9dab8b15961abcf5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"class",
+								"6461627f9dab8b15961abcf5"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -272,7 +293,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"José\",\r\n    \"lastName\": \"Rodríguez\",\r\n    \"birthday\": \"09/28/2002\",\r\n    \"phone\": \"1676778392\",\r\n    \"email\": \"isabelgomez@yahoo.com\",\r\n    \"city\": \"Mar del Plata\",\r\n    \"postal_code\": \"3000\",\r\n    \"is_active\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Robert\",\r\n    \"lastName\": \"Lopez\",\r\n    \"dni\": 12345678,\r\n    \"birthday\": \"09/28/2000\",\r\n    \"phone\": \"1676778391\",\r\n    \"email\": \"robert@yahoo.com\",\r\n    \"city\": \"Cordoba\",\r\n    \"postalCode\": \"5000\",\r\n    \"isActive\": true,\r\n    \"membership\": \"Classic\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -296,10 +317,67 @@
 				{
 					"name": "Update Member",
 					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Roberto\",\r\n    \"lastName\": \"Lopez\",\r\n    \"dni\": 12345678,\r\n    \"birthday\": \"09/28/2000\",\r\n    \"phone\": \"1676778391\",\r\n    \"email\": \"robert@yahoo.com\",\r\n    \"city\": \"Cordoba\",\r\n    \"postalCode\": \"4000\",\r\n    \"isActive\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member Id",
+					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/member",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member"
+							]
 						}
 					},
 					"response": []
@@ -341,10 +419,78 @@
 		},
 		{
 			"name": "Super-admins",
-			"item": []
+			"item": [
+				{
+					"name": "Get All Super-Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/super-admin",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id Super-Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/super-admin/646395ee58ff7aa8c559c800",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admin",
+								"646395ee58ff7aa8c559c800"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"algo@email.com\",\r\n    \"password\": \"Password1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/super-admin",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"super-admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "Trainers",
+			"name": "Trainer",
 			"item": [
 				{
 					"name": "Get all trainers",
@@ -366,12 +512,40 @@
 					"response": []
 				},
 				{
+					"name": "Post trainer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"gshjjjjl0@miibeyyyian.yu\",\r\n  \"phone\": \"213637909066\",\r\n  \"firstName\": \"Dany\",\r\n  \"lastName\": \"Doe\",\r\n  \"city\": \"Rio de Janeiro\",\r\n  \"dni\": 38504999,\r\n  \"salary\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/trainer",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get trainer by id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
+							"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99f4",
 							"host": [
 								"localhost"
 							],
@@ -379,7 +553,7 @@
 							"path": [
 								"api",
 								"trainer",
-								"64613b33bc57874f5ddf99fa"
+								"64613b33bc57874f5ddf99f4"
 							]
 						}
 					},

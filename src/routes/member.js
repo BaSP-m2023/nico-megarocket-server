@@ -8,7 +8,9 @@ const middleware = require('../validations/member');
 
 router
   .post('/', middleware.validateCreation, memberController.createMember)
-  .put('/:id', middleware.validateUpdate, memberController.updateMember);
+  .put('/:id', middleware.validateUpdate, memberController.updateMember)
+  .get('/', memberController.getAllMembers)
+  .get('/:id', memberController.getById);
 
 router.delete('/:id', memberController.deleteMember);
 
