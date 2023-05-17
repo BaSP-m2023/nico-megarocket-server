@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-
 const subscriptionSchema = new Schema({
   classId: {
     type: Schema.Types.ObjectId,
@@ -16,5 +15,4 @@ const subscriptionSchema = new Schema({
     required: true,
   },
 });
-
 module.exports = mongoose.model('Subscription', subscriptionSchema);
