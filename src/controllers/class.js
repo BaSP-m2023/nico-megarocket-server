@@ -42,6 +42,28 @@ const getClassById = (req, res) => {
     });
 };
 
+const deleteClass = (req, res) => {
+  const { id } = req.params;
+  classes.findByIdAndDelete(id)
+    .then((result) => {
+      if (result) {
+        res.status(200).json({
+          message: `Class ${id} deleted`,
+          data: result,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Class not found',
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'Error in the request',
+      error,
+    }));
+};
+
 const createClass = (req, res) => {
   const {
     hour, day, trainer, activity, slots,
@@ -69,4 +91,9 @@ const createClass = (req, res) => {
     });
 };
 
-module.exports = { getClasses, getClassById, createClass };
+module.exports = {
+  getClasses,
+  getClassById,
+  createClass,
+  deleteClass,
+};
