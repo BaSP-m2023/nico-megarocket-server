@@ -109,7 +109,27 @@
             }
           },
           "response": []
-        }
+        },
+        {
+					"name": "Delete admin ById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/646243e1c024fbfc7109d058",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								"646243e1c024fbfc7109d058"
+							]
+						}
+					},
+					"response": []
+				}
       ]
     },
     {
