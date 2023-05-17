@@ -41,6 +41,46 @@ const getClassById = (req, res) => {
       });
     });
 };
+const updateClass = (req, res) => {
+  const { id } = req.params;
+
+  const {
+    hour,
+    day,
+    trainer,
+    activity,
+    slots,
+  } = req.body;
+
+  classes.findByIdAndUpdate(
+    id,
+    {
+      hour,
+      day,
+      trainer,
+      activity,
+      slots,
+    },
+    { new: true },
+  )
+    .then((result) => {
+      if (result) {
+        res.status(201).json({
+          message: 'Class Updated',
+          result,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Class not found',
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      error,
+    }));
+};
 
 const deleteClass = (req, res) => {
   const { id } = req.params;
@@ -95,5 +135,6 @@ module.exports = {
   getClasses,
   getClassById,
   createClass,
+  updateClass,
   deleteClass,
 };
