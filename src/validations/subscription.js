@@ -4,7 +4,8 @@ const validateCreation = (req, res, next) => {
   const SubscriptionValidation = Joi.object({
     classId: Joi.string()
       .hex()
-      .min(24),
+      .min(24)
+      .required(),
     members: Joi.string()
       .hex()
       .min(24)
