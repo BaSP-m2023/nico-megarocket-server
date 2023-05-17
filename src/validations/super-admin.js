@@ -2,11 +2,10 @@ const Joi = require('joi');
 
 const validateUpdate = (req, res, next) => {
   const adminValidation = Joi.object({
-    email: Joi.string().email().required(),
+    email: Joi.string().email(),
     password: Joi.string()
       .min(8)
       .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
-      .required()
       .messages({
         'string.pattern.base':
           'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
