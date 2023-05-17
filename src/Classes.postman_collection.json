@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1f015f96-1ca8-47c2-bb7c-18c93676cfe8",
+		"_postman_id": "ae1080f1-62c3-4193-8267-c8155f84fb25",
 		"name": "MEGA ROCKET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27281667"
@@ -9,97 +9,6 @@
 		{
 			"name": "Activity",
 			"item": [
-				{
-					"name": "GET BY ID Activity",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"activity",
-								"645ff5edf01fd3a2938b702b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "POST Activity",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": " {\r\n    \"name\": \"swimming\",\r\n    \"isActive\": \"true\",\r\n    \"description\": \"pool\"\r\n }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/activity",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"activity"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "GET Activity",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:4000/api/activity",
-							"host": [
-								"localhost"
-							],
-							"port": "4000",
-							"path": [
-								"api",
-								"activity"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Update an Activity",
 					"request": {
@@ -254,10 +163,40 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Delete Class by id",
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/class/6461627f9dab8b15961abcf5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"class",
+								"6461627f9dab8b15961abcf5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update class by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hour\": \"12:50\",\r\n    \"day\" : \"Monday\",\r\n    \"trainer\": \"60a2c7df25d91f5127e6ce1d\",\r\n    \"activity\": \"60a2c7df22d99f5127e6ce1d\",\r\n    \"slots\": \"14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:4000/api/class/6461627f9dab8b15961abcf5",
 							"protocol": "http",
@@ -381,6 +320,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Member",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -410,6 +369,40 @@
 							"path": [
 								"api",
 								"subscription"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Super-admins",
+			"item": [
+				{
+					"name": "PUT Update SuperAdmin Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"oscarl@gmail.com\",\r\n    \"password\": \"LrY492ww\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/superadmin/64639d848958b1ca63f4f47c",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"superadmin",
+								"64639d848958b1ca63f4f47c"
 							]
 						}
 					},
