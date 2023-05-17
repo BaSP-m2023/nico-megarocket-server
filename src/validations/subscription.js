@@ -1,5 +1,28 @@
 const Joi = require('joi');
 
+const validateCreation = (req, res, next) => {
+  const SubscriptionValidation = Joi.object({
+    classId: Joi.string()
+      .hex()
+      .min(24)
+      .required(),
+    members: Joi.string()
+      .hex()
+      .min(24)
+      .required(),
+    date: Joi.date()
+      .required(),
+  });
+
+  const validation = SubscriptionValidation.validate(req.body);
+  if (!validation.error) return next();
+  return res.status(400).json({
+    message: `There was an error: ${validation.error.details[0].message}`,
+    data: undefined,
+    error: true,
+  });
+};
+
 const validateUpdate = (req, res, next) => {
   const subscriptionValidate = Joi.object({
     classId: Joi.string()
@@ -20,5 +43,6 @@ const validateUpdate = (req, res, next) => {
 };
 
 module.exports = {
+  validateCreation,
   validateUpdate,
 };

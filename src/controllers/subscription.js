@@ -1,6 +1,25 @@
 const subscription = require('../models/Subscription');
 
-const updateSuscription = (req, res) => {
+const createSubscription = (req, res) => {
+  const {
+    classId, members, date,
+  } = req.body;
+  subscription.create({
+    classId,
+    members,
+    date,
+  })
+    .then((result) => res.status(201).json({
+      message: 'Subscription created',
+      result,
+    }))
+    .catch((error) => res.status(500).json({
+      message: 'Error ocurred',
+      error,
+    }));
+};
+
+const updateSubscription = (req, res) => {
   const { id } = req.params;
   const {
     classId, members, date,
@@ -68,7 +87,8 @@ const getSubscriptionById = (req, res) => {
 };
 
 module.exports = {
+  createSubscription,
   getAllSubscriptions,
   getSubscriptionById,
-  updateSuscription,
+  updateSubscription,
 };
