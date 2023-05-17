@@ -8,7 +8,6 @@ const validateCreation = (req, res, next) => {
     members: Joi.string()
       .required(),
     date: Joi.date()
-      .max('now')
       .required(),
   });
 
