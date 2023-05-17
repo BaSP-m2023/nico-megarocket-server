@@ -34,13 +34,13 @@ const adminsSchema = new Schema({
   },
   city: {
     type: String,
-    minlength: 2,
+    minLength: 2,
     maxLength: 10,
     required: true,
   },
   password: {
     type: String,
-    match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+    match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
     required: true,
   },
 });
