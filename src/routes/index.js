@@ -10,7 +10,7 @@ const member = require('./member');
 
 const trainer = require('./trainer');
 
-const subscription = require('./subscription');
+const subscriptions = require('./subscription');
 
 const router = express.Router();
 
@@ -24,6 +24,6 @@ router.use('/admins', admins);
 
 router.use('/class', classes);
 
-router.use('/subscription', subscription);
+router.use('/subscription', subscriptions);
 
 module.exports = router;

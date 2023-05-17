@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3c6a9c2c-0404-4798-b486-7bf5b6d1447f",
+		"_postman_id": "0007ecc8-273b-4d2e-b9bb-e397a12b1cf3",
 		"name": "MEGA ROCKET",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27269560"
@@ -9,6 +9,97 @@
 		{
 			"name": "Activity",
 			"item": [
+				{
+					"name": "GET BY ID Activity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity",
+								"645ff5edf01fd3a2938b702b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Activity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"name\": \"swimming\",\r\n    \"isActive\": \"true\",\r\n    \"description\": \"pool\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Activity",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/activity",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"activity"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Update an Activity",
 					"request": {
@@ -90,6 +181,45 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admins ByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/admins/645fd03f7abeabf9a2a430f9",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"admins",
+								"645fd03f7abeabf9a2a430f9"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -142,6 +272,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Post class",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hour\": \"14:20\",\r\n    \"day\": \"Sunday\",\r\n    \"trainer\": \"64614f4715062fbd70b9f149\",\r\n    \"activity\": \"64614f4715062fbd70b9f149\",\r\n    \"slots\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/class",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"class"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -162,7 +321,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"José\",\r\n    \"lastName\": \"Rodríguez\",\r\n    \"birthday\": \"09/28/2002\",\r\n    \"phone\": \"1676778392\",\r\n    \"email\": \"isabelgomez@yahoo.com\",\r\n    \"city\": \"Mar del Plata\",\r\n    \"postal_code\": \"3000\",\r\n    \"is_active\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Robert\",\r\n    \"lastName\": \"Lopez\",\r\n    \"dni\": 12345678,\r\n    \"birthday\": \"09/28/2000\",\r\n    \"phone\": \"1676778391\",\r\n    \"email\": \"robert@yahoo.com\",\r\n    \"city\": \"Cordoba\",\r\n    \"postalCode\": \"5000\",\r\n    \"isActive\": true,\r\n    \"membership\": \"Classic\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -186,10 +345,87 @@
 				{
 					"name": "Update Member",
 					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Roberto\",\r\n    \"lastName\": \"Lopez\",\r\n    \"dni\": 12345678,\r\n    \"birthday\": \"09/28/2000\",\r\n    \"phone\": \"1676778391\",\r\n    \"email\": \"robert@yahoo.com\",\r\n    \"city\": \"Cordoba\",\r\n    \"postalCode\": \"4000\",\r\n    \"isActive\": true,\r\n    \"membership\": \"Classic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member Id",
+					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Members",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/member",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Member",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/member/6463bf24d1c8b03558cc4988",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"member",
+								"6463bf24d1c8b03558cc4988"
+							]
 						}
 					},
 					"response": []
@@ -200,13 +436,80 @@
 			"name": "Subscriptions",
 			"item": [
 				{
-					"name": "Update a Subscription",
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/subscription",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/subscription/6463bd8b193b69d2dd9b16a7",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscription",
+								"6463bd8b193b69d2dd9b16a7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Subscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classId\": \"64614f4715062fbd70b9f149\",\r\n    \"members\": \"6462dad987c004710e02764f\",\r\n    \"date\": \"12/21/2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/subscription",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subscription",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"classId\": \"\",\r\n    \"members\": \"\",\r\n    \"date\": \"12/22/2022\"\r\n}",
+							"raw": "{\r\n    \"classId\":\"\",\r\n    \"members\":\"\",\r\n    \"date\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -235,8 +538,131 @@
 			"item": []
 		},
 		{
-			"name": "Trainer",
-			"item": []
+			"name": "Trainers",
+			"item": [
+				{
+					"name": "Get all trainers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/trainer",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get trainer by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer",
+								"64613b33bc57874f5ddf99fa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Trainer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lastName\": \"Shovel999\",\r\n  \"firstName\": \"Oscar\",\r\n  \"dni\": \"38504444\",\r\n  \"email\": \"gshovel0@miibeyyyian.gov.cn\",\r\n  \"phone\": 2136379466,\r\n  \"city\": \"Rosario\",\r\n  \"salary\": 999,\r\n  \"isActive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/trainer/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "64613b33bc57874f5ddf99f2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Trainer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:4000/api/trainer/64613b33bc57874f5ddf99fa",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer",
+								"64613b33bc57874f5ddf99fa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Trainer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Rodrigo\",\r\n    \"lastName\": \"Shovel\",\r\n    \"dni\": 38504448,\r\n    \"phone\": \"2136379469\",\r\n    \"email\": \"riverplate@miibeyyyian.gov.cn\",\r\n    \"city\": \"Santa Fe\",\r\n    \"salary\": 991\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:4000/api/trainer",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"trainer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
