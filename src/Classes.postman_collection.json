@@ -86,6 +86,26 @@
             "url": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b"
           },
           "response": []
+        },
+        {
+          "name": "Delete an Activity",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:4000/api/activity/645ff5edf01fd3a2938b702b",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "activity",
+                "645ff5edf01fd3a2938b702b"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -267,6 +287,45 @@
     {
       "name": "Subscriptions",
       "item": [
+        {
+          "name": "GET",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4000/api/subscription",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "subscription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET BY ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:4000/api/subscription/6463bd8b193b69d2dd9b16a7",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "subscription",
+                "6463bd8b193b69d2dd9b16a7"
+              ]
+            }
+          },
+          "response": []
+        },
         {
           "name": "Post Subscription",
           "request": {
