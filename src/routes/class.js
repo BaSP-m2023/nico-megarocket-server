@@ -9,6 +9,8 @@ const router = express.Router();
 router
   .post('/', classValidation.validateCreateClass, classController.createClass)
   .get('/:id', classValidation.validateId, classController.getClassById)
-  .get('/', classController.getClasses);
+  .get('/', classController.getClasses)
+  .put('/:id', classValidation.validateUpdate, classController.updateClass)
+  .delete('/:id', classController.deleteClass);
 
 module.exports = router;

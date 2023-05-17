@@ -12,6 +12,37 @@ const validateId = (req, res, next) => {
   });
 };
 
+const validateUpdate = (req, res, next) => {
+  const classValidation = Joi.object({
+    hour: Joi.string()
+      .pattern(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)
+      .messages({
+        'string.pattern.base':
+        'The field must be a valid hour(for example 09:30 )',
+      }),
+    day: Joi.string()
+      .valid('Monday', 'Tuesday', 'Wednesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday')
+      .messages({
+        'any.only': 'The days can only be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday',
+      }),
+    trainer: Joi.string()
+      .hex()
+      .min(24),
+    activity: Joi.string()
+      .hex()
+      .min(24),
+    slots: Joi.number()
+      .min(1)
+      .max(20),
+  });
+  const validation = classValidation.validate(req.body);
+  if (!validation.error) return next();
+  return res.status(400).json({
+    message: `Theres was an error: ${validation.error.details[0].message}`,
+    data: undefined,
+    error: true,
+  });
+};
 const validateCreateClass = (req, res, next) => {
   const classValidation = Joi.object({
     hour: Joi.string()
@@ -58,4 +89,4 @@ const validateCreateClass = (req, res, next) => {
   });
 };
 
-module.exports = { validateId, validateCreateClass };
+module.exports = { validateId, validateCreateClass, validateUpdate };

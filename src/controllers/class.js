@@ -41,6 +41,68 @@ const getClassById = (req, res) => {
       });
     });
 };
+const updateClass = (req, res) => {
+  const { id } = req.params;
+
+  const {
+    hour,
+    day,
+    trainer,
+    activity,
+    slots,
+  } = req.body;
+
+  classes.findByIdAndUpdate(
+    id,
+    {
+      hour,
+      day,
+      trainer,
+      activity,
+      slots,
+    },
+    { new: true },
+  )
+    .then((result) => {
+      if (result) {
+        res.status(201).json({
+          message: 'Class Updated',
+          result,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Class not found',
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      error,
+    }));
+};
+
+const deleteClass = (req, res) => {
+  const { id } = req.params;
+  classes.findByIdAndDelete(id)
+    .then((result) => {
+      if (result) {
+        res.status(200).json({
+          message: `Class ${id} deleted`,
+          data: result,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Class not found',
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'Error in the request',
+      error,
+    }));
+};
 
 const createClass = (req, res) => {
   const {
@@ -69,4 +131,10 @@ const createClass = (req, res) => {
     });
 };
 
-module.exports = { getClasses, getClassById, createClass };
+module.exports = {
+  getClasses,
+  getClassById,
+  createClass,
+  updateClass,
+  deleteClass,
+};
