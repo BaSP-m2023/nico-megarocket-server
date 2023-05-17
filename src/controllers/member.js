@@ -87,15 +87,47 @@ const getAllMembers = (req, res) => {
 const getById = (req, res) => {
   const { id } = req.params;
   Member.findById(id)
-    .then((member) => res.status(200).json({
-      message: 'Member found!',
-      data: member,
-      error: false,
+    .then((member) => {
+      if (member) {
+        res.status(200).json({
+          message: 'Member found!',
+          data: member,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'Member not found',
+        });
+      }
+    })
+    .catch((error) => res.status(500).json({
+      message: 'An error ocurred',
+      error,
     }));
+};
+
+const deleteMember = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const memberExist = await Member.findById(id);
+
+    if (!memberExist) {
+      return res.status(404).send('ID was not found');
+    }
+
+    await Member.findByIdAndDelete(id);
+
+    res.send('Member has been deleted');
+  } catch (error) {
+    res.status(500).send('Member could not be deleted');
+  }
+  return null;
 };
 
 module.exports = {
   updateMember,
+  deleteMember,
   createMember,
   getAllMembers,
   getById,

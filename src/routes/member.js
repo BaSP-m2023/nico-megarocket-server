@@ -12,4 +12,6 @@ router
   .get('/', memberController.getAllMembers)
   .get('/:id', memberController.getById);
 
+router.delete('/:id', memberController.deleteMember);
+
 module.exports = router;
