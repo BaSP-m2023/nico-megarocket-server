@@ -220,7 +220,36 @@
 						}
 					},
 					"response": []
-				}
+				},
+        {
+          "name": "Update an Admin",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstName\": \"Kiketo\",\r\n        \"lastName\": \"Anast\",\r\n        \"dni\": 40140033,\r\n        \"phone\": 3413822255,\r\n        \"email\": \"chad@gmail.com\",\r\n        \"city\": \"Agaland\",\r\n        \"password\": \"AAss123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:4000/api/admins/645fd03f7abeabf9a2a430f9",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "admins",
+                "645fd03f7abeabf9a2a430f9"
+              ]
+            }
+          },
+          "response": []
+        }
 			]
 		},
 		{
