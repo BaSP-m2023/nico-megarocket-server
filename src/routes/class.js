@@ -10,6 +10,7 @@ router
   .post('/', classValidation.validateCreateClass, classController.createClass)
   .get('/:id', classValidation.validateId, classController.getClassById)
   .get('/', classController.getClasses)
-  .put('/:id', classValidation.validateUpdate, classController.updateClass);
+  .put('/:id', classValidation.validateUpdate, classController.updateClass)
+  .delete('/:id', classController.deleteClass);
 
 module.exports = router;
