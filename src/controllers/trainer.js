@@ -73,4 +73,56 @@ const updateTrainer = (req, res) => {
     .catch((error) => res.status(500).json(error));
 };
 
-module.exports = { getAllTrainers, getTrainerById, updateTrainer };
+const deleteTrainer = (req, res) => {
+  const { id } = req.params;
+
+  trainers.findByIdAndDelete(id)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          message: `Trainer with the id: ${id} was not found, please try with another one`,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: `Trainer with the id: ${id} was successfully deleted.`,
+      });
+    })
+    .catch((error) => res.status(500).json({
+      message: 'There was an mistake!',
+      error,
+    }));
+};
+
+const postTrainer = (req, res) => {
+  const {
+    firstName, lastName, dni, phone, email, city, salary, isActive,
+  } = req.body;
+  trainers.create({
+    firstName,
+    lastName,
+    dni,
+    phone,
+    email,
+    city,
+    salary,
+    isActive,
+  })
+    .then((result) => {
+      res.status(201).json(result);
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'Trainer cannot be created',
+        error,
+      });
+    });
+};
+
+module.exports = {
+  getAllTrainers,
+  getTrainerById,
+  updateTrainer,
+  deleteTrainer,
+  postTrainer,
+};

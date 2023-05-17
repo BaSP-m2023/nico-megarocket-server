@@ -10,15 +10,15 @@ const classSchema = new Schema({
   day: {
     type: String,
     required: true,
+    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satueday', 'Sunday'],
   },
   trainer: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   activity: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
-    enum: Schema.Types.ObjectId,
   },
   slots: {
     type: Number,
