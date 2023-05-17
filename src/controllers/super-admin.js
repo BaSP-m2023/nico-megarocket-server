@@ -11,7 +11,24 @@ const getAllSuperAdmin = (req, res) => {
       }
     })
     .catch((error) => res.status(500).json({
-      message: 'Error, a problem has occurred',
+      message: 'Error ocurred',
+      error,
+    }));
+};
+const createSuperAdmin = (req, res) => {
+  const {
+    email, password,
+  } = req.body;
+  superAdmin.create({
+    email,
+    password,
+  })
+    .then((result) => res.status(201).json({
+      message: 'Super Admin created',
+      result,
+    }))
+    .catch((error) => res.status(500).json({
+      message: 'Error ocurred',
       error,
     }));
 };
@@ -42,4 +59,8 @@ const getSuperAdminById = (req, res) => {
     });
 };
 
-module.exports = { getAllSuperAdmin, getSuperAdminById };
+module.exports = {
+  createSuperAdmin,
+  getAllSuperAdmin,
+  getSuperAdminById,
+};
