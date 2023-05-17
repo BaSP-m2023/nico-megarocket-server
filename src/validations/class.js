@@ -12,4 +12,50 @@ const validateId = (req, res, next) => {
   });
 };
 
-module.exports = { validateId };
+const validateCreateClass = (req, res, next) => {
+  const classValidation = Joi.object({
+    hour: Joi.string()
+      .pattern(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/)
+      .required()
+      .messages({
+        'string.pattern.base': 'Hour format is HH:mm',
+      }),
+
+    day: Joi.string()
+      .valid('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satueday', 'Sunday')
+      .messages({
+        'any.only': 'The Day property has to be a day of the week',
+      })
+      .required(),
+
+    trainer: Joi.string()
+      .hex()
+      .length(24)
+      .required()
+      .messages({
+        'string.hex': 'Trainer has to be a alphanumeric ID',
+      }),
+
+    activity: Joi.string()
+      .hex()
+      .length(24)
+      .required()
+      .messages({
+        'string.hex': 'Activity has to be a alphanumeric ID',
+        'string.length': 'Activity has 24 characters',
+      }),
+
+    slots: Joi.number()
+      .required(),
+  });
+
+  const validation = classValidation.validate(req.body);
+
+  if (!validation.error) return next();
+  return res.status(400).json({
+    message: `${validation.error.details[0].message}`,
+    error: true,
+  });
+};
+
+module.exports = { validateId, validateCreateClass };
