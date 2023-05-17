@@ -1,4 +1,4 @@
-const superAdmin = require('../models/Super-admin');
+const superAdmin = require('../models/SuperAdmin');
 
 const createSuperAdmin = (req, res) => {
   const {
