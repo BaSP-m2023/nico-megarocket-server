@@ -1,5 +1,31 @@
 const superAdmin = require('../models/SuperAdmin');
 
+const deleteSuperAdmin = (req, res) => {
+  const { id } = req.params;
+
+  superAdmin.findByIdAndDelete(id)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          message: `SuperAdmin with ID ${id} not found`,
+          data: null,
+          error: true,
+        });
+      }
+      return res.status(200).json({
+        message: 'SuperAdmin deleted!',
+        data: null,
+        error: false,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: 'An error ocurred',
+        error: error.msg,
+      });
+    });
+};
+
 const updateAdmin = (req, res) => {
   const { id } = req.params;
   const {
@@ -22,7 +48,12 @@ const updateAdmin = (req, res) => {
       }
       return res.status(200).json(result);
     })
-    .catch((error) => res.status(500).json(error));
+    .catch((error) => {
+      res.status(500).json({
+        message: 'An error ocurred',
+        error: error.msg,
+      });
+    });
 };
 
 const getAllSuperAdmin = (req, res) => {
@@ -35,11 +66,14 @@ const getAllSuperAdmin = (req, res) => {
         });
       }
     })
-    .catch((error) => res.status(500).json({
-      message: 'Error ocurred',
-      error,
-    }));
+    .catch((error) => {
+      res.status(500).json({
+        message: 'An error ocurred',
+        error: error.msg,
+      });
+    });
 };
+
 const createSuperAdmin = (req, res) => {
   const {
     email, password,
@@ -52,10 +86,12 @@ const createSuperAdmin = (req, res) => {
       message: 'Super Admin created',
       result,
     }))
-    .catch((error) => res.status(500).json({
-      message: 'Error ocurred',
-      error,
-    }));
+    .catch((error) => {
+      res.status(500).json({
+        message: 'An error ocurred',
+        error: error.msg,
+      });
+    });
 };
 
 const getSuperAdminById = (req, res) => {
@@ -89,4 +125,5 @@ module.exports = {
   getAllSuperAdmin,
   getSuperAdminById,
   updateAdmin,
+  deleteSuperAdmin,
 };
