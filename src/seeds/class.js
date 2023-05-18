@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 export default [
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543cb'),
-    hour: '2:11',
-    day: '04/03/2023',
+    hour: '02:15',
+    day: 'Friday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -14,8 +14,8 @@ export default [
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543cc'),
-    hour: '18:42',
-    day: '23/02/2023',
+    hour: '18:30',
+    day: 'Monday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -25,8 +25,8 @@ export default [
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543cd'),
-    hour: '3:14',
-    day: '23/12/2022',
+    hour: '03:00',
+    day: 'Wednesday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -36,8 +36,8 @@ export default [
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543ce'),
-    hour: '8:15',
-    day: '10/04/2023',
+    hour: '08:30',
+    day: 'Monday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -47,8 +47,8 @@ export default [
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543cf'),
-    hour: '9:14',
-    day: '15/06/2022',
+    hour: '09:00',
+    day: 'Wednesday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -58,8 +58,8 @@ export default [
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543d0'),
-    hour: '8:34',
-    day: '03/11/2022',
+    hour: '08:30',
+    day: 'Friday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -69,8 +69,8 @@ export default [
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543d1'),
-    hour: '17:52',
-    day: '08/03/2023',
+    hour: '17:30',
+    day: 'Wednesday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -80,8 +80,8 @@ export default [
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543d2'),
-    hour: '11:07',
-    day: '01/02/2023',
+    hour: '11:15',
+    day: 'Wednesday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -91,8 +91,8 @@ export default [
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543d3'),
-    hour: '5:28',
-    day: '06/11/2022',
+    hour: '05:45',
+    day: 'Friday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
@@ -103,7 +103,7 @@ export default [
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027543d4'),
     hour: '19:50',
-    day: '04/07/2022',
+    day: 'Monday',
     trainer: [
       '646596b54fcb63fdd73b28a6',
       '6465558202739f6df0878ceb',
