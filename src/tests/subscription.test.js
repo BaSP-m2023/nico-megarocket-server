@@ -1,5 +1,5 @@
-// Test basico para evitar conflictos.
-// !!ELIMINAR ESTE TEST Y HACER EL SUYO
+// Basic test to avoid conflicts
+// REMOVE THIS TEST AND MAKE YOURS!
 test('should pass a basic test', () => {
   expect(1 + 1).toBe(2);
 });
