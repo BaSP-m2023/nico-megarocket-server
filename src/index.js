@@ -1,24 +1,21 @@
-const express = require('express');
-const cors = require('cors');
+const dontenv = require('dotenv');
 const mongoose = require('mongoose');
+const app = require('./app');
 
-const router = require('./routes');
+dontenv.config();
 
-const app = express();
-const port = process.env.PORT || 4000;
+mongoose.connect(
+  process.env.MONGO_DB_CONNECT_URL,
+  { maxPoolSize: process.env.MONGO_POOLSIZE || 1 },
+)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((error) => console.log('Error: ', error));
 
-app.use(cors());
-app.use(express.json());
-
-const DB_URL = 'mongodb+srv://nico-team:UcLQ3ogL9TCSIMH2@megarocket-databases.inpprte.mongodb.net/nico-database';
-
-mongoose
-  .connect(DB_URL, { maxPoolSize: process.env.MONGO_POOLSIZE || 1})
-  .then(() => console.log('Db connected'))
-  .catch((error) => console.log('Error : ', error));
-
-app.use('/api', router);
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+try {
+  app.listen(process.env.PORT, (err) => {
+    if (err) throw err;
+    console.log(`server listening on port ${process.env.PORT}`);
+  });
+} catch (err) {
+  console.log('There was an error starting the server', err);
+}
