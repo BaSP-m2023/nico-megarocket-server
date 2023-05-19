@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 export default [
   {
-    _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d1'),
+    _id: new mongoose.Types.ObjectId('646596b54fcb63fdd73b28a6'),
     firstName: 'Helsa',
     lastName: 'Messiter',
     dni: '89640367',
@@ -13,7 +13,7 @@ export default [
     isActive: true,
   },
   {
-    _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d2'),
+    _id: new mongoose.Types.ObjectId('6465558202739f6df0878ceb'),
     firstName: 'Pavla',
     lastName: 'Eliyahu',
     dni: '87711027',
