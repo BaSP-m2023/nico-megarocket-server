@@ -24,7 +24,7 @@ const trainerSchema = new Schema({
     require: true,
   },
   phone: {
-    type: Number,
+    type: String,
     minLength: 10,
     require: true,
   },

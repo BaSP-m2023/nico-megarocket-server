@@ -16,6 +16,7 @@ const validateCreation = (req, res, next) => {
     birthday: Joi.date()
       .required(),
     phone: Joi.string()
+      .regex(/^[0-9]{10}$/)
       .length(10)
       .required()
       .messages({
@@ -76,7 +77,10 @@ const validateUpdate = (req, res, next) => {
         }
         return value;
       }),
-    phone: Joi.string().length(10).required()
+    phone: Joi.string()
+      .regex(/^[0-9]{10}$/)
+      .length(10)
+      .required()
       .messages({
         'number.min': 'Phone number must be at least 10 digits',
         'number.max': 'Phone number must be at most 10 digits',
