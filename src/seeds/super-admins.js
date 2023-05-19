@@ -44,7 +44,7 @@ export default [
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027999cb'),
     email: 'tutancamon@gmail.com',
-    password: 'laspiramides425',
+    password: 'lasPiramides425',
   },
   {
     _id: new mongoose.Types.ObjectId('64667748fc13ae7f027020cb'),
