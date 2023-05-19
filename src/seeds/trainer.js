@@ -10,6 +10,7 @@ export default [
     email: 'hmessiter0@icq.com',
     city: 'Legrada',
     salary: 804,
+    isActive: true,
   },
   {
     _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d2'),
@@ -20,6 +21,7 @@ export default [
     email: 'peliyahu1@gmpg.org',
     city: 'Gantang',
     salary: 534,
+    isActive: true,
   },
   {
     _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d3'),
@@ -30,6 +32,7 @@ export default [
     email: 'mwoolfall2@cbc.ca',
     city: 'Utena',
     salary: 333,
+    isActive: false,
   },
   {
     _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d4'),
@@ -40,6 +43,7 @@ export default [
     email: 'hzieme3@imageshack.us',
     city: 'Wuyun',
     salary: 739,
+    isActive: true,
   },
   {
     _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d5'),
@@ -50,6 +54,7 @@ export default [
     email: 'tlyddyard4@phpbb.com',
     city: 'Nkurenkuru',
     salary: 247,
+    isActive: false,
   },
   {
     _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d6'),
@@ -60,6 +65,7 @@ export default [
     email: 'apobjoy5@illinois.edu',
     city: 'Dembéni',
     salary: 587,
+    isActive: true,
   },
   {
     _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d7'),
@@ -70,6 +76,7 @@ export default [
     email: 'eeastcott6@google.com.hk',
     city: 'Danghara',
     salary: 719,
+    isActive: true,
   },
   {
     _id: new mongoose.Types.ObjectId('6463fc86e024c468698af1d8'),
@@ -80,5 +87,6 @@ export default [
     email: 'egantley7@myspace.com',
     city: 'Bāgh-e Malek',
     salary: 320,
+    isActive: true,
   },
 ];
