@@ -23,7 +23,7 @@ const adminsSchema = new Schema({
     required: true,
   },
   phone: {
-    type: Number,
+    type: String,
     length: 10,
     required: true,
   },
