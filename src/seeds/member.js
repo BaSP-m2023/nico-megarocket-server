@@ -7,7 +7,7 @@ export default [
     lastName: 'Perez',
     dni: 12345678,
     birthday: '2000-09-28T03:00:00.000Z',
-    phone: '167677839g',
+    phone: '167677839',
     email: 'robert@yahoo.com',
     city: 'Cordoba',
     postalCode: '5000',
