@@ -38,9 +38,9 @@ describe('POST /api/member', () => {
       isActive: '',
       membership: '',
     };
-  
+
     const response = await request(app).post('/api/member').send(data);
-  
+
     expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
@@ -48,7 +48,7 @@ describe('POST /api/member', () => {
     jest.spyOn(Member, 'create').mockImplementation(() => {
       throw new Error('Server Error');
     });
-  
+
     const data = {
       firstName: 'sad222',
       lastName: 'Fernandez',
@@ -61,9 +61,9 @@ describe('POST /api/member', () => {
       isActive: true,
       membership: 'Classic',
     };
-  
+
     const response = await request(app).post('/api/member').send(data);
-  
+
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
