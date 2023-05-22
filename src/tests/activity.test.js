@@ -13,20 +13,20 @@ describe('GET /api/activity', () => {
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
-  test('Get by Id activity return status 200', async () => {
-    const response = await request(app).get('/api/activity/6465993bc7fee6b84bae2698').send();
-    expect(response.status).toBe(200);
-    expect(response.error).toBeFalsy();
-  });
-});
-
-describe('GET Routes invalid', () => {
   test('should return status 404', async () => {
     const response = await request(app).get('/api/activ').send();
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
-  test('Get Invalid ID', async () => {
+});
+
+describe('GET /api/activity/:id', () => {
+  test('Get by Id activity return status 200', async () => {
+    const response = await request(app).get('/api/activity/6465993bc7fee6b84bae2698').send();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('Get Invalid ID status 500', async () => {
     const response = await request(app).get('/api/activity/6465993bc7fee6b84bae2696666').send();
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
@@ -49,9 +49,19 @@ describe('POST /api/activity', () => {
     expect(response.status).toBe(201);
     expect(response.error).toBeFalsy();
   });
-  test('should return status 400', async () => {
+  test('Invalid data should return status 400', async () => {
     const mock = {
       name: '',
+      description: 'Test test',
+      isActive: false,
+    };
+    const response = await request(app).post('/api/activity').send(mock);
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('Invalid data should return status 400', async () => {
+    const mock = {
+      name: 12345,
       description: 'Test test',
       isActive: false,
     };
