@@ -7,14 +7,6 @@ beforeAll(async () => {
   await Trainer.collection.insertMany(trainerSeed);
 });
 
-describe('GET /api/trainer', () => {
-  test('Should return all elements', async () => {
-    const response = await request(app).get('/api/trainer').send();
-    expect(response.status).toBe(200);
-    expect(response.error).toBeFalsy();
-  });
-});
-
 describe('GET BY ID /api/trainer/:id', () => {
   test('Should return a valid ID', async () => {
     const id = '6463fc86e024c468698af1d8';
@@ -154,5 +146,19 @@ describe('DELETE /api/trainer/:id', () => {
     const response = await request(app).delete(`/api/trainerssdas/${id}`).send();
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
+  });
+});
+
+describe('GET /api/trainer', () => {
+  test('Should return all elements', async () => {
+    const response = await request(app).get('/api/trainer').send();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('Should return if the database has no objects', async () => {
+    await Trainer.deleteMany({});
+    const response = await request(app).get('/api/trainer').send();
+    expect(response.status).toBe(200);
+    expect(response.body.data).toEqual([]);
   });
 });
