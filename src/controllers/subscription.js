@@ -69,18 +69,25 @@ const getAllSubscriptions = (req, res) => {
     });
 };
 const getSubscriptionById = (req, res) => {
-  const Id = req.params.id;
-  subscription.findById(Id)
+  const { id } = req.params;
+  subscription.findById(id)
     .then((subscriptions) => {
-      res.status(200).json({
-        message: `subcription ${Id} was found`,
+      if (!subscriptions) {
+        return res.status(404).json({
+          message: `Subscription ${id} not found`,
+          error: true,
+        });
+      }
+
+      return res.status(200).json({
+        message: `Subscription ${id} was found`,
         data: subscriptions,
         error: false,
       });
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'there is an error here',
+        message: 'There was an error',
         error,
       });
     });
