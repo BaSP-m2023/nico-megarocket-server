@@ -13,6 +13,15 @@ describe('GET /api/super-admin', () => {
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
+  test('Should handle error with status 500', async () => {
+    jest.spyOn(SuperAdmin, 'find').mockImplementation(() => {
+      throw new Error('Error finding SuperAdmin');
+    });
+
+    const response = await request(app).get('/api/super-admin').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
 });
 
 describe('GET BY ID /api/super-admin/:id', () => {
@@ -34,6 +43,15 @@ describe('GET BY ID /api/super-admin/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
+  test('Should handle error with status 500', async () => {
+    jest.spyOn(SuperAdmin, 'findById').mockImplementation(() => {
+      throw new Error('Error finding SuperAdmin by ID');
+    });
+    const id = '64667748fc13ae7f027631cc';
+    const response = await request(app).get(`/api/super-admin/${id}`).send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
 });
 
 describe('POST /api/super-admin', () => {
@@ -53,6 +71,18 @@ describe('POST /api/super-admin', () => {
     };
     const response = await request(app).post('/api/super-admin').send(mockSuperAdmin);
     expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('Should handle error with status 500', async () => {
+    jest.spyOn(SuperAdmin, 'create').mockImplementation(() => {
+      throw new Error('Error saving SuperAdmin');
+    });
+    const mockSuperAdmin = {
+      email: 'octavito@gmail.com',
+      password: 'Lasleonas1234',
+    };
+    const response = await request(app).post('/api/super-admin').send(mockSuperAdmin);
+    expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
 });
