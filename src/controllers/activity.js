@@ -79,7 +79,7 @@ const updateActivity = (req, res) => {
         result,
       });
     })
-    .catch((error) => res.status(500).json({
+    .catch((error) => res.status(400).json({
       message: 'Error updating activity',
       error,
     }));
@@ -87,7 +87,6 @@ const updateActivity = (req, res) => {
 
 const deleteActivity = (req, res) => {
   const { id } = req.params;
-
   activity.findByIdAndDelete(id)
     .then((result) => {
       if (!result) {
