@@ -25,12 +25,18 @@ const validateUpdate = (req, res, next) => {
       .messages({
         'any.only': 'The days can only be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday',
       }),
-    trainer: Joi.string()
-      .hex()
-      .min(24),
-    activity: Joi.string()
-      .hex()
-      .min(24),
+    trainer: Joi.array().items(
+      Joi
+        .string()
+        .hex()
+        .min(24),
+    ),
+    activity: Joi.array().items()(
+      Joi
+        .string()
+        .hex()
+        .min(24),
+    ),
     slots: Joi.number()
       .min(1)
       .max(20),
@@ -58,24 +64,27 @@ const validateCreateClass = (req, res, next) => {
         'any.only': 'The Day property has to be a day of the week',
       })
       .required(),
-
-    trainer: Joi.string()
-      .hex()
-      .length(24)
-      .required()
-      .messages({
-        'string.hex': 'Trainer has to be a alphanumeric ID',
-      }),
-
-    activity: Joi.string()
-      .hex()
-      .length(24)
-      .required()
-      .messages({
-        'string.hex': 'Activity has to be a alphanumeric ID',
-        'string.length': 'Activity has 24 characters',
-      }),
-
+    trainer: Joi.array().items(
+      Joi
+        .string()
+        .hex()
+        .length(24)
+        .required()
+        .messages({
+          'string.hex': 'Trainer has to be a alphanumeric ID',
+        }),
+    ),
+    activity: Joi.array().items()(
+      Joi
+        .string()
+        .hex()
+        .length(24)
+        .required()
+        .messages({
+          'string.hex': 'Activity has to be a alphanumeric ID',
+          'string.length': 'Activity has 24 characters',
+        }),
+    ),
     slots: Joi.number()
       .required(),
   });
