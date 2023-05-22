@@ -72,3 +72,87 @@ describe('POST /api/trainer', () => {
     expect(response.error).toBeTruthy();
   });
 });
+
+describe('PUT /api/trainer/:id', () => {
+  test('Should edit element', async () => {
+    const id = '6463fc86e024c468698af1d8';
+    const data = {
+      firstName: 'Jose',
+      lastName: 'Martinez',
+      dni: 34876892,
+      phone: '8376890267',
+      email: 'algo@algo.com',
+      city: 'Boston',
+      salary: 324,
+    };
+    const response = await request(app).put(`/api/trainer/${id}`).send(data);
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('Invalid edit element', async () => {
+    const id = '6463fc86e024c468698af1d8';
+    const data = {
+      firstName: 'Jose',
+      lastName: 'Martinez',
+      dni: 3487,
+      phone: '83768',
+      email: 'algo@',
+      city: 'Boston',
+      salary: 324,
+    };
+    const response = await request(app).put(`/api/trainer/${id}`).send(data);
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('Invalid route', async () => {
+    const id = '6463fc86e024c468698af1d8';
+    const data = {
+      firstName: 'Jose',
+      lastName: 'Martinez',
+      dni: 34876892,
+      phone: '8376890267',
+      email: 'algo@algo.com',
+      city: 'Boston',
+      salary: 324,
+    };
+    const response = await request(app).put(`/api/trainerdasd/${id}`).send(data);
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Invalid ID', async () => {
+    const id = '6463fc86e024c468698af1d8cxzcxz';
+    const data = {
+      firstName: 'Jose',
+      lastName: 'Martinez',
+      dni: 34876892,
+      phone: '8376890267',
+      email: 'algo@algo.com',
+      city: 'Boston',
+      salary: 324,
+    };
+    const response = await request(app).put(`/api/trainer/${id}`).send(data);
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
+});
+
+describe('DELETE /api/trainer/:id', () => {
+  test('Should delete object', async () => {
+    const id = '6463fc86e024c468698af1d8';
+    const response = await request(app).delete(`/api/trainer/${id}`).send();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('Invalid ID', async () => {
+    const id = '6463fc86e024c468698af1d8dlkasldlksa';
+    const response = await request(app).delete(`/api/trainer/${id}`).send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
+  test('Invalid route', async () => {
+    const id = '6463fc86e024c468698af1d8';
+    const response = await request(app).delete(`/api/trainerssdas/${id}`).send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+});
