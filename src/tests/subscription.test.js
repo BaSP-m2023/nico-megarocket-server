@@ -59,3 +59,17 @@ describe('DELETE /api/subscription/:id', () => {
     expect(response.error).toBeTruthy();
   });
 });
+
+describe('GET /api/subscription', () => {
+  test('Get all subscription return status 200 ', async () => {
+    const response = await request(app).get('/api/subscription').send();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('Get all empty subscription return status 200', async () => {
+    await Subscription.deleteMany({});
+    const response = await request(app).get('/api/subscription').send();
+    expect(response.status).toBe(200);
+    expect(response.body.data).toEqual([]);
+  });
+});
