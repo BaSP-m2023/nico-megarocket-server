@@ -2,13 +2,7 @@ import mongoose from 'mongoose';
 
 export default [
   {
-    _id: new mongoose.Types.ObjectId('6466ggl7fc13ae78027631cc'),
-    name: 'volley',
-    description: 'play with a ball',
-    isActive: true,
-  },
-  {
-    _id: new mongoose.Types.ObjectId('3k66ggl7fc13ae7bhe4631cc'),
+    _id: new mongoose.Types.ObjectId('64662e65a1350cc48de5d410'),
     name: 'futbbol',
     description: 'play with a ball',
     isActive: false,
@@ -32,7 +26,7 @@ export default [
     isActive: true,
   },
   {
-    _id: new mongoose.Types.ObjectId('7466gpl7fc13ae780jkyu1cc'),
+    _id: new mongoose.Types.ObjectId('64667980a1350cc48de5d43f'),
     name: 'handball',
     description: 'play with a ball',
     isActive: false,
@@ -44,19 +38,19 @@ export default [
     isActive: false,
   },
   {
-    _id: new mongoose.Types.ObjectId('09ft45gl7fc13ae7807631cc'),
+    _id: new mongoose.Types.ObjectId('64667b0c2ceafea5db4d150a'),
     name: 'abs',
     description: 'routine abs',
     isActive: true,
   },
   {
-    _id: new mongoose.Types.ObjectId('56drsgl7fc13ae78027631cc'),
+    _id: new mongoose.Types.ObjectId('6466d0748ef7611a2c1fef70'),
     name: 'boxing',
     description: 'contact sport',
     isActive: true,
   },
   {
-    _id: new mongoose.Types.ObjectId('64662e65a1350cc48de5d410'),
+    _id: new mongoose.Types.ObjectId('64667e2fe50d3146e4efb252'),
     name: 'functional',
     description: 'body routine',
     isActive: true,
