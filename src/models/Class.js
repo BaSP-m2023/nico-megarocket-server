@@ -25,8 +25,8 @@ const classSchema = new Schema({
   slots: {
     type: Number,
     required: true,
-    minlength: 1,
-    maxlength: 20,
+    minLength: 1,
+    maxLength: 20,
   },
 });
 

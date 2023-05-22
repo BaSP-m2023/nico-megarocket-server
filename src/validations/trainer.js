@@ -31,7 +31,11 @@ const validateCreation = (req, res, next) => {
     lastName: Joi.string().min(3).max(15).required(),
     dni: Joi.number().positive().integer().min(10000000)
       .max(99999999),
-    phone: Joi.string().min(9).max(12).required()
+    phone: Joi.string()
+      .regex(/^[0-9]{10}$/)
+      .min(9)
+      .max(12)
+      .required()
       .messages({
         'number.min': 'Phone number must be at least 9 digits',
         'number.max': 'Phone number must be at most 12 digits',

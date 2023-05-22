@@ -13,6 +13,7 @@ const validateUpdate = (req, res, next) => {
       .min(10000000)
       .max(99999999),
     phone: Joi.string()
+      .regex(/^[0-9]{10}$/)
       .min(9)
       .max(12),
     email: Joi.string()
@@ -58,6 +59,7 @@ const validateCreation = (req, res, next) => {
       .max(99999999)
       .required(),
     phone: Joi.string()
+      .regex(/^[0-9]{10}$/)
       .min(9)
       .max(12)
       .required(),
