@@ -3,12 +3,6 @@ import app from '../app';
 import Activity from '../models/Activity';
 import activitySeed from '../seeds/activity';
 
-const mockActivity = {
-  name: 'Test',
-  description: 'Test test',
-  isActive: false,
-};
-
 beforeAll(async () => {
   await Activity.collection.insertMany(activitySeed);
 });
@@ -46,8 +40,23 @@ describe('GET Routes invalid', () => {
 
 describe('POST /api/activity', () => {
   test('Post activity return status 201', async () => {
-    const response = await request(app).post('/api/activity').send(mockActivity);
+    const mock = {
+      name: 'Test',
+      description: 'Test test',
+      isActive: false,
+    };
+    const response = await request(app).post('/api/activity').send(mock);
     expect(response.status).toBe(201);
     expect(response.error).toBeFalsy();
+  });
+  test('should return status 400', async () => {
+    const mock = {
+      name: '',
+      description: 'Test test',
+      isActive: false,
+    };
+    const response = await request(app).post('/api/activity').send(mock);
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
   });
 });
