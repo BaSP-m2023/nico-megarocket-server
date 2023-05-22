@@ -18,6 +18,14 @@ describe('GET /api/activity', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
+  test('should return status 500', async () => {
+    jest.spyOn(Activity, 'find').mockImplementation(() => {
+      throw new Error('Internal server error');
+    });
+    const response = await request(app).get('/api/activity').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
 });
 
 describe('GET /api/activity/:id', () => {
@@ -59,14 +67,17 @@ describe('POST /api/activity', () => {
     expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
-  test('Invalid data should return status 400', async () => {
+  test('should return status 500', async () => {
     const mock = {
-      name: 12345,
+      name: 'test',
       description: 'Test test',
       isActive: false,
     };
+    jest.spyOn(Activity, 'create').mockImplementation(() => {
+      throw new Error('Internal server error');
+    });
     const response = await request(app).post('/api/activity').send(mock);
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
 });
