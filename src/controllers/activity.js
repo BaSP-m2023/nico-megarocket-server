@@ -20,11 +20,18 @@ const getActivityById = (req, res) => {
   const Id = req.params.id;
   activity.findById(Id, 'name description')
     .then((activities) => {
-      res.status(200).json({
-        message: `activity ${activities.name} was found`,
-        data: activities,
-        error: false,
-      });
+      if (activities) {
+        res.status(200).json({
+          message: `activity ${activities.name} was found`,
+          data: activities,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'activity not found',
+          error: true,
+        });
+      }
     })
     .catch((error) => {
       res.status(500).json({
