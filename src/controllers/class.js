@@ -2,7 +2,7 @@ const classes = require('../models/Class');
 
 const getClasses = (req, res) => {
   classes.find()
-    .populate('trainer')
+    .populate('Trainer')
     .populate('Activity')
     .then((data) => {
       if (data) {
@@ -22,7 +22,7 @@ const getClassById = (req, res) => {
   const { id } = req.params;
 
   classes.findById(id)
-    .populate('trainer')
+    .populate('Trainer')
     .populate('Activity')
     .then((data) => {
       if (data) {
