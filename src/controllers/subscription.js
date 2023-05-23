@@ -72,11 +72,18 @@ const getSubscriptionById = (req, res) => {
   const Id = req.params.id;
   subscription.findById(Id)
     .then((subscriptions) => {
-      res.status(200).json({
-        message: `subcription ${Id} was found`,
-        data: subscriptions,
-        error: false,
-      });
+      if (subscriptions) {
+        res.status(200).json({
+          message: `subscription ${subscriptions.name} was found`,
+          data: subscriptions,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'subscription not found',
+          error: true,
+        });
+      }
     })
     .catch((error) => {
       res.status(500).json({
@@ -90,6 +97,7 @@ const deleteSubscription = (req, res) => {
   const { id } = req.params;
 
   subscription.findByIdAndDelete(id)
+
     .then((result) => {
       if (!result) {
         return res.status(404).json({

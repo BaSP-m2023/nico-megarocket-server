@@ -10,9 +10,9 @@ const router = express.Router();
 
 router
   .post('/', validations.validateCreation, subscriptionController.createSubscription)
-  .put('/:id', validations.validateUpdate, subscriptionController.updateSubscription)
+  .put('/:id', validations.validateId, validations.validateUpdate, subscriptionController.updateSubscription)
   .get('/', controller.getAllSubscriptions)
-  .get('/:id', controller.getSubscriptionById)
-  .delete('/:id', subscriptionController.deleteSubscription);
+  .get('/:id', validations.validateId, controller.getSubscriptionById)
+  .delete('/:id', validations.validateId, subscriptionController.deleteSubscription);
 
 module.exports = router;

@@ -32,11 +32,27 @@ describe('PUT /api/subscription/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
-  test('Put subscription return status 500 invalid Id', async () => {
+  test('Put subscription return status 404 id not found', async () => {
+    const data = {
+      date: new Date('2023-04-10'),
+    };
+    const response = await request(app).put('/api/subscriptionsss/6465993bc7fee6b84bae2698').send(data);
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Put subscription return status 400 invalid Id', async () => {
     const data = {
       date: new Date('2023-04-10'),
     };
     const response = await request(app).put('/api/subscription/6467f535fc13ae553d753ae877').send(data);
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return status 500', async () => {
+    jest.spyOn(Subscription, 'findByIdAndUpdate').mockImplementation(() => {
+      throw new Error('Internal server error');
+    });
+    const response = await request(app).put('/api/subscription/6465993bc7fee6b84bae2698').send();
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
@@ -53,8 +69,21 @@ describe('DELETE /api/subscription/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
-  test('Delete subscription return status 500 Invalid Id', async () => {
+  test('Delete subscription return status 404 Id not found', async () => {
+    const response = await request(app).delete('/api/subscription/6465993bc7fee6b84bae2698').send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Delete subscription return status 400 Invalid Id', async () => {
     const response = await request(app).delete('/api/subscription/6467f535fc13ae553d753ae877').send();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('should return status 500', async () => {
+    jest.spyOn(Subscription, 'findByIdAndDelete').mockImplementation(() => {
+      throw new Error('Internal server error');
+    });
+    const response = await request(app).delete('/api/subscription/6465993bc7fee6b84bae2698').send();
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
