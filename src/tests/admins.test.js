@@ -148,4 +148,18 @@ describe('DELETE /api/admins/:id', () => {
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
+
+  describe('GET /api/admins', () => {
+    test('Get all admins return status 200 ', async () => {
+      const response = await request(app).get('/api/admins').send();
+      expect(response.status).toBe(200);
+      expect(response.error).toBeFalsy();
+    });
+    test('Get empty admins return status 200', async () => {
+      await Admin.deleteMany({});
+      const response = await request(app).get('/api/admins').send();
+      expect(response.status).toBe(200);
+      expect(response.body.data).toEqual([]);
+    });
+  });
 });
