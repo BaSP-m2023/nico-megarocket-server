@@ -54,6 +54,8 @@ const updateSubscription = (req, res) => {
 
 const getAllSubscriptions = (req, res) => {
   subscription.find()
+    .populate('members')
+    .populate('classId')
     .then((subscriptions) => {
       res.status(200).json({
         message: 'here is the subscriptions list',
@@ -71,6 +73,8 @@ const getAllSubscriptions = (req, res) => {
 const getSubscriptionById = (req, res) => {
   const Id = req.params.id;
   subscription.findById(Id)
+    .populate('members')
+    .populate('classId')
     .then((subscriptions) => {
       res.status(200).json({
         message: `subcription ${Id} was found`,
