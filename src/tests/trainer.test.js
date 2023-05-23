@@ -188,4 +188,12 @@ describe('GET /api/trainer', () => {
     expect(response.status).toBe(200);
     expect(response.body.data).toEqual([]);
   });
+  test('Should return status 500', async () => {
+    jest.spyOn(Trainer, 'find').mockImplementation(() => {
+      throw new Error('Error for find Trainer');
+    });
+    const response = await request(app).get('/api/trainer').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
 });
