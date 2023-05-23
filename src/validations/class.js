@@ -31,12 +31,10 @@ const validateUpdate = (req, res, next) => {
         .hex()
         .min(24),
     ),
-    activity: Joi.array().items()(
-      Joi
-        .string()
-        .hex()
-        .min(24),
-    ),
+    activity: Joi.string()
+      .hex()
+      .min(24),
+
     slots: Joi.number()
       .min(1)
       .max(20),
@@ -74,17 +72,14 @@ const validateCreateClass = (req, res, next) => {
           'string.hex': 'Trainer has to be a alphanumeric ID',
         }),
     ),
-    activity: Joi.array().items()(
-      Joi
-        .string()
-        .hex()
-        .length(24)
-        .required()
-        .messages({
-          'string.hex': 'Activity has to be a alphanumeric ID',
-          'string.length': 'Activity has 24 characters',
-        }),
-    ),
+    activity: Joi.string()
+      .hex()
+      .length(24)
+      .required()
+      .messages({
+        'string.hex': 'Activity has to be a alphanumeric ID',
+        'string.length': 'Activity has 24 characters',
+      }),
     slots: Joi.number()
       .required(),
   });
