@@ -121,7 +121,7 @@ describe('DELETE /api/admins/:id', () => {
       phone: '3413555012',
       email: 'rmollo@example.com',
       city: 'Rosario',
-      password: 'Arisj7584js7u'
+      password: 'Arisj7584js7u',
     });
     const response = await request(app).delete(`/api/admins/${newAdmin.id}`).send();
     expect(response.status).toBe(200);
