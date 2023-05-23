@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const subscriptionSchema = new Schema({
   classId: {
-    type: [Schema.Types.ObjectId],
+    type: Schema.Types.ObjectId,
     required: true,
   },
   members: {
