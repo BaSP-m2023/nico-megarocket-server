@@ -17,12 +17,12 @@ describe('PUT /api/class/:id', () => {
     expect(response.error).toBeFalsy();
   });
   test('For invalid ID', async () => {
-    const id = '64667748fc13ae7f027543d44';
+    const id = '64667748fc13ae7f027543d9';
     const data = {
       day: 'Sunday',
     };
     const response = await request(app).put(`/api/class/${id}`).send(data);
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
   test('For invalid element', async () => {
