@@ -97,7 +97,7 @@ describe('PUT /api/trainer/:id', () => {
     expect(response.error).toBeTruthy();
   });
   test('Invalid route', async () => {
-    const id = '6463fc86e024c468698af1d8';
+    const id = '6463fc86e024c468698af1d8sdasd';
     const data = {
       firstName: 'Jose',
       lastName: 'Martinez',
@@ -111,8 +111,26 @@ describe('PUT /api/trainer/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
-  test('Invalid ID', async () => {
-    const id = '6463fc86e024c468698af1d8cxzcxz';
+  test('ID not found', async () => {
+    const id = '6463fc86e024c468698af1d2';
+    const data = {
+      firstName: 'Jose',
+      lastName: 'Martinez',
+      dni: 34876892,
+      phone: '8376890267',
+      email: 'algo@algo.com',
+      city: 'Boston',
+      salary: 324,
+    };
+    const response = await request(app).put(`/api/trainerdasd/${id}`).send(data);
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Should return status 500', async () => {
+    jest.spyOn(Trainer, 'findByIdAndUpdate').mockImplementation(() => {
+      throw new Error('Error updating Trainer');
+    });
+    const id = '6463fc86e024c468698af1d8';
     const data = {
       firstName: 'Jose',
       lastName: 'Martinez',
@@ -135,16 +153,25 @@ describe('DELETE /api/trainer/:id', () => {
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
-  test('Invalid ID', async () => {
-    const id = '6463fc86e024c468698af1d8dlkasldlksa';
-    const response = await request(app).delete(`/api/trainer/${id}`).send();
-    expect(response.status).toBe(500);
-    expect(response.error).toBeTruthy();
-  });
   test('Invalid route', async () => {
     const id = '6463fc86e024c468698af1d8';
     const response = await request(app).delete(`/api/trainerssdas/${id}`).send();
     expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('ID not found', async () => {
+    const id = '6463fc86e024c468698af1d2';
+    const response = await request(app).delete(`/api/trainer/${id}`).send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Should return status 500', async () => {
+    jest.spyOn(Trainer, 'findByIdAndDelete').mockImplementation(() => {
+      throw new Error('Error for delete Trainer');
+    });
+    const id = '6463fc86e024c468698af1d8';
+    const response = await request(app).delete(`/api/trainer/${id}`).send();
+    expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
 });
