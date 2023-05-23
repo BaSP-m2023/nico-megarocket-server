@@ -14,9 +14,9 @@ const classSchema = new Schema({
     required: true,
   },
   trainer: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
+    ref: 'trainer',
     required: true,
-
   },
   activity: {
     type: Schema.Types.ObjectId,

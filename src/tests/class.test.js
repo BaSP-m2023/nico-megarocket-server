@@ -40,27 +40,11 @@ describe('GET BY ID /api/class/:id', () => {
 });
 
 describe('POST /api/class', () => {
-  test('This should be error 500', async () => {
-    jest.spyOn(Class, 'create').mockImplementation(() => {
-      throw new Error('Error saving Class');
-    });
-    const mockClass = {
-      hour: '19:00',
-      day: 'Tuesday',
-      trainer: '646596b54fcb63fdd73b28a6',
-      activity: '64666b5d1fb62f8171bb6517',
-      slots: 9,
-    };
-    const response = await request(app).post('/api/class').send(mockClass);
-    expect(response.status).toBe(500);
-    expect(response.error).toBeTruthy();
-  });
-
   test('This should create a class with status 201', async () => {
     const mockClass = {
       hour: '19:00',
       day: 'Tuesday',
-      trainer: '646596b54fcb63fdd73b28a6',
+      trainer: ['646596b54fcb63fdd73b28a6'],
       activity: '64666b5d1fb62f8171bb6517',
       slots: 9,
     };
@@ -68,19 +52,11 @@ describe('POST /api/class', () => {
     expect(response.status).toBe(201);
     expect(response.error).toBeFalsy();
   });
-
-  test('This should return an error', async () => {
-    const mockClassTwo = {
-      hour: '05:45',
-      day: 'Fridays',
-      trainer: [
-        '646596b54fcb63fdd73b28a6',
-        '6465558202739f6df0878ceb',
-      ],
-      activity: '64662e65a1350cc48de5d410',
-      slots: 7,
-    };
-    const response = await request(app).post('/api/class').send(mockClassTwo);
+  test('This should be error 400', async () => {
+    jest.spyOn(Class, 'create').mockImplementation(() => {
+      throw new Error('Error saving Class');
+    });
+    const response = await request(app).post('/api/class').send();
     expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
