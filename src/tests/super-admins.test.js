@@ -75,3 +75,17 @@ describe('DELETE /api/super-admin/:id', () => {
     expect(response.error).toBeTruthy();
   });
 });
+
+describe('GET /api/super-admin', () => {
+  test('Get all super admins return status 200', async () => {
+    const response = await request(app).get('/api/super-admin').send();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('Get empty admins return status 200', async () => {
+    await SuperAdmin.deleteMany({});
+    const response = await request(app).get('/api/super-admin').send();
+    expect(response.status).toBe(200);
+    expect(response.body.data).toEqual([]);
+  });
+});
