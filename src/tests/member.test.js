@@ -39,6 +39,21 @@ describe('PUT /api/member', () => {
     expect(response.body).toBeDefined();
   });
 
+  test('Invalid data', async () => {
+    const data = {
+      firstName: 'Juan',
+      lastName: 'Perez',
+      dni: 37254615,
+      birthday: '2005-08-12T03:00:00.000Z',
+      phone: '1676778390',
+      email: 'juanperezyahoo',
+      city: 'Cordoba',
+    };
+    const response = await request(app).post('/api/member').send(data);
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+
   test('should send error 404 because this ID doesnt exist', async () => {
     const response = await request(app).put(`/api/member/${invalidMemberMockUp.id}`).send(modifiedMember);
     expect(response.status).toBe(404);
