@@ -21,6 +21,32 @@ describe('POST /subscription', () => {
     expect(response.status).toBe(201);
     expect(response.error).toBeFalsy();
   });
+
+  test('should return 400 if required fields are missing', async () => {
+    const invalidSubscription = {
+      classId: '64667748fc13ae7f027543cc',
+      // Missing 'members' field
+      date: new Date('2022-10-29'),
+    };
+    const response = await request(app).post('/api/subscription').send(invalidSubscription);
+
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+
+  test('Should handle error with status 500', async () => {
+    jest.spyOn(Subscription, 'create').mockImplementation(() => {
+      throw new Error('Error saving Subscription');
+    });
+    const mockCreateSubscription = {
+      classId: '64667748fc13ae7f027543cc',
+      members: '6465537202739f6df0878cd1',
+      date: new Date('2022-10-29'),
+    };
+    const response = await request(app).post('/api/subscription').send(mockCreateSubscription);
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
 });
 
 describe('GET /api/subscription', () => {
