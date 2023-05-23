@@ -11,9 +11,6 @@ describe('GET /api/class', () => {
   test('This should return status 200', async () => {
     const response = await request(app).get('/api/class').send();
     expect(response.status).toBe(200);
-  });
-  test('Error should be false', async () => {
-    const response = await request(app).get('/api/class').send();
     expect(response.error).toBeFalsy();
   });
 });
