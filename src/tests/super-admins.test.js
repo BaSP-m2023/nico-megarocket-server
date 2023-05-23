@@ -52,7 +52,7 @@ describe('PUT /api/super-admin/:id', () => {
 describe('DELETE /api/super-admin/:id', () => {
   test('deletes a SuperAdmin by id', async () => {
     const superAdmin = await SuperAdmin.create({ email: 'probando1@gmail.com', password: 'Password123' });
-    const response = await request(app).delete(`/api/super-admin/${superAdmin._id}`).send();
+    const response = await request(app).delete(`/api/super-admin/${superAdmin.id}`).send();
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
