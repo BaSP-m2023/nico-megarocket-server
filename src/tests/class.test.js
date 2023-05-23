@@ -79,3 +79,17 @@ test('Server error. 500, internal server error', async () => {
   expect(response.status).toBe(500);
   expect(response.error).toBeTruthy();
 });
+
+describe('GET /api/class', () => {
+  test('Get all. Status 200', async () => {
+    const response = await request(app).get('/api/class').send();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('Get empty. Status 200', async () => {
+    await Class.deleteMany({});
+    const response = await request(app).get('/api/class').send();
+    expect(response.status).toBe(200);
+    expect(response.body.data).toEqual([]);
+  });
+});
