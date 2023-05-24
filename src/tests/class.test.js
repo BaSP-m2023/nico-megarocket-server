@@ -25,6 +25,21 @@ describe('PUT /api/class/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
+  test('This should return an Id invalid character', async () => {
+    const id = '64667748fc13ae7f027543d49999999';
+    const data = {
+      hour: '18:30',
+      day: 'Sunday',
+      trainer: [
+        '646596b54fcb63fdd73b28a6',
+      ],
+      activity: '64661bf03cfd3f20a4b7db44',
+      slots: 4,
+    };
+    const response = await request(app).put(`/api/class/${id}`).send(data);
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
   test('For invalid element', async () => {
     const id = '64667748fc13ae7f027543d4';
     const data = {
@@ -93,6 +108,12 @@ describe('GET /api/class', () => {
     const response = await request(app).get('/api/class').send();
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
+  });
+  test('Invalid ID', async () => {
+    const id = '64667748fc13ae7f027543d49999999';
+    const response = await request(app).get(`/api/class/${id}`).send();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
   });
   test('Get empty. Status 200', async () => {
     await Class.deleteMany({});
