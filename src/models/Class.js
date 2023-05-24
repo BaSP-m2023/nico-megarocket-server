@@ -10,16 +10,17 @@ const classSchema = new Schema({
   },
   day: {
     type: String,
-    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday'],
+    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     required: true,
   },
   trainer: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
+    ref: 'Trainer',
     required: true,
-
   },
   activity: {
     type: Schema.Types.ObjectId,
+    ref: 'Activity',
     required: true,
   },
   slots: {
