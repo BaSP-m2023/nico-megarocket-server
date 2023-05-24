@@ -54,8 +54,8 @@ const updateSubscription = (req, res) => {
 
 const getAllSubscriptions = (req, res) => {
   subscription.find()
-    .populate('members')
-    .populate('classId')
+    // .populate('members')
+    // .populate('classId')
     .then((subscriptions) => {
       res.status(200).json({
         message: 'here is the subscriptions list',
@@ -90,10 +90,13 @@ const getSubscriptionById = (req, res) => {
       }
     })
     .catch((error) => {
+      console.log('error----->', error);
+      /*
       res.status(500).json({
         message: 'there is an error here',
         error,
       });
+      */
     });
 };
 

@@ -173,7 +173,7 @@ describe('GET BY ID /api/member/:id', () => {
   test('Invalid format id', async () => {
     const id = '6463fc86e024c468698af1d2dkasjdlsadaaaa';
     const response = await request(app).get(`/api/member/${id}`).send();
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
   test('Invalid route', async () => {

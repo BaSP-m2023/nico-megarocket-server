@@ -31,7 +31,7 @@ describe('GET BY ID /api/trainer/:id', () => {
   test('Format ID invalid', async () => {
     const id = '6463fc86e024c468698af1d2dkasjdlsad';
     const response = await request(app).get(`/api/trainer/${id}`).send();
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
   test('Invalid route', async () => {
