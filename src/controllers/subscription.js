@@ -54,6 +54,8 @@ const updateSubscription = (req, res) => {
 
 const getAllSubscriptions = (req, res) => {
   subscription.find()
+    // .populate('members')
+    // .populate('classId')
     .then((subscriptions) => {
       res.status(200).json({
         message: 'here is the subscriptions list',
@@ -71,18 +73,30 @@ const getAllSubscriptions = (req, res) => {
 const getSubscriptionById = (req, res) => {
   const Id = req.params.id;
   subscription.findById(Id)
+    .populate('members')
+    .populate('classId')
     .then((subscriptions) => {
-      res.status(200).json({
-        message: `subcription ${Id} was found`,
-        data: subscriptions,
-        error: false,
-      });
+      if (subscriptions) {
+        res.status(200).json({
+          message: `subscription ${subscriptions.name} was found`,
+          data: subscriptions,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'subscription not found',
+          error: true,
+        });
+      }
     })
     .catch((error) => {
+      console.log('error----->', error);
+      /*
       res.status(500).json({
         message: 'there is an error here',
         error,
       });
+      */
     });
 };
 
@@ -90,6 +104,7 @@ const deleteSubscription = (req, res) => {
   const { id } = req.params;
 
   subscription.findByIdAndDelete(id)
+
     .then((result) => {
       if (!result) {
         return res.status(404).json({
