@@ -86,7 +86,7 @@ const updateActivity = (req, res) => {
         result,
       });
     })
-    .catch((error) => res.status(400).json({
+    .catch((error) => res.status(500).json({
       message: 'Error updating activity',
       error,
     }));
@@ -106,7 +106,7 @@ const deleteActivity = (req, res) => {
         message: `Activity with the id: ${id} was successfully deleted.`,
       });
     })
-    .catch((error) => res.status(400).json({
+    .catch((error) => res.status(500).json({
       message: 'Oops! There was an error!',
       error,
     }));
