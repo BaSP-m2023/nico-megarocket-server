@@ -34,9 +34,9 @@ describe('GET /api/activity/:id', () => {
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
-  test('Get Invalid ID status 500', async () => {
+  test('Get Invalid ID status 400', async () => {
     const response = await request(app).get('/api/activity/6465993bc7fee6b84bae2696666').send();
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
   test('Get ID not found status 404', async () => {

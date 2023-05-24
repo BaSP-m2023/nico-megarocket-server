@@ -51,9 +51,9 @@ describe('GETBYID /api/admins/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
-  test('getting an admin by id in bad format should return status 500', async () => {
+  test('getting an admin by id in bad format should return status 400', async () => {
     const response = await request(app).get('/api/admins/617a9f7af043b719c23928').send();
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
 });
