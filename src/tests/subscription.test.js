@@ -90,15 +90,18 @@ describe('DELETE /api/subscription/:id', () => {
 });
 
 describe('GET /api/subscription', () => {
-  test('Get all subscription return status 200 ', async () => {
-    const response = await request(app).get('/api/subscription').send();
-    expect(response.status).toBe(200);
-    expect(response.error).toBeFalsy();
-  });
   test('Get all empty subscription return status 200', async () => {
     await Subscription.deleteMany({});
     const response = await request(app).get('/api/subscription').send();
     expect(response.status).toBe(200);
     expect(response.body.data).toEqual([]);
+  });
+  test('should return status 500', async () => {
+    jest.spyOn(Subscription, 'find').mockImplementation(() => {
+      throw new Error('Internal server error');
+    });
+    const response = await request(app).get('/api/subscription').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
   });
 });
