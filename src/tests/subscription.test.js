@@ -25,7 +25,6 @@ describe('POST /subscription', () => {
   test('should return 400 if required fields are missing', async () => {
     const invalidSubscription = {
       classId: '64667748fc13ae7f027543cc',
-      // Missing 'members' field
       date: new Date('2022-10-29'),
     };
     const response = await request(app).post('/api/subscription').send(invalidSubscription);
@@ -58,6 +57,15 @@ describe('GET /api/subscription', () => {
   test('get all subscriptions with bad route should return status 404', async () => {
     const response = await request(app).get('/api/subscriptionnn').send();
     expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('get all subscriptions with server error should return status 500', async () => {
+    jest.spyOn(Subscription, 'find').mockImplementationOnce(() => {
+      throw new Error('Internal Server Error');
+    });
+
+    const response = await request(app).get('/api/subscription').send();
+    expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
 });
