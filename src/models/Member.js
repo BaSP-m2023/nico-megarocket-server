@@ -62,4 +62,4 @@ const memberSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Member', memberSchema);
+module.exports = mongoose.model('member', memberSchema);
