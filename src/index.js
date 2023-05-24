@@ -6,7 +6,7 @@ dotenv.config();
 
 mongoose.connect(
   process.env.MONGO_DB_CONNECT_URL,
-  { maxPoolSize: process.env.MONGO_POOLSIZE || 1 },
+  { maxPoolSize: process.env.MONGO_POOLSIZE || 3 },
 )
   .then(() => console.log('Connected to MongoDB'))
   .catch((error) => console.log('Error: ', error));
