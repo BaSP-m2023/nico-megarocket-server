@@ -35,6 +35,12 @@ describe('GET BY ID /api/class/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
+  test('This should return an Id invalid character', async () => {
+    const id = '646596b54fcb63fdd73b28a589';
+    const response = await request(app).get(`/api/class/${id}`).send();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
   test('Check invalid Route', async () => {
     const id = '646596b54fcb63fdd73b28a6';
     const response = await request(app).get(`/api/classes/${id}`).send();
