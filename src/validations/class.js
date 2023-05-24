@@ -21,7 +21,7 @@ const validateUpdate = (req, res, next) => {
         'The field must be a valid hour(for example 09:30 )',
       }),
     day: Joi.string()
-      .valid('Monday', 'Tuesday', 'Wednesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday')
+      .valid('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
       .messages({
         'any.only': 'The days can only be Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday',
       }),
@@ -57,7 +57,7 @@ const validateCreateClass = (req, res, next) => {
       }),
 
     day: Joi.string()
-      .valid('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satueday', 'Sunday')
+      .valid('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
       .messages({
         'any.only': 'The Day property has to be a day of the week',
       })
