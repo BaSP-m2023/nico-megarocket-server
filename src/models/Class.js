@@ -20,6 +20,7 @@ const classSchema = new Schema({
   },
   activity: {
     type: Schema.Types.ObjectId,
+    ref: 'Activity',
     required: true,
   },
   slots: {
@@ -30,4 +31,4 @@ const classSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Class', classSchema);
+module.exports = mongoose.model('class', classSchema);

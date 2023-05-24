@@ -20,11 +20,18 @@ const getActivityById = (req, res) => {
   const Id = req.params.id;
   activity.findById(Id, 'name description')
     .then((activities) => {
-      res.status(200).json({
-        message: `activity ${activities.name} was found`,
-        data: activities,
-        error: false,
-      });
+      if (activities) {
+        res.status(200).json({
+          message: `activity ${activities.name} was found`,
+          data: activities,
+          error: false,
+        });
+      } else {
+        res.status(404).json({
+          message: 'activity not found',
+          error: true,
+        });
+      }
     })
     .catch((error) => {
       res.status(500).json({
@@ -87,7 +94,6 @@ const updateActivity = (req, res) => {
 
 const deleteActivity = (req, res) => {
   const { id } = req.params;
-
   activity.findByIdAndDelete(id)
     .then((result) => {
       if (!result) {
@@ -100,7 +106,7 @@ const deleteActivity = (req, res) => {
         message: `Activity with the id: ${id} was successfully deleted.`,
       });
     })
-    .catch((error) => res.status(400).json({
+    .catch((error) => res.status(500).json({
       message: 'Oops! There was an error!',
       error,
     }));

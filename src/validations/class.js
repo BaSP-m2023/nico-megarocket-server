@@ -34,6 +34,7 @@ const validateUpdate = (req, res, next) => {
     activity: Joi.string()
       .hex()
       .min(24),
+
     slots: Joi.number()
       .min(1)
       .max(20),
