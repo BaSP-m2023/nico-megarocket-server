@@ -10,12 +10,12 @@ const classSchema = new Schema({
   },
   day: {
     type: String,
-    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursaday', 'Friday', 'Saturday', 'Sunday'],
+    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     required: true,
   },
   trainer: {
     type: [Schema.Types.ObjectId],
-    ref: 'trainer',
+    ref: 'Trainer',
     required: true,
   },
   activity: {
