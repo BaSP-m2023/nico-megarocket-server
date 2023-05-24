@@ -107,7 +107,7 @@ describe('PUT /api/admins/:id', () => {
       firstName: 'Martina',
     };
     const response = await request(app).put(`/api/admins/${id}`).send(data);
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
 
@@ -149,6 +149,13 @@ describe('DELETE /api/admins/:id', () => {
   test('invalid route: returns status 404 when route is wrong', async () => {
     const response = await request(app).delete('/api/addminss/64667748fc13ae7f027632cc').send();
     expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+
+  test('Invalid ID', async () => {
+    const id = '617a9f7af043b719c23928ffff';
+    const response = await request(app).delete(`/api/admins/${id}`).send();
+    expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
 
