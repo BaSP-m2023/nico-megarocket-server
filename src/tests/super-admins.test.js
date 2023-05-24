@@ -44,7 +44,7 @@ describe('PUT /api/super-admin/:id', () => {
       password: 'Password124',
     };
     const response = await request(app).put(`/api/super-admin/${id}`).send(data);
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
 });
