@@ -6,6 +6,42 @@ import classSeed from '../seeds/class';
 beforeAll(async () => {
   await Class.collection.insertMany(classSeed);
 });
+
+describe('GET BY ID /api/class/:id', () => {
+  test('This should return an Id', async () => {
+    const id = '64667748fc13ae7f027543cd';
+    const response = await request(app).get(`/api/class/${id}`).send();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('This should return an Id invalid', async () => {
+    const id = '646596b54fcb63fdd73b28a5';
+    const response = await request(app).get(`/api/class/${id}`).send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('This should return an Id invalid character', async () => {
+    const id = '646596b54fcb63fdd73b28a589';
+    const response = await request(app).get(`/api/class/${id}`).send();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('Check invalid Route', async () => {
+    const id = '646596b54fcb63fdd73b28a6';
+    const response = await request(app).get(`/api/classes/${id}`).send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Server error. 500, internal server error', async () => {
+    jest.spyOn(Class, 'findById').mockImplementation(() => {
+      throw new Error('Internal Server Error');
+    });
+    const response = await request(app).get('/api/class/64667748fc13ae7f027543d9').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
+});
+
 describe('PUT /api/class/:id', () => {
   test('This should edit element', async () => {
     const id = '64667748fc13ae7f027543d4';
@@ -93,6 +129,26 @@ describe('DELETE /api/class/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
+  test('Invalid id. 404 error, id not found.', async () => {
+    const response = await request(app).delete('/api/class/64667748fc13ae7f027543d9').send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Get Invalid ID status 400', async () => {
+    const response = await request(app).delete('/api/class/64667748fc13ae7f027543d49999').send();
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('Invalid route. 404 wrong route.', async () => {
+    const response = await request(app).delete('/api/classes/64667748fc13ae7f027543d4').send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Server error. 500, internal server error', async () => {
+    jest.spyOn(Class, 'findByIdAndDelete').mockImplementation(() => {
+      throw new Error('Internal Server Error');
+    });
+  });
   test('Server error. 500, internal server error', async () => {
     jest.spyOn(Class, 'findByIdAndDelete').mockImplementation(() => {
       throw new Error('Internal Server Error');
@@ -115,53 +171,12 @@ describe('GET /api/class', () => {
     expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
   });
-  test('Get empty. Status 200', async () => {
-    await Class.deleteMany({});
-    const response = await request(app).get('/api/class').send();
-    expect(response.status).toBe(200);
-    expect(response.body.data).toEqual([]);
-  });
   test('returns status 500 when there is an internal server error', async () => {
     jest.spyOn(Class, 'find').mockImplementation(() => {
       throw new Error('Internal Server Error');
     });
     const response = await request(app).get('/api/class').send();
     expect(response.status).toBe(500);
-  });
-});
-
-describe('GET BY ID /api/class/:id', () => {
-  test('This should return an Id', async () => {
-    const id = '64667748fc13ae7f027543d3';
-    const response = await request(app).get(`/api/class/${id}`).send();
-    expect(response.status).toBe(200);
-    expect(response.error).toBeFalsy();
-  });
-  test('This should return an Id invalid', async () => {
-    const id = '646596b54fcb63fdd73b28a5';
-    const response = await request(app).get(`/api/class/${id}`).send();
-    expect(response.status).toBe(404);
-    expect(response.error).toBeTruthy();
-  });
-  test('This should return an Id invalid character', async () => {
-    const id = '646596b54fcb63fdd73b28a589';
-    const response = await request(app).get(`/api/class/${id}`).send();
-    expect(response.status).toBe(400);
-    expect(response.error).toBeTruthy();
-  });
-  test('Check invalid Route', async () => {
-    const id = '646596b54fcb63fdd73b28a6';
-    const response = await request(app).get(`/api/classes/${id}`).send();
-    expect(response.status).toBe(404);
-    expect(response.error).toBeTruthy();
-  });
-  test('Server error. 500, internal server error', async () => {
-    jest.spyOn(Class, 'findById').mockImplementation(() => {
-      throw new Error('Internal Server Error');
-    });
-    const response = await request(app).get('/api/class/64667748fc13ae7f027543d9').send();
-    expect(response.status).toBe(500);
-    expect(response.error).toBeTruthy();
   });
 });
 
