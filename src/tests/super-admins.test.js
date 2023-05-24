@@ -49,6 +49,36 @@ describe('PUT /api/super-admin/:id', () => {
   });
 });
 
+describe('GET BY ID /api/super-admin/:id', () => {
+  test('Should return a superAdmin valid ID', async () => {
+    const id = '64667748fc13ae7f027631cc';
+    const response = await request(app).get(`/api/super-admin/${id}`).send();
+    expect(response.status).toBe(200);
+    expect(response.error).toBeFalsy();
+  });
+  test('Should return a superAdmin invalid ID', async () => {
+    const id = '64667748fc13ae7f027999cc';
+    const response = await request(app).get(`/api/super-admin/${id}`).send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Invalid route', async () => {
+    const id = '64667748fc13ae7f027631cc';
+    const response = await request(app).get(`/api/superadmin/${id}`).send();
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+  test('Should handle error with status 500', async () => {
+    jest.spyOn(SuperAdmin, 'findById').mockImplementation(() => {
+      throw new Error('Error finding SuperAdmin by ID');
+    });
+    const id = '64667748fc13ae7f027631cc';
+    const response = await request(app).get(`/api/super-admin/${id}`).send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
+});
+
 describe('DELETE /api/super-admin/:id', () => {
   test('deletes a SuperAdmin by id', async () => {
     const superAdmin = await SuperAdmin.create({ email: 'probando1@gmail.com', password: 'Password123' });
@@ -76,8 +106,41 @@ describe('DELETE /api/super-admin/:id', () => {
   });
 });
 
+describe('POST /api/super-admin', () => {
+  test('Should send data from API', async () => {
+    const mockSuperAdmin = {
+      email: 'octavito@gmail.com',
+      password: 'Lasleonas1234',
+    };
+    const response = await request(app).post('/api/super-admin').send(mockSuperAdmin);
+    expect(response.status).toBe(201);
+    expect(response.error).toBeFalsy();
+  });
+  test('Invalid data', async () => {
+    const mockSuperAdmin = {
+      email: 'octavito sin email',
+      password: 'lasleonas',
+    };
+    const response = await request(app).post('/api/super-admin').send(mockSuperAdmin);
+    expect(response.status).toBe(400);
+    expect(response.error).toBeTruthy();
+  });
+  test('Should handle error with status 500', async () => {
+    jest.spyOn(SuperAdmin, 'create').mockImplementation(() => {
+      throw new Error('Error saving SuperAdmin');
+    });
+    const mockSuperAdmin = {
+      email: 'octavito@gmail.com',
+      password: 'Lasleonas1234',
+    };
+    const response = await request(app).post('/api/super-admin').send(mockSuperAdmin);
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
+});
+
 describe('GET /api/super-admin', () => {
-  test('Get all super admins return status 200', async () => {
+  test('Should return all elements of superAdmin', async () => {
     const response = await request(app).get('/api/super-admin').send();
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
@@ -87,5 +150,13 @@ describe('GET /api/super-admin', () => {
     const response = await request(app).get('/api/super-admin').send();
     expect(response.status).toBe(200);
     expect(response.body.data).toEqual([]);
+  });
+  test('Should handle error with status 500', async () => {
+    jest.spyOn(SuperAdmin, 'find').mockImplementation(() => {
+      throw new Error('Error finding SuperAdmin');
+    });
+    const response = await request(app).get('/api/super-admin').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
   });
 });
