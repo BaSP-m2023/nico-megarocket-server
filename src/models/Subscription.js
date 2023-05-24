@@ -9,7 +9,7 @@ const subscriptionSchema = new Schema({
     required: true,
   },
   members: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: 'member',
     required: true,
   },

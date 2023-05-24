@@ -6,7 +6,7 @@ import subscriptionSeed from '../seeds/subscription';
 
 const mockSubscription = {
   classId: '64667748fc13ae7f027543cc',
-  members: '6465537202739f6df0878cd1',
+  members: ['6465537202739f6df0878cd1'],
   date: new Date('2022-10-29'),
 };
 
@@ -39,7 +39,7 @@ describe('POST /subscription', () => {
     });
     const mockCreateSubscription = {
       classId: '64667748fc13ae7f027543cc',
-      members: '6465537202739f6df0878cd1',
+      members: ['6465537202739f6df0878cd1'],
       date: new Date('2022-10-29'),
     };
     const response = await request(app).post('/api/subscription').send(mockCreateSubscription);
@@ -121,6 +121,15 @@ describe('GET /subscription/:id', () => {
     const response = await request(app).get(`/api/subscription/${nonExistentId}`).send();
 
     expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
+
+  test('should return status 500', async () => {
+    jest.spyOn(Subscription, 'find').mockImplementation(() => {
+      throw new Error('Internal server error');
+    });
+    const response = await request(app).get('/api/subscription').send();
+    expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
 });
