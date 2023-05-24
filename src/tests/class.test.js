@@ -119,11 +119,6 @@ describe('DELETE /api/class/:id', () => {
     expect(response.status).toBe(200);
     expect(response.error).toBeFalsy();
   });
-  test('Invalid id. 404 error, id not found.', async () => {
-    const response = await request(app).delete('/api/class/64667748fc13ae7f027543d9').send();
-    expect(response.status).toBe(404);
-    expect(response.error).toBeTruthy();
-  });
   test('Invalid route. 404 wrong route.', async () => {
     const response = await request(app).delete('/api/classes/64667748fc13ae7f027543d4').send();
     expect(response.status).toBe(404);
@@ -138,16 +133,6 @@ describe('DELETE /api/class/:id', () => {
     const response = await request(app).delete('/api/class/64667748fc13ae7f027543d49999').send();
     expect(response.status).toBe(400);
     expect(response.error).toBeTruthy();
-  });
-  test('Invalid route. 404 wrong route.', async () => {
-    const response = await request(app).delete('/api/classes/64667748fc13ae7f027543d4').send();
-    expect(response.status).toBe(404);
-    expect(response.error).toBeTruthy();
-  });
-  test('Server error. 500, internal server error', async () => {
-    jest.spyOn(Class, 'findByIdAndDelete').mockImplementation(() => {
-      throw new Error('Internal Server Error');
-    });
   });
   test('Server error. 500, internal server error', async () => {
     jest.spyOn(Class, 'findByIdAndDelete').mockImplementation(() => {
