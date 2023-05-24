@@ -43,6 +43,14 @@ describe('PUT /api/class/:id', () => {
     expect(response.status).toBe(404);
     expect(response.error).toBeTruthy();
   });
+  test('Server error. 500, internal server error', async () => {
+    jest.spyOn(Class, 'findByIdAndUpdate').mockImplementation(() => {
+      throw new Error('Internal Server Error');
+    });
+    const response = await request(app).put('/api/class/64667748fc13ae7f027543d4').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
+  });
 });
 
 describe('DELETE /api/class/:id', () => {
@@ -91,5 +99,13 @@ describe('GET /api/class', () => {
     const response = await request(app).get('/api/class').send();
     expect(response.status).toBe(200);
     expect(response.body.data).toEqual([]);
+  });
+  test('Server error. 500, internal server error', async () => {
+    jest.spyOn(Class, 'find').mockImplementation(() => {
+      throw new Error('Internal Server Error');
+    });
+    const response = await request(app).get('/api/class').send();
+    expect(response.status).toBe(500);
+    expect(response.error).toBeTruthy();
   });
 });
