@@ -110,6 +110,18 @@ describe('PUT /api/admins/:id', () => {
     expect(response.status).toBe(500);
     expect(response.error).toBeTruthy();
   });
+
+  test('Valid ID but not exist', async () => {
+    const id = '64667748fc13ae7f027631cd';
+    const data = {
+      email: 'probando2@gmail.com',
+      password: 'Password124',
+    };
+
+    const response = await request(app).put(`/api/admins/${id}`).send(data);
+    expect(response.status).toBe(404);
+    expect(response.error).toBeTruthy();
+  });
 });
 
 describe('DELETE /api/admins/:id', () => {
@@ -160,6 +172,13 @@ describe('DELETE /api/admins/:id', () => {
       const response = await request(app).get('/api/admins').send();
       expect(response.status).toBe(200);
       expect(response.body.data).toEqual([]);
+    });
+    test('returns status 500 when there is an internal server error', async () => {
+      jest.spyOn(Admin, 'find').mockImplementation(() => {
+        throw new Error('Internal Server Error');
+      });
+      const response = await request(app).get('/api/admins').send();
+      expect(response.status).toBe(500);
     });
   });
 });
