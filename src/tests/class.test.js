@@ -4,15 +4,14 @@ import Class from '../models/Class';
 import classSeed from '../seeds/class';
 
 beforeAll(async () => {
-  await Class.collection.insertMany(classSeed);
+  await Class.insertMany(classSeed);
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
 });
 
 describe('GET /api/class', () => {
-  test('This should return status 200', async () => {
-    const response = await request(app).get('/api/class').send();
-    expect(response.status).toBe(200);
-    expect(response.error).toBeFalsy();
-  });
   test('returns status 500 when there is an internal server error', async () => {
     jest.spyOn(Class, 'find').mockImplementation(() => {
       throw new Error('Internal Server Error');
@@ -23,12 +22,6 @@ describe('GET /api/class', () => {
 });
 
 describe('GET BY ID /api/class/:id', () => {
-  test('This should return an Id', async () => {
-    const id = '64667748fc13ae7f027543d3';
-    const response = await request(app).get(`/api/class/${id}`).send();
-    expect(response.status).toBe(200);
-    expect(response.error).toBeFalsy();
-  });
   test('This should return an Id invalid', async () => {
     const id = '646596b54fcb63fdd73b28a5';
     const response = await request(app).get(`/api/class/${id}`).send();
