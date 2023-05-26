@@ -54,8 +54,8 @@ const updateSubscription = (req, res) => {
 
 const getAllSubscriptions = (req, res) => {
   subscription.find()
-    .populate('member')
-    .populate('class')
+    .populate('members')
+    .populate('classId')
     .then((subscriptions) => {
       res.status(200).json({
         message: 'here is the subscriptions list',
@@ -70,11 +70,12 @@ const getAllSubscriptions = (req, res) => {
       });
     });
 };
+
 const getSubscriptionById = (req, res) => {
   const Id = req.params.id;
   subscription.findById(Id)
-    .populate('member')
-    .populate('class')
+    .populate('members')
+    .populate('classId')
     .then((subscriptions) => {
       if (subscriptions) {
         res.status(200).json({
@@ -91,7 +92,7 @@ const getSubscriptionById = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'there is an error here',
+        message: 'There was an error',
         error,
       });
     });

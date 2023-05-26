@@ -6,10 +6,12 @@ const validateCreation = (req, res, next) => {
       .hex()
       .min(24)
       .required(),
-    members: Joi.string()
-      .hex()
-      .min(24)
-      .required(),
+    members: Joi.array().items(
+      Joi.string()
+        .hex()
+        .min(24)
+        .required(),
+    ).required(),
     date: Joi.date()
       .required(),
   });
@@ -28,9 +30,11 @@ const validateUpdate = (req, res, next) => {
     classId: Joi.string()
       .hex()
       .min(24),
-    members: Joi.string()
-      .hex()
-      .min(24),
+    members: Joi.array().items(
+      Joi.string()
+        .hex()
+        .min(24),
+    ),
     date: Joi.date(),
   });
   const validation = subscriptionValidate.validate(req.body);

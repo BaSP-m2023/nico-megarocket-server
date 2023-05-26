@@ -50,4 +50,4 @@ const trainerSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('trainer', trainerSchema);
+module.exports = mongoose.model('Trainer', trainerSchema);
