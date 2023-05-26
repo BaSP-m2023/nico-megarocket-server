@@ -14,6 +14,10 @@ beforeAll(async () => {
   await Subscription.collection.insertMany(subscriptionSeed);
 });
 
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 describe('POST /subscription', () => {
   test('should create a new subscription', async () => {
     const response = await request(app).post('/api/subscription').send(mockSubscription);
