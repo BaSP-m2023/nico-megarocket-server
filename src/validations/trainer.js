@@ -43,7 +43,7 @@ const validateCreation = (req, res, next) => {
     email: Joi.string().lowercase().regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
     city: Joi.string().required().min(3).max(15),
     salary: Joi.number().required(),
-    isActive: Joi.boolean,
+    isActive: Joi.boolean(),
   });
 
   const validation = trainerValidation.validate(req.body);
