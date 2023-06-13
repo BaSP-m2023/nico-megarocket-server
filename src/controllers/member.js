@@ -31,10 +31,18 @@ const createMember = (req, res) => {
       data: result,
       error: false,
     }))
-    .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
-      error,
-    }));
+    .catch((error) => {
+      if (error.message.includes('E11000 duplicate key error collection')) {
+        return res.status(400).json({
+          message: 'Email already exists',
+          error,
+        });
+      }
+      return res.status(500).json({
+        message: 'An error ocurred',
+        error,
+      });
+    });
 };
 
 const updateMember = (req, res) => {
