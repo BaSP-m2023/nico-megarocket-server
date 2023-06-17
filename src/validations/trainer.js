@@ -14,6 +14,7 @@ const validateUpdate = (req, res, next) => {
     email: Joi.string().email(),
     city: Joi.string().min(5).max(25),
     salary: Joi.number(),
+    isActive: Joi.boolean(),
   });
   const validation = trainerValidation.validate(req.body);
 
