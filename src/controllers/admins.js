@@ -34,7 +34,7 @@ const updateAdmin = (req, res) => {
     .catch((error) =>
       res.status(500).json({
         message: error,
-        data: undefined,
+        data: null,
         error: true,
       })
     );
@@ -78,7 +78,7 @@ const getAdmins = (req, res) => {
     .catch((error) =>
       res.status(500).json({
         message: error,
-        data: undefined,
+        data: null,
         error: true,
       })
     );
@@ -105,7 +105,7 @@ const getAdminsById = (req, res) => {
     .catch((error) =>
       res.status(500).json({
         message: error,
-        data: undefined,
+        data: null,
         error: true,
       })
     );
@@ -132,7 +132,7 @@ const deleteAdmin = (req, res) => {
     .catch((error) =>
       res.status(500).json({
         message: error,
-        data: undefined,
+        data: null,
         error: true,
       })
     );
