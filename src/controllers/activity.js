@@ -12,6 +12,7 @@ const getAllActivities = (req, res) => {
     .catch((error) => {
       res.status(500).json({
         message: 'there is an error here',
+        data: null,
         error,
       });
     });
@@ -19,16 +20,17 @@ const getAllActivities = (req, res) => {
 const getActivityById = (req, res) => {
   const Id = req.params.id;
   activity.findById(Id, 'name description')
-    .then((activities) => {
-      if (activities) {
+    .then((result) => {
+      if (result) {
         res.status(200).json({
-          message: `activity ${activities.name} was found`,
-          data: activities,
+          message: `Activity ${result.name} was found`,
+          data: result,
           error: false,
         });
       } else {
         res.status(404).json({
           message: 'activity not found',
+          data: null,
           error: true,
         });
       }
@@ -49,11 +51,16 @@ const createActivity = (req, res) => {
     description,
   })
     .then((result) => {
-      res.status(201).json(result);
+      res.status(201).json({
+        message: 'Activity Created',
+        data: result,
+        error: false,
+      });
     })
     .catch((error) => {
       res.status(500).json({
         message: 'it cannot be created',
+        data: null,
         error,
       });
     });
@@ -78,16 +85,19 @@ const updateActivity = (req, res) => {
       if (!result) {
         return res.status(404).json({
           message: `Activity with the id: ${id} was not found, please try with another one`,
+          data: null,
           error: true,
         });
       }
       return res.status(201).json({
-        message: 'Activity updated successfully',
-        result,
+        message: 'Activity Updated',
+        data: result,
+        error: false,
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'Error updating activity',
+      message: 'Error updating Activity',
+      data: null,
       error,
     }));
 };
@@ -99,15 +109,19 @@ const deleteActivity = (req, res) => {
       if (!result) {
         return res.status(404).json({
           message: `Activity with the id: ${id} was not found, please try with another one`,
+          data: null,
           error: true,
         });
       }
       return res.status(200).json({
-        message: `Activity with the id: ${id} was successfully deleted.`,
+        message: 'Activity deleted.',
+        data: null,
+        error: false,
       });
     })
     .catch((error) => res.status(500).json({
       message: 'Oops! There was an error!',
+      data: null,
       error,
     }));
 };
