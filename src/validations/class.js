@@ -36,7 +36,7 @@ const validateUpdate = (req, res, next) => {
       .min(24),
 
     slots: Joi.number()
-      .min(1)
+      .min(0)
       .max(20),
   });
   const validation = classValidation.validate(req.body);
