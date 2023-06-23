@@ -67,7 +67,7 @@ const createAdmin = (req, res) => {
 const getAdmins = (req, res) => {
   Admin.find()
     .then((admins) => res.status(200).json({
-      message: 'Obtained all the admins from the list.',
+      message: 'Admins list.',
       data: admins,
       error: false,
     }))

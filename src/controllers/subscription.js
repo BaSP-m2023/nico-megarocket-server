@@ -58,7 +58,7 @@ const getAllSubscriptions = (req, res) => {
     .populate('classId')
     .then((subscriptions) => {
       res.status(200).json({
-        message: 'here is the subscriptions list',
+        message: 'Subscriptions list',
         data: subscriptions,
         error: false,
       });
@@ -79,13 +79,13 @@ const getSubscriptionById = (req, res) => {
     .then((subscriptions) => {
       if (subscriptions) {
         res.status(200).json({
-          message: `subscription ${subscriptions.name} was found`,
+          message: 'Subscription found',
           data: subscriptions,
           error: false,
         });
       } else {
         res.status(404).json({
-          message: 'subscription not found',
+          message: 'Subscription not found',
           error: true,
         });
       }

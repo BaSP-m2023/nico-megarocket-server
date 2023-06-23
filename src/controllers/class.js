@@ -7,7 +7,7 @@ const getClasses = (req, res) => {
     .then((data) => {
       if (data) {
         res.status(200).json({
-          message: 'All classes',
+          message: 'Classes list',
           data,
         });
       }
@@ -27,7 +27,7 @@ const getClassById = (req, res) => {
     .then((data) => {
       if (data) {
         res.status(200).json({
-          message: 'Class Found',
+          message: 'Class found',
           data,
           error: false,
         });

@@ -82,7 +82,7 @@ const updateMember = (req, res) => {
 const getAllMembers = (req, res) => {
   Member.find()
     .then((members) => res.status(200).json({
-      message: 'Complete members list',
+      message: 'Members list',
       data: members,
       error: false,
     }))
@@ -98,7 +98,7 @@ const getById = (req, res) => {
     .then((member) => {
       if (member) {
         res.status(200).json({
-          message: 'Member found!',
+          message: 'Member found',
           data: member,
           error: false,
         });

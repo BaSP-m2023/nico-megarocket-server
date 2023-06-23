@@ -4,7 +4,7 @@ const getAllActivities = (req, res) => {
   activity.find()
     .then((activities) => {
       res.status(200).json({
-        message: 'here is the activities list',
+        message: 'Activities list',
         data: activities,
         error: false,
       });
@@ -23,13 +23,13 @@ const getActivityById = (req, res) => {
     .then((result) => {
       if (result) {
         res.status(200).json({
-          message: `Activity ${result.name} was found`,
+          message: 'Activity found',
           data: result,
           error: false,
         });
       } else {
         res.status(404).json({
-          message: 'activity not found',
+          message: 'Activity not found',
           data: null,
           error: true,
         });

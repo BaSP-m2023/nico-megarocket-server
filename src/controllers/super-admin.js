@@ -61,7 +61,7 @@ const getAllSuperAdmin = (req, res) => {
     .then((data) => {
       if (data) {
         res.status(200).json({
-          message: 'This are all the super admin',
+          message: 'Super admins list',
           data,
         });
       }
@@ -101,7 +101,7 @@ const getSuperAdminById = (req, res) => {
     .then((data) => {
       if (data) {
         res.status(200).json({
-          message: 'Super Admin Found',
+          message: 'Super Admin found',
           data,
           error: false,
         });

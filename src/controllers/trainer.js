@@ -5,7 +5,7 @@ const getAllTrainers = (req, res) => {
     .then((data) => {
       if (data) {
         res.status(200).json({
-          message: 'This are all our trainers',
+          message: 'Trainers list',
           data,
         });
       }
@@ -23,7 +23,7 @@ const getTrainerById = (req, res) => {
     .then((data) => {
       if (data) {
         res.status(200).json({
-          message: 'Trainer Found',
+          message: 'Trainer found',
           data,
           error: false,
         });
