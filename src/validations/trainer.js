@@ -20,7 +20,7 @@ const validateUpdate = (req, res, next) => {
 
   if (!validation.error) return next();
   return res.status(400).json({
-    message: `There was an error ${validation.error.details[0].message}`,
+    message: `There was an error: ${validation.error.details[0].message}`,
     data: undefined,
     error: true,
   });
@@ -51,7 +51,7 @@ const validateCreation = (req, res, next) => {
 
   if (!validation.error) return next();
   return res.status(400).json({
-    message: `There was an error ${validation.error.details[0].message}`,
+    message: `There was an error: ${validation.error.details[0].message}`,
     data: undefined,
     error: true,
   });

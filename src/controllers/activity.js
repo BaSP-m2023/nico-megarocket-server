@@ -52,7 +52,7 @@ const createActivity = (req, res) => {
   })
     .then((result) => {
       res.status(201).json({
-        message: 'Activity Created',
+        message: 'Activity created',
         data: result,
         error: false,
       });
@@ -84,13 +84,13 @@ const updateActivity = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Activity with the id: ${id} was not found, please try with another one`,
+          message: 'Activity not found',
           data: null,
           error: true,
         });
       }
       return res.status(201).json({
-        message: 'Activity Updated',
+        message: 'Activity updated',
         data: result,
         error: false,
       });
@@ -108,13 +108,13 @@ const deleteActivity = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Activity with the id: ${id} was not found, please try with another one`,
+          message: 'Activity not found',
           data: null,
           error: true,
         });
       }
       return res.status(200).json({
-        message: 'Activity deleted.',
+        message: 'Activity deleted',
         data: null,
         error: false,
       });

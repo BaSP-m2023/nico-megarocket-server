@@ -37,12 +37,12 @@ const updateSubscription = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Subscription with the id: ${id} was not found, please try with another one`,
+          message: 'Subscription not found',
           error: true,
         });
       }
-      return res.status(200).json({
-        message: 'Subscription updated successfully',
+      return res.status(201).json({
+        message: 'Subscription updated',
         result,
       });
     })
@@ -106,12 +106,12 @@ const deleteSubscription = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Subscription with the id: ${id} was not found, please try with another one`,
+          message: 'Subscription not found',
           error: true,
         });
       }
       return res.status(200).json({
-        message: `Subscription with the id: ${id} was successfully deleted.`,
+        message: 'Subscription deleted',
       });
     })
     .catch((error) => res.status(500).json({

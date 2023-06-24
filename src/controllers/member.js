@@ -27,7 +27,7 @@ const createMember = (req, res) => {
     membership,
   })
     .then((result) => res.status(201).json({
-      message: 'Member created successfuly',
+      message: 'Member created',
       data: result,
       error: false,
     }))
@@ -70,11 +70,15 @@ const updateMember = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Member with id: ${id} was not found`,
+          message: 'Member not found',
           error: true,
         });
       }
-      return res.status(201).json(result);
+      return res.status(201).json({
+        message: 'Member updated',
+        result,
+        error: false,
+      });
     })
     .catch((error) => res.status(500).json(error));
 };
@@ -117,18 +121,20 @@ const getById = (req, res) => {
 const deleteMember = async (req, res) => {
   try {
     const { id } = req.params;
-
     const memberExist = await Member.findById(id);
-
     if (!memberExist) {
-      return res.status(404).send('ID was not found');
+      return res.status(404).send({
+        message: 'Member not found',
+      });
     }
-
     await Member.findByIdAndDelete(id);
-
-    res.send('Member has been deleted');
+    return res.status(200).send({
+      message: 'Member deleted',
+    });
   } catch (error) {
-    res.status(500).send('Member could not be deleted');
+    res.status(500).send({
+      message: 'Database error',
+    });
   }
   return null;
 };

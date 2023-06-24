@@ -22,13 +22,13 @@ const updateAdmin = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Admin with ID ${id} not found`,
+          message: 'Admin not found',
           data: null,
           error: true,
         });
       }
-      return res.status(200).json({
-        message: 'Admin updated!',
+      return res.status(201).json({
+        message: 'Admin updated',
         data: result,
         error: false,
       });
@@ -110,13 +110,13 @@ const deleteAdmin = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Admin with ID ${id} not found`,
+          message: 'Admin not found',
           data: null,
           error: true,
         });
       }
       return res.status(200).json({
-        message: 'Admin deleted!',
+        message: 'Admin deleted',
         data: null,
         error: false,
       });

@@ -70,7 +70,7 @@ const updateClass = (req, res) => {
     .then((result) => {
       if (result) {
         res.status(201).json({
-          message: 'Class Updated',
+          message: 'Class updated',
           result,
           error: false,
         });
@@ -92,7 +92,7 @@ const deleteClass = (req, res) => {
     .then((result) => {
       if (result) {
         res.status(200).json({
-          message: `Class ${id} deleted`,
+          message: 'Class deleted',
           data: result,
           error: false,
         });

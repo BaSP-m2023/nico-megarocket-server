@@ -65,10 +65,15 @@ const updateTrainer = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          msg: `The id ${id} was not found`,
+          message: 'Trainer not found',
+          error: false,
         });
       }
-      return res.status(200).json(result);
+      return res.status(201).json({
+        message: 'Trainer updated',
+        result,
+        error: false,
+      });
     })
     .catch((error) => res.status(500).json(error));
 };
@@ -80,12 +85,13 @@ const deleteTrainer = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Trainer with the id: ${id} was not found, please try with another one`,
+          message: 'Trainer not found',
           error: true,
         });
       }
       return res.status(200).json({
-        message: `Trainer with the id: ${id} was successfully deleted.`,
+        message: 'Trainer deleted',
+        error: false,
       });
     })
     .catch((error) => res.status(500).json({
@@ -108,9 +114,10 @@ const postTrainer = (req, res) => {
     salary,
     isActive,
   })
-    .then((result) => {
-      res.status(201).json(result);
-    })
+    .then((result) => res.status(201).json({
+      message: 'Trainer created',
+      result,
+    }))
     .catch((error) => {
       res.status(500).json({
         message: 'Trainer cannot be created',
