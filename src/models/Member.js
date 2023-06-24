@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const memberSchema = new Schema({
   firebaseUid: {
     type: String,
-    required: true,
+    // required: true,
   },
   firstName: {
     type: String,

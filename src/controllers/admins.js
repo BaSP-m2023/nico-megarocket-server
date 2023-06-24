@@ -4,7 +4,7 @@ const firebaseApp = require('../helper/firebase');
 const updateAdmin = (req, res) => {
   const { id } = req.params;
   const {
-    firstName, lastName, dni, phone, email, city, password,
+    firstName, lastName, dni, phone, email, city,
   } = req.body;
 
   Admin.findByIdAndUpdate(
@@ -16,7 +16,6 @@ const updateAdmin = (req, res) => {
       phone,
       email,
       city,
-      password,
     },
     { new: true },
   )
@@ -129,29 +128,42 @@ const getAdminsById = (req, res) => {
     }));
 };
 
-const deleteAdmin = (req, res) => {
+const deleteAdmin = async (req, res) => {
   const { id } = req.params;
+  try {
+    const existingAdmin = await Admin.findOne({ _id: id });
 
-  Admin.findByIdAndDelete(id)
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Admin with ID ${id} not found`,
-          data: null,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Admin deleted!',
+    if (!existingAdmin) {
+      return res.status(404).json({
+        message: 'This Admin does not exists',
         data: null,
-        error: false,
+        error: true,
       });
-    })
-    .catch((error) => res.status(500).json({
-      message: error,
+    }
+    const { firebaseUid } = existingAdmin;
+
+    await firebaseApp.auth().deleteUser(firebaseUid);
+
+    const result = await Admin.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Admin with ID ${id} not found`,
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Admin deleted!',
+      data: null,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: true,
       data: null,
       error: true,
-    }));
+    });
+  }
 };
 
 module.exports = {

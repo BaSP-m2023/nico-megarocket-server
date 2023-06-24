@@ -12,11 +12,6 @@ const superAdminsSchema = new Schema({
     match: /^[^@]+@[^@]+.[a-zA-Z]{2,}$/,
     required: true,
   },
-  password: {
-    type: String,
-    match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-    required: true,
-  },
 });
 
 module.exports = mongoose.model('SuperAdmin', superAdminsSchema);

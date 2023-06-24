@@ -1,12 +1,12 @@
-const trainers = require('../models/Trainer');
+const trainer = require('../models/Trainer');
 const firebaseApp = require('../helper/firebase');
 
 const getAllTrainers = (req, res) => {
-  trainers.find()
+  trainer.find()
     .then((data) => {
       if (data) {
         res.status(200).json({
-          message: 'This are all our trainers',
+          message: 'This are all our trainer',
           data,
         });
       }
@@ -20,7 +20,7 @@ const getAllTrainers = (req, res) => {
 const getTrainerById = (req, res) => {
   const { id } = req.params;
 
-  trainers.findById(id)
+  trainer.findById(id)
     .then((data) => {
       if (data) {
         res.status(200).json({
@@ -49,7 +49,7 @@ const updateTrainer = (req, res) => {
     firstName, lastName, dni, phone, email, city, salary, isActive,
   } = req.body;
 
-  trainers.findByIdAndUpdate(
+  trainer.findByIdAndUpdate(
     id,
     {
       firstName,
@@ -74,25 +74,43 @@ const updateTrainer = (req, res) => {
     .catch((error) => res.status(500).json(error));
 };
 
-const deleteTrainer = (req, res) => {
+const deleteTrainer = async (req, res) => {
   const { id } = req.params;
 
-  trainers.findByIdAndDelete(id)
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Trainer with the id: ${id} was not found, please try with another one`,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: `Trainer with the id: ${id} was successfully deleted.`,
+  try {
+    const existingTrainer = await trainer.findOne({ id });
+
+    if (existingTrainer) {
+      return res.status(404).json({
+        message: 'This Trainer does not exists',
+        data: null,
+        error: true,
       });
-    })
-    .catch((error) => res.status(500).json({
-      message: 'There was an mistake!',
-      error,
-    }));
+    }
+    const { firebaseUid } = existingTrainer;
+
+    await firebaseApp.auth().deleteUser(firebaseUid);
+
+    const result = await trainer.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Trainer with ID ${id} not found`,
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Trainer deleted!',
+      data: null,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Server Error',
+      data: null,
+      error: true,
+    });
+  }
 };
 
 const postTrainer = async (req, res) => {
@@ -102,7 +120,7 @@ const postTrainer = async (req, res) => {
 
   let firebaseUid;
   try {
-    const existingTrainer = await trainers.findOne({ email });
+    const existingTrainer = await trainer.findOne({ email });
 
     if (existingTrainer) {
       return res.status(400).json({
@@ -121,7 +139,7 @@ const postTrainer = async (req, res) => {
 
     await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'TRAINER' });
 
-    const result = await trainers.create({
+    const result = await trainer.create({
       firebaseUid,
       firstName,
       email,
@@ -142,7 +160,7 @@ const postTrainer = async (req, res) => {
     return res.status(500).json({
       message: 'Trainer cannot be created',
       data: null,
-      error: error.msg,
+      error: true,
     });
   }
 };

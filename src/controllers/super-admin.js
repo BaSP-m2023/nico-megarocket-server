@@ -1,30 +1,43 @@
 const superAdmin = require('../models/SuperAdmin');
 const firebaseApp = require('../helper/firebase');
 
-const deleteSuperAdmin = (req, res) => {
+const deleteSuperAdmin = async (req, res) => {
   const { id } = req.params;
 
-  superAdmin.findByIdAndDelete(id)
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `SuperAdmin with ID ${id} not found`,
-          data: null,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'SuperAdmin deleted!',
+  try {
+    const existingSuperAdmin = await superAdmin.findOne({ _id: id });
+
+    if (!existingSuperAdmin) {
+      return res.status(404).json({
+        message: 'This SuperAdmin does not exists',
         data: null,
-        error: false,
+        error: true,
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'An error ocurred',
-        error: error.msg,
+    }
+    const { firebaseUid } = existingSuperAdmin;
+
+    await firebaseApp.auth().deleteUser(firebaseUid);
+
+    const result = await superAdmin.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({
+        message: `SuperAdmin with ID ${id} not found`,
+        data: null,
+        error: true,
       });
+    }
+    return res.status(200).json({
+      message: 'SuperAdmin deleted!',
+      data: null,
+      error: false,
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Server Error',
+      data: null,
+      error: true,
+    });
+  }
 };
 
 const updateAdmin = (req, res) => {
@@ -77,7 +90,7 @@ const getAllSuperAdmin = (req, res) => {
 
 const createSuperAdmin = async (req, res) => {
   const {
-    firstName, email,
+    email,
   } = req.body;
 
   let firebaseUid;
@@ -103,17 +116,18 @@ const createSuperAdmin = async (req, res) => {
 
     const result = await superAdmin.create({
       firebaseUid,
-      firstName,
       email,
     });
     return res.status(201).json({
       message: 'Super Admin created',
-      result,
+      data: result,
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
       message: 'An error ocurred',
-      error: error.msg,
+      data: null,
+      error: true,
     });
   }
 };
@@ -132,6 +146,7 @@ const getSuperAdminById = (req, res) => {
       } else {
         res.status(404).json({
           message: 'Super Admin not found',
+          data: null,
           error: true,
         });
       }
@@ -139,6 +154,7 @@ const getSuperAdminById = (req, res) => {
     .catch((error) => {
       res.status(500).json({
         message: 'An error ocurred',
+        data: null,
         error: error.msg,
       });
     });

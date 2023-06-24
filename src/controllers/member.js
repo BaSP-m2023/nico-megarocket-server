@@ -65,7 +65,8 @@ const createMember = async (req, res) => {
     }
     return res.status(500).json({
       message: 'An error ocurred',
-      error,
+      data: null,
+      error: true,
     });
   }
 };
@@ -149,22 +150,41 @@ const getById = (req, res) => {
 };
 
 const deleteMember = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
+    const existingMember = await Member.findOne({ _id: id });
 
-    const memberExist = await Member.findById(id);
-
-    if (!memberExist) {
-      return res.status(404).send('ID was not found');
+    if (!existingMember) {
+      return res.status(404).json({
+        message: 'This Member does not exists',
+        data: null,
+        error: true,
+      });
     }
+    const { firebaseUid } = existingMember;
 
-    await Member.findByIdAndDelete(id);
+    await firebaseApp.auth().deleteUser(firebaseUid);
 
-    res.send('Member has been deleted');
+    const result = await Member.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Member with ID ${id} not found`,
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Member deleted!',
+      data: null,
+      error: false,
+    });
   } catch (error) {
-    res.status(500).send('Member could not be deleted');
+    return res.status(500).json({
+      message: true,
+      data: null,
+      error: true,
+    });
   }
-  return null;
 };
 
 module.exports = {

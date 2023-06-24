@@ -42,11 +42,6 @@ const adminsSchema = new Schema({
     maxLength: 10,
     required: true,
   },
-  password: {
-    type: String,
-    match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
-    required: true,
-  },
 });
 
 module.exports = mongoose.model('Admin', adminsSchema);
