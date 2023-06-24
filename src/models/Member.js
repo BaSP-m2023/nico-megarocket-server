@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const memberSchema = new Schema({
+  firebaseUid: {
+    type: String,
+    required: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -53,11 +57,11 @@ const memberSchema = new Schema({
   },
   isActive: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   membership: {
     type: String,
-    enum: ['Black', 'Classic', 'Only_classes'],
+    enum: ['Black', 'Classic', 'Only classes'],
     required: true,
   },
 });

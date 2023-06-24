@@ -1,4 +1,5 @@
 const trainers = require('../models/Trainer');
+const firebaseApp = require('../helper/firebase');
 
 const getAllTrainers = (req, res) => {
   trainers.find()
@@ -94,29 +95,56 @@ const deleteTrainer = (req, res) => {
     }));
 };
 
-const postTrainer = (req, res) => {
+const postTrainer = async (req, res) => {
   const {
     firstName, lastName, dni, phone, email, city, salary, isActive,
   } = req.body;
-  trainers.create({
-    firstName,
-    lastName,
-    dni,
-    phone,
-    email,
-    city,
-    salary,
-    isActive,
-  })
-    .then((result) => {
-      res.status(201).json(result);
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'Trainer cannot be created',
-        error,
+
+  let firebaseUid;
+  try {
+    const existingTrainer = await trainers.findOne({ email });
+
+    if (existingTrainer) {
+      return res.status(400).json({
+        message: 'This email is already used',
+        data: null,
+        error: true,
       });
+    }
+
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
     });
+
+    firebaseUid = newFirebaseUser.uid;
+
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'TRAINER' });
+
+    const result = await trainers.create({
+      firebaseUid,
+      firstName,
+      email,
+      lastName,
+      dni,
+      phone,
+      city,
+      salary,
+      isActive,
+    });
+
+    return res.status(201).json({
+      message: 'Trainer created',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Trainer cannot be created',
+      data: null,
+      error: error.msg,
+    });
+  }
 };
 
 module.exports = {

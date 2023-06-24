@@ -1,6 +1,7 @@
 const Member = require('../models/Member');
+const firebaseApp = require('../helper/firebase');
 
-const createMember = (req, res) => {
+const createMember = async (req, res) => {
   const {
     firstName,
     lastName,
@@ -14,7 +15,64 @@ const createMember = (req, res) => {
     membership,
   } = req.body;
 
-  Member.create({
+  let firebaseUid;
+
+  try {
+    const existingMember = await Member.findOne({ email });
+
+    if (existingMember) {
+      return res.status(400).json({
+        message: 'This email is already used',
+        data: null,
+        error: true,
+      });
+    }
+
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    firebaseUid = newFirebaseUser.uid;
+
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'MEMBER' });
+
+    const result = await Member.create({
+      firebaseUid,
+      firstName,
+      lastName,
+      dni,
+      birthday,
+      phone,
+      email,
+      city,
+      postalCode,
+      isActive,
+      membership,
+    });
+
+    return res.status(201).json({
+      message: 'Member created successfuly',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    if (error.message.includes('E11000 duplicate key error collection')) {
+      return res.status(400).json({
+        message: 'Email already exists',
+        error,
+      });
+    }
+    return res.status(500).json({
+      message: 'An error ocurred',
+      error,
+    });
+  }
+};
+
+const updateMember = (req, res) => {
+  const { id } = req.params;
+  const {
     firstName,
     lastName,
     dni,
@@ -25,30 +83,6 @@ const createMember = (req, res) => {
     postalCode,
     isActive,
     membership,
-  })
-    .then((result) => res.status(201).json({
-      message: 'Member created successfuly',
-      data: result,
-      error: false,
-    }))
-    .catch((error) => {
-      if (error.message.includes('E11000 duplicate key error collection')) {
-        return res.status(400).json({
-          message: 'Email already exists',
-          error,
-        });
-      }
-      return res.status(500).json({
-        message: 'An error ocurred',
-        error,
-      });
-    });
-};
-
-const updateMember = (req, res) => {
-  const { id } = req.params;
-  const {
-    firstName, lastName, dni, birthday, phone, email, city, postalCode, isActive, membership,
   } = req.body;
 
   Member.findByIdAndUpdate(

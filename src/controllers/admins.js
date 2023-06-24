@@ -1,4 +1,5 @@
 const Admin = require('../models/Admins');
+const firebaseApp = require('../helper/firebase');
 
 const updateAdmin = (req, res) => {
   const { id } = req.params;
@@ -40,29 +41,54 @@ const updateAdmin = (req, res) => {
     }));
 };
 
-const createAdmin = (req, res) => {
+const createAdmin = async (req, res) => {
   const {
-    firstName, lastName, dni, phone, email, city, password,
+    firstName, lastName, dni, phone, email, city,
   } = req.body;
-  Admin.create({
-    firstName,
-    lastName,
-    dni,
-    phone,
-    email,
-    city,
-    password,
-  })
-    .then((result) => res.status(201).json({
+
+  let firebaseUid;
+  try {
+    const existingAdmin = await Admin.findOne({ email });
+
+    if (existingAdmin) {
+      return res.status(400).json({
+        message: 'This email is already used',
+        data: null,
+        error: true,
+      });
+    }
+
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    firebaseUid = newFirebaseUser.uid;
+
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'ADMIN' });
+
+    const result = await Admin.create({
+      firebaseUid,
+      firstName,
+      lastName,
+      dni,
+      phone,
+      email,
+      city,
+    });
+
+    return res.status(201).json({
       message: 'Admin created',
       data: result,
       error: false,
-    }))
-    .catch((error) => res.status(500).json({
+    });
+  } catch (error) {
+    return res.status(500).json({
       message: error,
       data: null,
       error: true,
-    }));
+    });
+  }
 };
 const getAdmins = (req, res) => {
   Admin.find()

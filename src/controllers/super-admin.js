@@ -1,4 +1,5 @@
 const superAdmin = require('../models/SuperAdmin');
+const firebaseApp = require('../helper/firebase');
 
 const deleteSuperAdmin = (req, res) => {
   const { id } = req.params;
@@ -74,24 +75,47 @@ const getAllSuperAdmin = (req, res) => {
     });
 };
 
-const createSuperAdmin = (req, res) => {
+const createSuperAdmin = async (req, res) => {
   const {
-    email, password,
+    firstName, email,
   } = req.body;
-  superAdmin.create({
-    email,
-    password,
-  })
-    .then((result) => res.status(201).json({
+
+  let firebaseUid;
+  try {
+    const existingSuperAdmin = await superAdmin.findOne({ email });
+
+    if (existingSuperAdmin) {
+      return res.status(400).json({
+        message: 'This email is already used',
+        data: null,
+        error: true,
+      });
+    }
+
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    firebaseUid = newFirebaseUser.uid;
+
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'SUPER_ADMIN' });
+
+    const result = await superAdmin.create({
+      firebaseUid,
+      firstName,
+      email,
+    });
+    return res.status(201).json({
       message: 'Super Admin created',
       result,
-    }))
-    .catch((error) => {
-      res.status(500).json({
-        message: 'An error ocurred',
-        error: error.msg,
-      });
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'An error ocurred',
+      error: error.msg,
+    });
+  }
 };
 
 const getSuperAdminById = (req, res) => {
