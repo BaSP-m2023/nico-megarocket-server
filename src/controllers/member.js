@@ -60,7 +60,8 @@ const createMember = async (req, res) => {
     if (error.message.includes('E11000 duplicate key error collection')) {
       return res.status(400).json({
         message: 'Email already exists',
-        error,
+        data: null,
+        error: true,
       });
     }
     return res.status(500).json({
@@ -139,36 +140,40 @@ const updateMember = async (req, res) => {
 
 const getAllMembers = (req, res) => {
   Member.find()
-    .then((members) => res.status(200).json({
+    .then((result) => res.status(200).json({
       message: 'Members list',
-      data: members,
+      data: result,
       error: false,
     }))
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
-      error,
+      message: error,
+      data: null,
+      error: true,
     }));
 };
 
 const getById = (req, res) => {
   const { id } = req.params;
   Member.findById(id)
-    .then((member) => {
-      if (member) {
+    .then((result) => {
+      if (result) {
         res.status(200).json({
           message: 'Member found',
-          data: member,
+          data: result,
           error: false,
         });
       } else {
         res.status(404).json({
           message: 'Member not found',
+          data: null,
+          error: true,
         });
       }
     })
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
-      error,
+      message: error,
+      data: null,
+      error: true,
     }));
 };
 
