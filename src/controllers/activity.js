@@ -1,129 +1,135 @@
 const activity = require('../models/Activity');
 
-const getAllActivities = (req, res) => {
-  activity.find()
-    .then((activities) => {
-      res.status(200).json({
-        message: 'here is the activities list',
-        data: activities,
-        error: false,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'there is an error here',
-        data: null,
-        error,
-      });
-    });
-};
-const getActivityById = (req, res) => {
-  const Id = req.params.id;
-  activity.findById(Id, 'name description')
-    .then((result) => {
-      if (result) {
-        res.status(200).json({
-          message: `Activity ${result.name} was found`,
-          data: result,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'activity not found',
-          data: null,
-          error: true,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'there is an error here',
-        error,
-      });
-    });
-};
+const getAllActivities = async (req, res) => {
+  try {
+    const activities = await activity.find();
 
-const createActivity = (req, res) => {
-  const { name, isActive, description } = req.body;
-  activity.create({
-    name,
-    isActive,
-    description,
-  })
-    .then((result) => {
-      res.status(201).json({
-        message: 'Activity Created',
+    return res.status(200).json({
+      message: 'here is the activities list',
+      data: activities,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
+      data: null,
+      error,
+    });
+  }
+};
+const getActivityById = async (req, res) => {
+  const Id = req.params.id;
+
+  try {
+    const result = await activity.findById(Id);
+
+    if (result) {
+      return res.status(200).json({
+        message: 'Activity was found',
         data: result,
         error: false,
       });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'it cannot be created',
-        data: null,
-        error,
-      });
+    }
+    return res.status(404).json({
+      message: 'activity not found',
+      data: null,
+      error: true,
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
+      error,
+    });
+  }
 };
 
-const updateActivity = (req, res) => {
+const createActivity = async (req, res) => {
+  const { name, isActive, description } = req.body;
+
+  try {
+    const result = await activity.create({
+      name,
+      isActive,
+      description,
+    });
+
+    return res.status(201).json({
+      message: 'Activity Created',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'it cannot be created',
+      data: null,
+      error,
+    });
+  }
+};
+
+const updateActivity = async (req, res) => {
   const { id } = req.params;
   const {
     name, description, isActive,
   } = req.body;
 
-  activity.findByIdAndUpdate(
-    id,
-    {
-      name,
-      description,
-      isActive,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Activity with the id: ${id} was not found, please try with another one`,
-          data: null,
-          error: true,
-        });
-      }
-      return res.status(201).json({
-        message: 'Activity Updated',
-        data: result,
-        error: false,
+  try {
+    const result = await activity.findByIdAndUpdate(
+      id,
+      {
+        name,
+        description,
+        isActive,
+      },
+      { new: true },
+    );
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Activity with the id: ${id} was not found, please try with another one`,
+        data: null,
+        error: true,
       });
-    })
-    .catch((error) => res.status(500).json({
+    }
+    return res.status(201).json({
+      message: 'Activity Updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
       message: 'Error updating Activity',
       data: null,
       error,
-    }));
+    });
+  }
 };
 
-const deleteActivity = (req, res) => {
+const deleteActivity = async (req, res) => {
   const { id } = req.params;
-  activity.findByIdAndDelete(id)
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Activity with the id: ${id} was not found, please try with another one`,
-          data: null,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Activity deleted.',
+
+  try {
+    const result = await activity.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({
+        message: `Activity with the id: ${id} was not found, please try with another one`,
         data: null,
-        error: false,
+        error: true,
       });
-    })
-    .catch((error) => res.status(500).json({
+    }
+    return res.status(200).json({
+      message: 'Activity deleted.',
+      data: null,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
       message: 'Oops! There was an error!',
       data: null,
       error,
-    }));
+    });
+  }
 };
 
 module.exports = {

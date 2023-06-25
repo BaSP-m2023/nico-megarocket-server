@@ -137,39 +137,48 @@ const updateMember = async (req, res) => {
   }
 };
 
-const getAllMembers = (req, res) => {
-  Member.find()
-    .then((members) => res.status(200).json({
-      message: 'Complete members list',
+const getAllMembers = async (req, res) => {
+  try {
+    const members = await Member.find();
+
+    return res.status(200).json({
+      message: 'here is the members list',
       data: members,
       error: false,
-    }))
-    .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
+      data: null,
       error,
-    }));
+    });
+  }
 };
 
-const getById = (req, res) => {
+const getById = async (req, res) => {
   const { id } = req.params;
-  Member.findById(id)
-    .then((member) => {
-      if (member) {
-        res.status(200).json({
-          message: 'Member found!',
-          data: member,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'Member not found',
-        });
-      }
-    })
-    .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
+
+  try {
+    const result = await Member.findById(id);
+
+    if (result) {
+      return res.status(200).json({
+        message: `Member ${result.name} was found`,
+        data: result,
+        error: false,
+      });
+    }
+    return res.status(404).json({
+      message: 'Member not found',
+      data: null,
+      error: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
       error,
-    }));
+    });
+  }
 };
 
 const deleteMember = async (req, res) => {

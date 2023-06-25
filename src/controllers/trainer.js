@@ -1,46 +1,48 @@
 const trainer = require('../models/Trainer');
 const firebaseApp = require('../helper/firebase');
 
-const getAllTrainers = (req, res) => {
-  trainer.find()
-    .then((data) => {
-      if (data) {
-        res.status(200).json({
-          message: 'This are all our trainer',
-          data,
-        });
-      }
-    })
-    .catch((error) => res.status(404).json({
-      message: 'Error, a problem has occurred',
+const getAllTrainers = async (req, res) => {
+  try {
+    const trainers = await trainer.find();
+
+    return res.status(200).json({
+      message: 'here is the trainers list',
+      data: trainers,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
+      data: null,
       error,
-    }));
+    });
+  }
 };
 
-const getTrainerById = (req, res) => {
+const getTrainerById = async (req, res) => {
   const { id } = req.params;
 
-  trainer.findById(id)
-    .then((data) => {
-      if (data) {
-        res.status(200).json({
-          message: 'Trainer Found',
-          data,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'Trainer not found',
-          error: true,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'An error ocurred',
-        error: error.msg,
+  try {
+    const result = await trainer.findById(id);
+
+    if (result) {
+      return res.status(200).json({
+        message: 'Trainer was found',
+        data: result,
+        error: false,
       });
+    }
+    return res.status(404).json({
+      message: 'Trainer not found',
+      data: null,
+      error: true,
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
+      error,
+    });
+  }
 };
 
 const updateTrainer = async (req, res) => {

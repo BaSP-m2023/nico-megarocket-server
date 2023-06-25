@@ -103,43 +103,47 @@ const createAdmin = async (req, res) => {
     });
   }
 };
-const getAdmins = (req, res) => {
-  Admin.find()
-    .then((admins) => res.status(200).json({
-      message: 'Obtained all the admins from the list.',
+const getAdmins = async (req, res) => {
+  try {
+    const admins = await Admin.find();
+
+    return res.status(200).json({
+      message: 'here is the admins list',
       data: admins,
       error: false,
-    }))
-    .catch((error) => res.status(500).json({
-      message: error,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
       data: null,
-      error: true,
-    }));
+      error,
+    });
+  }
 };
 
-const getAdminsById = (req, res) => {
+const getAdminsById = async (req, res) => {
   const { id } = req.params;
-  Admin.findById(id)
-    .then((admin) => {
-      if (admin) {
-        res.status(200).json({
-          message: 'Admin found',
-          data: admin,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'Admin not found',
-          data: null,
-          error: true,
-        });
-      }
-    })
-    .catch((error) => res.status(500).json({
-      message: error,
+  try {
+    const result = await Admin.findById(id);
+
+    if (result) {
+      return res.status(200).json({
+        message: 'Admin was found',
+        data: result,
+        error: false,
+      });
+    }
+    return res.status(404).json({
+      message: 'Admin not found',
       data: null,
       error: true,
-    }));
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
+      error,
+    });
+  }
 };
 
 const deleteAdmin = async (req, res) => {

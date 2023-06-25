@@ -86,22 +86,22 @@ const updateAdmin = async (req, res) => {
   }
 };
 
-const getAllSuperAdmin = (req, res) => {
-  superAdmin.find()
-    .then((data) => {
-      if (data) {
-        res.status(200).json({
-          message: 'This are all the super admin',
-          data,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'An error ocurred',
-        error: error.msg,
-      });
+const getAllSuperAdmin = async (req, res) => {
+  try {
+    const superAdmins = await superAdmin.find();
+
+    return res.status(200).json({
+      message: 'here is the Super-Admins list',
+      data: superAdmins,
+      error: false,
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
+      data: null,
+      error,
+    });
+  }
 };
 
 const createSuperAdmin = async (req, res) => {
@@ -148,32 +148,30 @@ const createSuperAdmin = async (req, res) => {
   }
 };
 
-const getSuperAdminById = (req, res) => {
+const getSuperAdminById = async (req, res) => {
   const { id } = req.params;
 
-  superAdmin.findById(id)
-    .then((data) => {
-      if (data) {
-        res.status(200).json({
-          message: 'Super Admin Found',
-          data,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'Super Admin not found',
-          data: null,
-          error: true,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'An error ocurred',
-        data: null,
-        error: error.msg,
+  try {
+    const result = await superAdmin.findById(id);
+
+    if (result) {
+      return res.status(200).json({
+        message: 'Super-Admin was found',
+        data: result,
+        error: false,
       });
+    }
+    return res.status(404).json({
+      message: 'Super-Admin not found',
+      data: null,
+      error: true,
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'there is an error here',
+      error,
+    });
+  }
 };
 
 module.exports = {
