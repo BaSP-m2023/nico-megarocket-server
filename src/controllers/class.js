@@ -7,7 +7,7 @@ const getClasses = async (req, res) => {
       .populate('activity');
 
     return res.status(200).json({
-      message: 'here is the classes list',
+      message: 'Classes list',
       data: allClasses,
       error: false,
     });
@@ -30,7 +30,7 @@ const getClassById = async (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: 'Class was found',
+        message: 'Class found',
         data: result,
         error: false,
       });
@@ -42,8 +42,9 @@ const getClassById = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
-      error,
+      message: error,
+      data: null,
+      error: true,
     });
   }
 };
@@ -72,7 +73,7 @@ const updateClass = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `Class with the id: ${id} was not found, please try with another one`,
+        message: 'Class not found',
         data: null,
         error: true,
       });
@@ -84,9 +85,9 @@ const updateClass = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error updating Class',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -99,7 +100,7 @@ const deleteClass = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `Class with the id: ${id} was not found, please try with another one`,
+        message: 'Class not found',
         data: null,
         error: true,
       });
@@ -111,9 +112,9 @@ const deleteClass = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Oops! There was an error!',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };

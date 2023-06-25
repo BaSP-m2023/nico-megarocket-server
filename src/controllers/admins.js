@@ -12,7 +12,7 @@ const updateAdmin = async (req, res) => {
 
     if (!existingAdmin) {
       return res.status(404).json({
-        message: 'This Admin does not exists',
+        message: 'Admin not found',
         data: null,
         error: true,
       });
@@ -35,7 +35,7 @@ const updateAdmin = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `The id ${id} was not found`,
+        message: 'Admin not found',
         data: null,
         error: true,
       });
@@ -65,7 +65,7 @@ const createAdmin = async (req, res) => {
 
     if (existingAdmin) {
       return res.status(400).json({
-        message: 'This email is already used',
+        message: 'Email already exists',
         data: null,
         error: true,
       });
@@ -105,11 +105,11 @@ const createAdmin = async (req, res) => {
 };
 const getAdmins = async (req, res) => {
   try {
-    const admins = await Admin.find();
+    const result = await Admin.find();
 
     return res.status(200).json({
-      message: 'here is the admins list',
-      data: admins,
+      message: 'Admins list',
+      data: result,
       error: false,
     });
   } catch (error) {
@@ -128,7 +128,7 @@ const getAdminsById = async (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: 'Admin was found',
+        message: 'Admin found',
         data: result,
         error: false,
       });
@@ -140,8 +140,9 @@ const getAdminsById = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
-      error,
+      message: error,
+      data: null,
+      error: true,
     });
   }
 };
@@ -153,7 +154,7 @@ const deleteAdmin = async (req, res) => {
 
     if (!existingAdmin) {
       return res.status(404).json({
-        message: 'This Admin does not exists',
+        message: 'Admin not found',
         data: null,
         error: true,
       });
@@ -165,19 +166,19 @@ const deleteAdmin = async (req, res) => {
     const result = await Admin.findByIdAndDelete(id);
     if (!result) {
       return res.status(404).json({
-        message: `Admin with ID ${id} not found`,
+        message: 'Admin not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Admin deleted!',
+      message: 'Admin deleted',
       data: null,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server Error',
+      message: error,
       data: null,
       error: true,
     });

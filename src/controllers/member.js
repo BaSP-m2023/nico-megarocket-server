@@ -22,7 +22,7 @@ const createMember = async (req, res) => {
 
     if (existingMember) {
       return res.status(400).json({
-        message: 'This email is already used',
+        message: 'Email already exists',
         data: null,
         error: true,
       });
@@ -52,7 +52,7 @@ const createMember = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Member created successfuly',
+      message: 'Member created',
       data: result,
       error: false,
     });
@@ -91,7 +91,7 @@ const updateMember = async (req, res) => {
 
     if (!existingMember) {
       return res.status(404).json({
-        message: 'This Member does not exists',
+        message: 'Member not found',
         data: null,
         error: true,
       });
@@ -118,13 +118,13 @@ const updateMember = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `The id ${id} was not found`,
+        message: 'Member not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Member Updated',
+      message: 'Member updated',
       data: result,
       error: false,
     });
@@ -142,15 +142,15 @@ const getAllMembers = async (req, res) => {
     const members = await Member.find();
 
     return res.status(200).json({
-      message: 'here is the members list',
+      message: 'Members list',
       data: members,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -163,7 +163,7 @@ const getById = async (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: `Member ${result.name} was found`,
+        message: 'Member found',
         data: result,
         error: false,
       });
@@ -175,8 +175,9 @@ const getById = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
-      error,
+      message: error,
+      data: null,
+      error: true,
     });
   }
 };
@@ -188,7 +189,7 @@ const deleteMember = async (req, res) => {
 
     if (!existingMember) {
       return res.status(404).json({
-        message: 'This Member does not exists',
+        message: 'Member not found',
         data: null,
         error: true,
       });
@@ -200,13 +201,13 @@ const deleteMember = async (req, res) => {
     const result = await Member.findByIdAndDelete(id);
     if (!result) {
       return res.status(404).json({
-        message: `Member with ID ${id} not found`,
+        message: 'Member not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Member deleted!',
+      message: 'Member deleted',
       data: null,
       error: false,
     });

@@ -6,15 +6,15 @@ const getAllTrainers = async (req, res) => {
     const trainers = await trainer.find();
 
     return res.status(200).json({
-      message: 'here is the trainers list',
+      message: 'Trainers list',
       data: trainers,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -27,7 +27,7 @@ const getTrainerById = async (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: 'Trainer was found',
+        message: 'Trainer found',
         data: result,
         error: false,
       });
@@ -39,8 +39,9 @@ const getTrainerById = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
-      error,
+      message: error,
+      data: null,
+      error: true,
     });
   }
 };
@@ -56,7 +57,7 @@ const updateTrainer = async (req, res) => {
 
     if (!existingTrainer) {
       return res.status(404).json({
-        message: 'This Trainer does not exists',
+        message: 'Trainer not found',
         data: null,
         error: true,
       });
@@ -81,13 +82,13 @@ const updateTrainer = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `The id ${id} was not found`,
+        message: 'Trainer not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Trainer Updated',
+      message: 'Trainer updated',
       data: result,
       error: false,
     });
@@ -108,7 +109,7 @@ const deleteTrainer = async (req, res) => {
 
     if (existingTrainer) {
       return res.status(404).json({
-        message: 'This Trainer does not exists',
+        message: 'Trainer not found',
         data: null,
         error: true,
       });
@@ -120,19 +121,19 @@ const deleteTrainer = async (req, res) => {
     const result = await trainer.findByIdAndDelete(id);
     if (!result) {
       return res.status(404).json({
-        message: `Trainer with ID ${id} not found`,
+        message: 'Trainer not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Trainer deleted!',
+      message: 'Trainer deleted',
       data: null,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server Error',
+      message: error,
       data: null,
       error: true,
     });
@@ -150,7 +151,7 @@ const postTrainer = async (req, res) => {
 
     if (existingTrainer) {
       return res.status(400).json({
-        message: 'This email is already used',
+        message: 'Email already exists',
         data: null,
         error: true,
       });

@@ -17,9 +17,9 @@ const createSubscription = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'it cannot be created',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -41,7 +41,7 @@ const updateSubscription = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `Subscription with the id: ${id} was not found, please try with another one`,
+        message: 'Subscription not found',
         data: null,
         error: true,
       });
@@ -53,9 +53,9 @@ const updateSubscription = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error updating Subscription',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -67,15 +67,15 @@ const getAllSubscriptions = async (req, res) => {
       .populate('members');
 
     return res.status(200).json({
-      message: 'here is the subscription list',
+      message: 'Subscription list',
       data: allClasses,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -90,7 +90,7 @@ const getSubscriptionById = async (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: 'Subscription was found',
+        message: 'Subscription found',
         data: result,
         error: false,
       });
@@ -102,8 +102,9 @@ const getSubscriptionById = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
-      error,
+      message: error,
+      data: null,
+      error: true,
     });
   }
 };
@@ -116,7 +117,7 @@ const deleteSubscription = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `Subscription with the id: ${id} was not found, please try with another one`,
+        message: 'Subscription not found',
         data: null,
         error: true,
       });
@@ -128,9 +129,9 @@ const deleteSubscription = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Oops! There was an error!',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };

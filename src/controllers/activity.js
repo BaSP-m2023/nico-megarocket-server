@@ -5,15 +5,15 @@ const getAllActivities = async (req, res) => {
     const activities = await activity.find();
 
     return res.status(200).json({
-      message: 'here is the activities list',
+      message: 'Activities list',
       data: activities,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -25,13 +25,13 @@ const getActivityById = async (req, res) => {
 
     if (result) {
       return res.status(200).json({
-        message: 'Activity was found',
+        message: 'Activity found',
         data: result,
         error: false,
       });
     }
     return res.status(404).json({
-      message: 'activity not found',
+      message: 'Activity not found',
       data: null,
       error: true,
     });
@@ -60,9 +60,9 @@ const createActivity = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'it cannot be created',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -86,21 +86,21 @@ const updateActivity = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `Activity with the id: ${id} was not found, please try with another one`,
+        message: 'Activity not found',
         data: null,
         error: true,
       });
     }
-    return res.status(201).json({
+    return res.status(200).json({
       message: 'Activity Updated',
       data: result,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error updating Activity',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -113,7 +113,7 @@ const deleteActivity = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `Activity with the id: ${id} was not found, please try with another one`,
+        message: 'Activity not found',
         data: null,
         error: true,
       });
@@ -125,9 +125,9 @@ const deleteActivity = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Oops! There was an error!',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
