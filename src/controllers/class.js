@@ -4,17 +4,19 @@ const getClasses = (req, res) => {
   classes.find()
     .populate('trainer')
     .populate('activity')
-    .then((data) => {
-      if (data) {
+    .then((result) => {
+      if (result) {
         res.status(200).json({
           message: 'Classes list',
-          data,
+          data: result,
+          error: false,
         });
       }
     })
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
-      error,
+      message: error,
+      data: null,
+      error: true,
     }));
 };
 
@@ -24,24 +26,26 @@ const getClassById = (req, res) => {
   classes.findById(id)
     .populate('trainer')
     .populate('activity')
-    .then((data) => {
-      if (data) {
+    .then((result) => {
+      if (result) {
         res.status(200).json({
           message: 'Class found',
-          data,
+          data: result,
           error: false,
         });
       } else {
         res.status(404).json({
           message: 'Class not found',
+          data: null,
           error: true,
         });
       }
     })
     .catch((error) => {
-      res.status(400).json({
-        message: 'An error ocurred',
-        error: error.msg,
+      res.status(500).json({
+        message: error,
+        data: null,
+        error: true,
       });
     });
 };
@@ -71,18 +75,21 @@ const updateClass = (req, res) => {
       if (result) {
         res.status(201).json({
           message: 'Class updated',
-          result,
+          data: result,
           error: false,
         });
       } else {
         res.status(404).json({
           message: 'Class not found',
+          data: null,
+          error: true,
         });
       }
     })
     .catch((error) => res.status(500).json({
-      message: 'An error ocurred',
-      error,
+      message: error,
+      data: null,
+      error: true,
     }));
 };
 
@@ -99,12 +106,15 @@ const deleteClass = (req, res) => {
       } else {
         res.status(404).json({
           message: 'Class not found',
+          data: null,
+          error: true,
         });
       }
     })
     .catch((error) => res.status(500).json({
-      message: 'Error in the request',
-      error,
+      message: error,
+      data: null,
+      error: false,
     }));
 };
 
@@ -120,17 +130,18 @@ const createClass = (req, res) => {
     activity,
     slots,
   })
-    .then((data) => {
+    .then((result) => {
       res.status(201).json({
         message: 'Class created',
-        data,
+        data: result,
         error: false,
       });
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'An error ocurred',
-        error,
+        message: error,
+        data: null,
+        error: true,
       });
     });
 };
