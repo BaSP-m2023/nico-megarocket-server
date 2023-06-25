@@ -1,11 +1,11 @@
-import firebaseApp from '../helper/firebase';
+const firebaseApp = require('../helper/firebase');
 
 const verifyToken = async (req, res, next) => {
   const { token } = req.headers;
   if (!token) {
     return res.status(400).json({
       message: 'Provide a Token',
-      data: undefined,
+      data: null,
       error: true,
     });
   }
@@ -16,10 +16,10 @@ const verifyToken = async (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       message: error.toString(),
-      data: undefined,
+      data: null,
       error: true,
     });
   }
 };
 
-export default { verifyToken };
+module.exports = verifyToken;
