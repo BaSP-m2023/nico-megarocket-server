@@ -10,7 +10,7 @@ const validateCreation = (req, res, next) => {
   const validation = activityValidation.validate(req.body);
   if (!validation.error) return next();
   return res.status(400).json({
-    message: `error, there is something wrong ${validation.error.details[0].message}`,
+    message: `There was an error: ${validation.error.details[0].message}`,
     data: undefined,
     error: true,
   });

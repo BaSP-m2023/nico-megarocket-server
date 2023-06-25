@@ -26,7 +26,7 @@ const getAuth = async (req, res) => {
     const superAdmin = await SuperAdmin.findOne({ firebaseUid: req.headers.firebaseUid });
     if (superAdmin) {
       return res.status(201).json({
-        message: 'SuperAdmin found',
+        message: 'Super Admin found',
         data: superAdmin,
         error: false,
       });

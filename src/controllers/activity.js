@@ -2,18 +2,18 @@ const activity = require('../models/Activity');
 
 const getAllActivities = (req, res) => {
   activity.find()
-    .then((activities) => {
+    .then((result) => {
       res.status(200).json({
-        message: 'here is the activities list',
-        data: activities,
+        message: 'Activities list',
+        data: result,
         error: false,
       });
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'there is an error here',
+        message: error,
         data: null,
-        error,
+        error: true,
       });
     });
 };
@@ -23,13 +23,13 @@ const getActivityById = (req, res) => {
     .then((result) => {
       if (result) {
         res.status(200).json({
-          message: `Activity ${result.name} was found`,
+          message: 'Activity found',
           data: result,
           error: false,
         });
       } else {
         res.status(404).json({
-          message: 'activity not found',
+          message: 'Activity not found',
           data: null,
           error: true,
         });
@@ -37,8 +37,9 @@ const getActivityById = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'there is an error here',
-        error,
+        message: error,
+        data: null,
+        error: true,
       });
     });
 };
@@ -52,16 +53,16 @@ const createActivity = (req, res) => {
   })
     .then((result) => {
       res.status(201).json({
-        message: 'Activity Created',
+        message: 'Activity created',
         data: result,
         error: false,
       });
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'it cannot be created',
+        message: error,
         data: null,
-        error,
+        error: true,
       });
     });
 };
@@ -84,21 +85,21 @@ const updateActivity = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Activity with the id: ${id} was not found, please try with another one`,
+          message: 'Activity not found',
           data: null,
           error: true,
         });
       }
       return res.status(201).json({
-        message: 'Activity Updated',
+        message: 'Activity updated',
         data: result,
         error: false,
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'Error updating Activity',
+      message: error,
       data: null,
-      error,
+      error: true,
     }));
 };
 
@@ -108,21 +109,21 @@ const deleteActivity = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Activity with the id: ${id} was not found, please try with another one`,
+          message: 'Activity not found',
           data: null,
           error: true,
         });
       }
       return res.status(200).json({
-        message: 'Activity deleted.',
+        message: 'Activity deleted',
         data: null,
         error: false,
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'Oops! There was an error!',
+      message: error,
       data: null,
-      error,
+      error: true,
     }));
 };
 

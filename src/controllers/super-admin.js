@@ -9,7 +9,7 @@ const deleteSuperAdmin = async (req, res) => {
 
     if (!existingSuperAdmin) {
       return res.status(404).json({
-        message: 'This SuperAdmin does not exists',
+        message: 'Super Admin not found',
         data: null,
         error: true,
       });
@@ -21,19 +21,19 @@ const deleteSuperAdmin = async (req, res) => {
     const result = await superAdmin.findByIdAndDelete(id);
     if (!result) {
       return res.status(404).json({
-        message: `SuperAdmin with ID ${id} not found`,
+        message: 'Super Admin not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'SuperAdmin deleted!',
+      message: 'Super Admin deleted',
       data: null,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Server Error',
+      message: error,
       data: null,
       error: true,
     });
@@ -51,7 +51,7 @@ const updateAdmin = async (req, res) => {
 
     if (!existingSuperAdmin) {
       return res.status(404).json({
-        message: 'This SuperAdmin does not exists',
+        message: 'Super Admin not found',
         data: null,
         error: true,
       });
@@ -67,13 +67,13 @@ const updateAdmin = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `The id ${id} was not found`,
+        message: 'Super Admin not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'SuperAdmin Updated',
+      message: 'Super Admin Updated',
       data: result,
       error: false,
     });
@@ -88,18 +88,20 @@ const updateAdmin = async (req, res) => {
 
 const getAllSuperAdmin = (req, res) => {
   superAdmin.find()
-    .then((data) => {
-      if (data) {
+    .then((result) => {
+      if (result) {
         res.status(200).json({
-          message: 'This are all the super admin',
-          data,
+          message: 'Super Admins list',
+          data: result,
+          error: false,
         });
       }
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'An error ocurred',
-        error: error.msg,
+        message: error,
+        data: null,
+        error: true,
       });
     });
 };
@@ -115,7 +117,7 @@ const createSuperAdmin = async (req, res) => {
 
     if (existingSuperAdmin) {
       return res.status(400).json({
-        message: 'This email is already used',
+        message: 'Email already exists',
         data: null,
         error: true,
       });
@@ -152,11 +154,11 @@ const getSuperAdminById = (req, res) => {
   const { id } = req.params;
 
   superAdmin.findById(id)
-    .then((data) => {
-      if (data) {
+    .then((result) => {
+      if (result) {
         res.status(200).json({
-          message: 'Super Admin Found',
-          data,
+          message: 'Super Admin found',
+          data: result,
           error: false,
         });
       } else {
@@ -169,9 +171,9 @@ const getSuperAdminById = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'An error ocurred',
+        message: error,
         data: null,
-        error: error.msg,
+        error: true,
       });
     });
 };

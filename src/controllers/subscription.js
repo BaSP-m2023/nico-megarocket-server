@@ -11,11 +11,13 @@ const createSubscription = (req, res) => {
   })
     .then((result) => res.status(201).json({
       message: 'Subscription created',
-      result,
+      data: result,
+      error: false,
     }))
     .catch((error) => res.status(500).json({
-      message: 'Error ocurred',
-      error,
+      message: error,
+      data: null,
+      error: true,
     }));
 };
 
@@ -37,18 +39,21 @@ const updateSubscription = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Subscription with the id: ${id} was not found, please try with another one`,
+          message: 'Subscription not found',
+          data: null,
           error: true,
         });
       }
-      return res.status(200).json({
-        message: 'Subscription updated successfully',
-        result,
+      return res.status(201).json({
+        message: 'Subscription updated',
+        data: result,
+        error: true,
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'Error updating suscription',
-      error,
+      message: error,
+      data: null,
+      error: true,
     }));
 };
 
@@ -56,17 +61,18 @@ const getAllSubscriptions = (req, res) => {
   subscription.find()
     .populate('members')
     .populate('classId')
-    .then((subscriptions) => {
+    .then((result) => {
       res.status(200).json({
-        message: 'here is the subscriptions list',
-        data: subscriptions,
+        message: 'Subscriptions list',
+        data: result,
         error: false,
       });
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'there is an error here',
-        error,
+        message: error,
+        data: null,
+        error: true,
       });
     });
 };
@@ -76,24 +82,26 @@ const getSubscriptionById = (req, res) => {
   subscription.findById(Id)
     .populate('members')
     .populate('classId')
-    .then((subscriptions) => {
-      if (subscriptions) {
+    .then((result) => {
+      if (result) {
         res.status(200).json({
-          message: `subscription ${subscriptions.name} was found`,
-          data: subscriptions,
+          message: 'Subscription found',
+          data: result,
           error: false,
         });
       } else {
         res.status(404).json({
-          message: 'subscription not found',
+          message: 'Subscription not found',
+          data: null,
           error: true,
         });
       }
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'There was an error',
-        error,
+        message: error,
+        data: null,
+        error: true,
       });
     });
 };
@@ -106,17 +114,21 @@ const deleteSubscription = (req, res) => {
     .then((result) => {
       if (!result) {
         return res.status(404).json({
-          message: `Subscription with the id: ${id} was not found, please try with another one`,
+          message: 'Subscription not found',
+          data: null,
           error: true,
         });
       }
       return res.status(200).json({
-        message: `Subscription with the id: ${id} was successfully deleted.`,
+        message: 'Subscription deleted',
+        data: null,
+        error: false,
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'Oops! There was an error!',
-      error,
+      message: error,
+      data: null,
+      error: true,
     }));
 };
 

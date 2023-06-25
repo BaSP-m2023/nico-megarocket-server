@@ -22,7 +22,7 @@ const createMember = async (req, res) => {
 
     if (existingMember) {
       return res.status(400).json({
-        message: 'This email is already used',
+        message: 'Email already exists',
         data: null,
         error: true,
       });
@@ -52,7 +52,7 @@ const createMember = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: 'Member created successfuly',
+      message: 'Member created',
       data: result,
       error: false,
     });
@@ -91,7 +91,7 @@ const updateMember = async (req, res) => {
 
     if (!existingMember) {
       return res.status(404).json({
-        message: 'This Member does not exists',
+        message: 'Member not found',
         data: null,
         error: true,
       });
@@ -118,13 +118,13 @@ const updateMember = async (req, res) => {
 
     if (!result) {
       return res.status(404).json({
-        message: `The id ${id} was not found`,
+        message: 'Member not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Member Updated',
+      message: 'Member updated',
       data: result,
       error: false,
     });
@@ -140,7 +140,7 @@ const updateMember = async (req, res) => {
 const getAllMembers = (req, res) => {
   Member.find()
     .then((members) => res.status(200).json({
-      message: 'Complete members list',
+      message: 'Members list',
       data: members,
       error: false,
     }))
@@ -156,7 +156,7 @@ const getById = (req, res) => {
     .then((member) => {
       if (member) {
         res.status(200).json({
-          message: 'Member found!',
+          message: 'Member found',
           data: member,
           error: false,
         });
@@ -179,7 +179,7 @@ const deleteMember = async (req, res) => {
 
     if (!existingMember) {
       return res.status(404).json({
-        message: 'This Member does not exists',
+        message: 'Member not found',
         data: null,
         error: true,
       });
@@ -191,13 +191,13 @@ const deleteMember = async (req, res) => {
     const result = await Member.findByIdAndDelete(id);
     if (!result) {
       return res.status(404).json({
-        message: `Member with ID ${id} not found`,
+        message: 'Member not found',
         data: null,
         error: true,
       });
     }
     return res.status(200).json({
-      message: 'Member deleted!',
+      message: 'Member deleted',
       data: null,
       error: false,
     });
