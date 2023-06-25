@@ -15,6 +15,13 @@ const validateUpdate = (req, res, next) => {
     city: Joi.string().min(5).max(25),
     salary: Joi.number(),
     isActive: Joi.boolean(),
+    password: Joi.string()
+      .min(8)
+      .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+      .messages({
+        'string.pattern.base':
+        'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
+      }),
   });
   const validation = trainerValidation.validate(req.body);
 
@@ -45,6 +52,14 @@ const validateCreation = (req, res, next) => {
     city: Joi.string().required().min(3).max(15),
     salary: Joi.number().required(),
     isActive: Joi.boolean(),
+    password: Joi.string()
+      .min(8)
+      .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+      .required()
+      .messages({
+        'string.pattern.base':
+      'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
+      }),
   });
 
   const validation = trainerValidation.validate(req.body);

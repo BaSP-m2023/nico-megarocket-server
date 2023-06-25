@@ -2,18 +2,18 @@ const activity = require('../models/Activity');
 
 const getAllActivities = (req, res) => {
   activity.find()
-    .then((activities) => {
+    .then((result) => {
       res.status(200).json({
         message: 'Activities list',
-        data: activities,
+        data: result,
         error: false,
       });
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'there is an error here',
+        message: error,
         data: null,
-        error,
+        error: true,
       });
     });
 };
@@ -37,8 +37,9 @@ const getActivityById = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'there is an error here',
-        error,
+        message: error,
+        data: null,
+        error: true,
       });
     });
 };
@@ -59,9 +60,9 @@ const createActivity = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: 'it cannot be created',
+        message: error,
         data: null,
-        error,
+        error: true,
       });
     });
 };
@@ -96,9 +97,9 @@ const updateActivity = (req, res) => {
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'Error updating Activity',
+      message: error,
       data: null,
-      error,
+      error: true,
     }));
 };
 
@@ -120,9 +121,9 @@ const deleteActivity = (req, res) => {
       });
     })
     .catch((error) => res.status(500).json({
-      message: 'Oops! There was an error!',
+      message: error,
       data: null,
-      error,
+      error: true,
     }));
 };
 

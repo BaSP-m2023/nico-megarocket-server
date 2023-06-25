@@ -38,6 +38,13 @@ const validateCreation = (req, res, next) => {
         'number.min': 'Postal code must be at least 4 digits',
         'number.max': 'Postal code must be at most 5 digits',
       }),
+    password: Joi.string()
+      .min(8)
+      .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+      .messages({
+        'string.pattern.base':
+          'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
+      }),
     isActive: Joi.boolean()
       .required(),
     membership: Joi.string()

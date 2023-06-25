@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const adminsSchema = new Schema({
+  firebaseUid: {
+    type: String,
+    required: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -36,11 +40,6 @@ const adminsSchema = new Schema({
     type: String,
     minLength: 2,
     maxLength: 10,
-    required: true,
-  },
-  password: {
-    type: String,
-    match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
     required: true,
   },
 });
