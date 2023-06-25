@@ -40,34 +40,50 @@ const deleteSuperAdmin = async (req, res) => {
   }
 };
 
-const updateAdmin = (req, res) => {
+const updateAdmin = async (req, res) => {
   const { id } = req.params;
   const {
-    email, password,
+    email,
   } = req.body;
 
-  superAdmin.findByIdAndUpdate(
-    id,
-    {
-      email,
-      password,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          msg: `The id ${id} was not found`,
-        });
-      }
-      return res.status(200).json(result);
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: 'An error ocurred',
-        error: error.msg,
+  try {
+    const existingSuperAdmin = await superAdmin.findOne({ _id: id });
+
+    if (!existingSuperAdmin) {
+      return res.status(404).json({
+        message: 'This SuperAdmin does not exists',
+        data: null,
+        error: true,
       });
+    }
+    const { firebaseUid } = existingSuperAdmin;
+
+    await firebaseApp.auth().updateUser(firebaseUid, {
+      email: req.body.email,
+      password: req.body.password,
     });
+
+    const result = await superAdmin.findByIdAndUpdate(id, { email }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `The id ${id} was not found`,
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'SuperAdmin Updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
 };
 
 const getAllSuperAdmin = (req, res) => {
@@ -125,7 +141,7 @@ const createSuperAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'An error ocurred',
+      message: error,
       data: null,
       error: true,
     });

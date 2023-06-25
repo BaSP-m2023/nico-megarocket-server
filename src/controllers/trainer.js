@@ -43,15 +43,30 @@ const getTrainerById = (req, res) => {
     });
 };
 
-const updateTrainer = (req, res) => {
+const updateTrainer = async (req, res) => {
   const { id } = req.params;
   const {
     firstName, lastName, dni, phone, email, city, salary, isActive,
   } = req.body;
 
-  trainer.findByIdAndUpdate(
-    id,
-    {
+  try {
+    const existingTrainer = await trainer.findOne({ _id: id });
+
+    if (!existingTrainer) {
+      return res.status(404).json({
+        message: 'This Trainer does not exists',
+        data: null,
+        error: true,
+      });
+    }
+    const { firebaseUid } = existingTrainer;
+
+    await firebaseApp.auth().updateUser(firebaseUid, {
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    const result = await trainer.findByIdAndUpdate(id, {
       firstName,
       lastName,
       dni,
@@ -60,18 +75,27 @@ const updateTrainer = (req, res) => {
       city,
       salary,
       isActive,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          msg: `The id ${id} was not found`,
-        });
-      }
-      return res.status(200).json(result);
-    })
-    .catch((error) => res.status(500).json(error));
+    }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `The id ${id} was not found`,
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Trainer Updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
 };
 
 const deleteTrainer = async (req, res) => {
@@ -142,8 +166,8 @@ const postTrainer = async (req, res) => {
     const result = await trainer.create({
       firebaseUid,
       firstName,
-      email,
       lastName,
+      email,
       dni,
       phone,
       city,
@@ -158,7 +182,7 @@ const postTrainer = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Trainer cannot be created',
+      message: error,
       data: null,
       error: true,
     });

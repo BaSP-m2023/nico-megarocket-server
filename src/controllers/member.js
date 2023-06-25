@@ -64,14 +64,14 @@ const createMember = async (req, res) => {
       });
     }
     return res.status(500).json({
-      message: 'An error ocurred',
+      message: error,
       data: null,
       error: true,
     });
   }
 };
 
-const updateMember = (req, res) => {
+const updateMember = async (req, res) => {
   const { id } = req.params;
   const {
     firstName,
@@ -86,9 +86,24 @@ const updateMember = (req, res) => {
     membership,
   } = req.body;
 
-  Member.findByIdAndUpdate(
-    id,
-    {
+  try {
+    const existingMember = await Member.findOne({ _id: id });
+
+    if (!existingMember) {
+      return res.status(404).json({
+        message: 'This Member does not exists',
+        data: null,
+        error: true,
+      });
+    }
+    const { firebaseUid } = existingMember;
+
+    await firebaseApp.auth().updateUser(firebaseUid, {
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    const result = await Member.findByIdAndUpdate(id, {
       firstName,
       lastName,
       dni,
@@ -99,19 +114,27 @@ const updateMember = (req, res) => {
       postalCode,
       isActive,
       membership,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Member with id: ${id} was not found`,
-          error: true,
-        });
-      }
-      return res.status(201).json(result);
-    })
-    .catch((error) => res.status(500).json(error));
+    }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `The id ${id} was not found`,
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Member Updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
 };
 
 const getAllMembers = (req, res) => {
@@ -180,7 +203,7 @@ const deleteMember = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: true,
+      message: error,
       data: null,
       error: true,
     });

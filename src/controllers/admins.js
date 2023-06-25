@@ -1,43 +1,57 @@
 const Admin = require('../models/Admins');
 const firebaseApp = require('../helper/firebase');
 
-const updateAdmin = (req, res) => {
+const updateAdmin = async (req, res) => {
   const { id } = req.params;
   const {
     firstName, lastName, dni, phone, email, city,
   } = req.body;
 
-  Admin.findByIdAndUpdate(
-    id,
-    {
+  try {
+    const existingAdmin = await Admin.findOne({ _id: id });
+
+    if (!existingAdmin) {
+      return res.status(404).json({
+        message: 'This Admin does not exists',
+        data: null,
+        error: true,
+      });
+    }
+    const { firebaseUid } = existingAdmin;
+
+    await firebaseApp.auth().updateUser(firebaseUid, {
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    const result = await Admin.findByIdAndUpdate(id, {
       firstName,
       lastName,
       dni,
       phone,
       email,
       city,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Admin with ID ${id} not found`,
-          data: null,
-          error: true,
-        });
-      }
-      return res.status(200).json({
-        message: 'Admin updated!',
-        data: result,
-        error: false,
+    }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `The id ${id} was not found`,
+        data: null,
+        error: true,
       });
-    })
-    .catch((error) => res.status(500).json({
+    }
+    return res.status(200).json({
+      message: 'Admin Updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
       message: error,
       data: null,
       error: true,
-    }));
+    });
+  }
 };
 
 const createAdmin = async (req, res) => {
@@ -159,7 +173,7 @@ const deleteAdmin = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: true,
+      message: 'Server Error',
       data: null,
       error: true,
     });
