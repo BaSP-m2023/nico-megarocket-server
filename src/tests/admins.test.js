@@ -5,13 +5,13 @@ const app = require('../app');
 const Admin = require('../models/Admins');
 
 const mockAdmin = {
-  firstName: 'Jose',
-  lastName: 'Daniele',
-  dni: 43491185,
-  phone: '3413755012',
-  email: 'josedaniele@example.com',
+  firstName: 'Baron',
+  lastName: 'DeLaCerveza',
+  dni: '22676305',
+  phone: '3417854385',
+  email: 'barondelacerveza@gmail.com',
   city: 'Rosario',
-  password: 'AUhiygwb12356',
+  password: 'AbcdeF12G456',
 };
 const mockAdminBad = {
   firstName: 'Jos2',

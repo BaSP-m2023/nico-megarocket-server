@@ -1,6 +1,7 @@
 const Member = require('../models/Member');
+const firebaseApp = require('../helper/firebase');
 
-const createMember = (req, res) => {
+const createMember = async (req, res) => {
   const {
     firstName,
     lastName,
@@ -14,46 +15,30 @@ const createMember = (req, res) => {
     membership,
   } = req.body;
 
-  Member.create({
-    firstName,
-    lastName,
-    dni,
-    birthday,
-    phone,
-    email,
-    city,
-    postalCode,
-    isActive,
-    membership,
-  })
-    .then((result) => res.status(201).json({
-      message: 'Member created successfuly',
-      data: result,
-      error: false,
-    }))
-    .catch((error) => {
-      if (error.message.includes('E11000 duplicate key error collection')) {
-        return res.status(400).json({
-          message: 'Email already exists',
-          error,
-        });
-      }
-      return res.status(500).json({
-        message: 'An error ocurred',
-        error,
+  let firebaseUid;
+
+  try {
+    const existingMember = await Member.findOne({ email });
+
+    if (existingMember) {
+      return res.status(400).json({
+        message: 'This email is already used',
+        data: null,
+        error: true,
       });
+    }
+
+    const newFirebaseUser = await firebaseApp.auth().createUser({
+      email: req.body.email,
+      password: req.body.password,
     });
-};
 
-const updateMember = (req, res) => {
-  const { id } = req.params;
-  const {
-    firstName, lastName, dni, birthday, phone, email, city, postalCode, isActive, membership,
-  } = req.body;
+    firebaseUid = newFirebaseUser.uid;
 
-  Member.findByIdAndUpdate(
-    id,
-    {
+    await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'MEMBER' });
+
+    const result = await Member.create({
+      firebaseUid,
       firstName,
       lastName,
       dni,
@@ -64,19 +49,92 @@ const updateMember = (req, res) => {
       postalCode,
       isActive,
       membership,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (!result) {
-        return res.status(404).json({
-          message: `Member with id: ${id} was not found`,
-          error: true,
-        });
-      }
-      return res.status(201).json(result);
-    })
-    .catch((error) => res.status(500).json(error));
+    });
+
+    return res.status(201).json({
+      message: 'Member created successfuly',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    if (error.message.includes('E11000 duplicate key error collection')) {
+      return res.status(400).json({
+        message: 'Email already exists',
+        error,
+      });
+    }
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
+};
+
+const updateMember = async (req, res) => {
+  const { id } = req.params;
+  const {
+    firstName,
+    lastName,
+    dni,
+    birthday,
+    phone,
+    email,
+    city,
+    postalCode,
+    isActive,
+    membership,
+  } = req.body;
+
+  try {
+    const existingMember = await Member.findOne({ _id: id });
+
+    if (!existingMember) {
+      return res.status(404).json({
+        message: 'This Member does not exists',
+        data: null,
+        error: true,
+      });
+    }
+    const { firebaseUid } = existingMember;
+
+    await firebaseApp.auth().updateUser(firebaseUid, {
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    const result = await Member.findByIdAndUpdate(id, {
+      firstName,
+      lastName,
+      dni,
+      birthday,
+      phone,
+      email,
+      city,
+      postalCode,
+      isActive,
+      membership,
+    }, { new: true });
+
+    if (!result) {
+      return res.status(404).json({
+        message: `The id ${id} was not found`,
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Member Updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
 };
 
 const getAllMembers = (req, res) => {
@@ -115,22 +173,41 @@ const getById = (req, res) => {
 };
 
 const deleteMember = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
+    const existingMember = await Member.findOne({ _id: id });
 
-    const memberExist = await Member.findById(id);
-
-    if (!memberExist) {
-      return res.status(404).send('ID was not found');
+    if (!existingMember) {
+      return res.status(404).json({
+        message: 'This Member does not exists',
+        data: null,
+        error: true,
+      });
     }
+    const { firebaseUid } = existingMember;
 
-    await Member.findByIdAndDelete(id);
+    await firebaseApp.auth().deleteUser(firebaseUid);
 
-    res.send('Member has been deleted');
+    const result = await Member.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({
+        message: `Member with ID ${id} not found`,
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Member deleted!',
+      data: null,
+      error: false,
+    });
   } catch (error) {
-    res.status(500).send('Member could not be deleted');
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
   }
-  return null;
 };
 
 module.exports = {
