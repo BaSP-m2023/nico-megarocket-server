@@ -2,12 +2,13 @@ const express = require('express');
 const trainerController = require('../controllers/trainer');
 const validation = require('../validations/trainer');
 const validationId = require('../validations/validateId');
-// const verifyToken = require("../middlewares/authMiddleware");
+const verifyToken = require('../middlewares/authMiddleware');
+
 const router = express.Router();
 router
   .put(
     '/:id',
-    // verifyToken(["ADMIN"]),
+    verifyToken,
     validationId.validateId,
     validation.validateUpdate,
     trainerController.updateTrainer,
