@@ -1,57 +1,55 @@
 const classes = require('../models/Class');
 
-const getClasses = (req, res) => {
-  classes.find()
-    .populate('trainer')
-    .populate('activity')
-    .then((result) => {
-      if (result) {
-        res.status(200).json({
-          message: 'Classes list',
-          data: result,
-          error: false,
-        });
-      }
-    })
-    .catch((error) => res.status(500).json({
+const getClasses = async (req, res) => {
+  try {
+    const result = await classes.find()
+      .populate('trainer')
+      .populate('activity');
+
+    return res.status(200).json({
+      message: 'Classes list',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
       message: error,
       data: null,
       error: true,
-    }));
-};
-
-const getClassById = (req, res) => {
-  const { id } = req.params;
-
-  classes.findById(id)
-    .populate('trainer')
-    .populate('activity')
-    .then((result) => {
-      if (result) {
-        res.status(200).json({
-          message: 'Class found',
-          data: result,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'Class not found',
-          data: null,
-          error: true,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: error,
-        data: null,
-        error: true,
-      });
     });
+  }
 };
-const updateClass = (req, res) => {
+
+const getClassById = async (req, res) => {
   const { id } = req.params;
 
+  try {
+    const result = await classes.findById(id)
+      .populate('trainer')
+      .populate('activity');
+
+    if (result) {
+      return res.status(200).json({
+        message: 'Class found',
+        data: result,
+        error: false,
+      });
+    }
+    return res.status(404).json({
+      message: 'Class not found',
+      data: null,
+      error: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
+};
+const updateClass = async (req, res) => {
+  const { id } = req.params;
   const {
     hour,
     day,
@@ -60,90 +58,89 @@ const updateClass = (req, res) => {
     slots,
   } = req.body;
 
-  classes.findByIdAndUpdate(
-    id,
-    {
-      hour,
-      day,
-      trainer,
-      activity,
-      slots,
-    },
-    { new: true },
-  )
-    .then((result) => {
-      if (result) {
-        res.status(201).json({
-          message: 'Class updated',
-          data: result,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'Class not found',
-          data: null,
-          error: true,
-        });
-      }
-    })
-    .catch((error) => res.status(500).json({
+  try {
+    const result = await classes.findByIdAndUpdate(
+      id,
+      {
+        hour,
+        day,
+        trainer,
+        activity,
+        slots,
+      },
+      { new: true },
+    );
+
+    if (!result) {
+      return res.status(404).json({
+        message: 'Class not found',
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(201).json({
+      message: 'Class updated',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
       message: error,
       data: null,
       error: true,
-    }));
+    });
+  }
 };
 
-const deleteClass = (req, res) => {
+const deleteClass = async (req, res) => {
   const { id } = req.params;
-  classes.findByIdAndDelete(id)
-    .then((result) => {
-      if (result) {
-        res.status(200).json({
-          message: 'Class deleted',
-          data: result,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'Class not found',
-          data: null,
-          error: true,
-        });
-      }
-    })
-    .catch((error) => res.status(500).json({
-      message: error,
+
+  try {
+    const result = await classes.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.status(404).json({
+        message: 'Class not found',
+        data: null,
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      message: 'Class deleted.',
       data: null,
       error: false,
-    }));
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
 };
 
-const createClass = (req, res) => {
+const createClass = async (req, res) => {
   const {
     hour, day, trainer, activity, slots,
   } = req.body;
 
-  classes.create({
-    hour,
-    day,
-    trainer,
-    activity,
-    slots,
-  })
-    .then((result) => {
-      res.status(201).json({
-        message: 'Class created',
-        data: result,
-        error: false,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: error,
-        data: null,
-        error: true,
-      });
+  try {
+    const result = await classes.create({
+      hour, day, trainer, activity, slots,
     });
+
+    return res.status(201).json({
+      message: 'Class Created',
+      data: result,
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
 };
 
 module.exports = {
