@@ -1,4 +1,4 @@
-import firebaseApp from '../helper/firebase';
+const firebaseApp = require('../helper/firebase');
 
 const verifyToken = async (req, res, next) => {
   const { token } = req.headers;
@@ -22,4 +22,4 @@ const verifyToken = async (req, res, next) => {
   }
 };
 
-export default { verifyToken };
+module.exports = verifyToken;
