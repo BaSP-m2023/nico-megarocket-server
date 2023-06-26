@@ -86,24 +86,22 @@ const updateAdmin = async (req, res) => {
   }
 };
 
-const getAllSuperAdmin = (req, res) => {
-  superAdmin.find()
-    .then((result) => {
-      if (result) {
-        res.status(200).json({
-          message: 'Super Admins list',
-          data: result,
-          error: false,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: error,
-        data: null,
-        error: true,
-      });
+const getAllSuperAdmin = async (req, res) => {
+  try {
+    const result = await superAdmin.find();
+
+    return res.status(200).json({
+      message: 'Super Admins list',
+      data: result,
+      error: false,
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
 };
 
 const createSuperAdmin = async (req, res) => {
@@ -150,32 +148,31 @@ const createSuperAdmin = async (req, res) => {
   }
 };
 
-const getSuperAdminById = (req, res) => {
+const getSuperAdminById = async (req, res) => {
   const { id } = req.params;
 
-  superAdmin.findById(id)
-    .then((result) => {
-      if (result) {
-        res.status(200).json({
-          message: 'Super Admin found',
-          data: result,
-          error: false,
-        });
-      } else {
-        res.status(404).json({
-          message: 'Super Admin not found',
-          data: null,
-          error: true,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: error,
-        data: null,
-        error: true,
+  try {
+    const result = await superAdmin.findById(id);
+
+    if (result) {
+      return res.status(200).json({
+        message: 'Super Admin found',
+        data: result,
+        error: false,
       });
+    }
+    return res.status(404).json({
+      message: 'Super Admin not found',
+      data: null,
+      error: true,
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: error,
+      data: null,
+      error: true,
+    });
+  }
 };
 
 module.exports = {
