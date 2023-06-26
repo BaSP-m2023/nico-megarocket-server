@@ -2,20 +2,20 @@ const classes = require('../models/Class');
 
 const getClasses = async (req, res) => {
   try {
-    const allClasses = await classes.find()
+    const result = await classes.find()
       .populate('trainer')
       .populate('activity');
 
     return res.status(200).json({
       message: 'Classes list',
-      data: allClasses,
+      data: result,
       error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'there is an error here',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
@@ -79,7 +79,7 @@ const updateClass = async (req, res) => {
       });
     }
     return res.status(201).json({
-      message: 'Class Updated',
+      message: 'Class updated',
       data: result,
       error: false,
     });
@@ -136,9 +136,9 @@ const createClass = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'it cannot be created',
+      message: error,
       data: null,
-      error,
+      error: true,
     });
   }
 };
