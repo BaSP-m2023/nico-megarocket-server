@@ -60,7 +60,8 @@ const createMember = async (req, res) => {
     if (error.message.includes('E11000 duplicate key error collection')) {
       return res.status(400).json({
         message: 'Email already exists',
-        error,
+        data: null,
+        error: true,
       });
     }
     return res.status(500).json({
@@ -139,11 +140,11 @@ const updateMember = async (req, res) => {
 
 const getAllMembers = async (req, res) => {
   try {
-    const members = await Member.find();
+    const result = await Member.find();
 
     return res.status(200).json({
       message: 'Members list',
-      data: members,
+      data: result,
       error: false,
     });
   } catch (error) {
