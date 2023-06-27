@@ -1,17 +1,17 @@
 const express = require('express');
 const verifyToken = require('../middlewares/authMiddleware');
 const validationId = require('../validations/validateId');
-const adminValidate = require('../validations/admins');
+const validateSuperAdmin = require('../validations/super-admin');
 
 const router = express.Router();
 
-const controllersAdmin = require('../controllers/admins');
+const controllerSuperAdmin = require('../controllers/super-admin');
 
 router
-  .put('/:id', verifyToken, validationId.validateId, adminValidate.validateUpdate, controllersAdmin.updateAdmin)
-  .get('/', verifyToken, controllersAdmin.getAdmins)
-  .get('/:id', verifyToken, validationId.validateId, controllersAdmin.getAdminsById)
-  .post('/', verifyToken, adminValidate.validateCreation, controllersAdmin.createAdmin)
-  .delete('/:id', verifyToken, validationId.validateId, controllersAdmin.deleteAdmin);
+  .put('/:id', verifyToken, validationId.validateId, validateSuperAdmin.validateUpdate, controllerSuperAdmin.updateAdmin)
+  .get('/', verifyToken, controllerSuperAdmin.getAllSuperAdmin)
+  .get('/:id', verifyToken, validationId.validateId, controllerSuperAdmin.getSuperAdminById)
+  .post('/', verifyToken, validateSuperAdmin.createSuperAdminValidation, controllerSuperAdmin.createSuperAdmin)
+  .delete('/:id', verifyToken, validationId.validateId, controllerSuperAdmin.deleteSuperAdmin);
 
 module.exports = router;
