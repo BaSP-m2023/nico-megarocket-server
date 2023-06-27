@@ -1,18 +1,17 @@
 const express = require('express');
-
-const validationsAdmin = require('../validations/admins');
-
-const controllersAdmin = require('../controllers/admins');
-
+const verifyToken = require('../middlewares/authMiddleware');
+const adminValidations = require('../validations/admins');
 const validationId = require('../validations/validateId');
 
 const router = express.Router();
 
+const adminControllers = require('../controllers/admins');
+
 router
-  .put('/:id', validationId.validateId, validationsAdmin.validateUpdate, controllersAdmin.updateAdmin)
-  .post('/', validationsAdmin.validateCreation, controllersAdmin.createAdmin)
-  .get('/', controllersAdmin.getAdmins)
-  .get('/:id', validationId.validateId, controllersAdmin.getAdminsById)
-  .delete('/:id', validationId.validateId, controllersAdmin.deleteAdmin);
+  .get('/', verifyToken, adminControllers.getAdmins)
+  .get('/:id', verifyToken, validationId.validateId, adminControllers.getAdminsById)
+  .post('/', verifyToken, adminValidations.validateCreation, adminControllers.createAdmin)
+  .put('/:id', verifyToken, validationId.validateId, adminValidations.validateUpdate, adminControllers.updateAdmin)
+  .delete('/:id', verifyToken, validationId.validateId, adminControllers.deleteAdmin);
 
 module.exports = router;
