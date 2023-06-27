@@ -13,26 +13,22 @@ router
     validation.validateUpdate,
     trainerController.updateTrainer,
   )
-  .get(
-    '/',
-    // checkAuth(["ADMIN", "SUPER_ADMIN"]),
-    trainerController.getAllTrainers,
-  )
+  .get('/', verifyToken, trainerController.getAllTrainers)
   .delete(
     '/:id',
-    // checkAuth(["ADMIN", "SUPER_ADMIN"]),
+    verifyToken,
     validationId.validateId,
     trainerController.deleteTrainer,
   )
   .get(
     '/:id',
-    // checkAuth(["ADMIN", "SUPER_ADMIN"]),
+    verifyToken,
     validationId.validateId,
     trainerController.getTrainerById,
   )
   .post(
     '/',
-    // checkAuth(["ADMIN", "SUPER_ADMIN"]),
+    verifyToken,
     validation.validateCreation,
     trainerController.postTrainer,
   );
