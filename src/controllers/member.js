@@ -11,7 +11,6 @@ const createMember = async (req, res) => {
     email,
     city,
     postalCode,
-    isActive,
     membership,
   } = req.body;
 
@@ -47,7 +46,6 @@ const createMember = async (req, res) => {
       email,
       city,
       postalCode,
-      isActive,
       membership,
     });
 
