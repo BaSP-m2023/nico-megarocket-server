@@ -45,6 +45,7 @@ const validateCreation = (req, res, next) => {
         'string.pattern.base':
           'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
       }),
+    isActive: Joi.boolean(),
     membership: Joi.string()
       .valid('Black', 'Classic', 'Only_classes')
       .messages({

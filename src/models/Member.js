@@ -55,6 +55,10 @@ const memberSchema = new Schema({
     minLength: 3,
     maxLength: 5,
   },
+  isActive: {
+    type: Boolean,
+    default: false,
+  },
   membership: {
     type: String,
     enum: ['Black', 'Classic', 'Only classes'],
