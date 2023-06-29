@@ -37,7 +37,9 @@ const updateSubscription = async (req, res) => {
         classId, members, date,
       },
       { new: true },
-    );
+    )
+      .populate('members')
+      .populate('classId');
 
     if (!result) {
       return res.status(404).json({
