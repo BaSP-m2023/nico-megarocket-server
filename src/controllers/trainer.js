@@ -105,9 +105,9 @@ const deleteTrainer = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const existingTrainer = await trainer.findOne({ id });
+    const existingTrainer = await trainer.findOne({ _id: id });
 
-    if (existingTrainer) {
+    if (!existingTrainer) {
       return res.status(404).json({
         message: 'Trainer not found',
         data: null,

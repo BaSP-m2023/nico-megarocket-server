@@ -75,14 +75,7 @@ const validateUpdate = (req, res, next) => {
       .min(10000000)
       .max(99999999),
     birthday: Joi.date()
-      .max('now')
-      .custom((value, helpers) => {
-        const age = new Date().getFullYear() - new Date(value).getFullYear();
-        if (age < 12) {
-          return helpers.error('date.minAge', { minAge: 12 });
-        }
-        return value;
-      }),
+      .max('now'),
     phone: Joi.string()
       .regex(/^[0-9]{10}$/)
       .length(10)
@@ -99,8 +92,7 @@ const validateUpdate = (req, res, next) => {
     postalCode: Joi.string()
       .min(3)
       .max(5),
-    isActive: Joi.boolean()
-      .default(true),
+    isActive: Joi.boolean(),
     membership: Joi.string()
       .valid('Black', 'Classic', 'Only Classes'),
   });
