@@ -45,12 +45,11 @@ const validateCreation = (req, res, next) => {
         'string.pattern.base':
           'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
       }),
-    isActive: Joi.boolean()
-      .required(),
+    isActive: Joi.boolean(),
     membership: Joi.string()
-      .valid('Black', 'Classic', 'Only_classes')
+      .valid('Black', 'Classic', 'Only Classes')
       .messages({
-        'any.only': 'Membership must be one of Black, Classic, or Only_classes',
+        'any.only': 'Membership must be one of Black, Classic, or Only Classes',
       }),
   });
 
@@ -103,7 +102,7 @@ const validateUpdate = (req, res, next) => {
     isActive: Joi.boolean()
       .default(true),
     membership: Joi.string()
-      .valid('Black', 'Classic', 'Only_classes'),
+      .valid('Black', 'Classic', 'Only Classes'),
   });
 
   const validation = memberValidation.validate(req.body);

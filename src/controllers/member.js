@@ -35,6 +35,14 @@ const createMember = async (req, res) => {
 
     firebaseUid = newFirebaseUser.uid;
 
+    if (newFirebaseUser.email) {
+      return res.status(400).json({
+        message: 'Email already exists',
+        data: null,
+        error: true,
+      });
+    }
+
     await firebaseApp.auth().setCustomUserClaims(newFirebaseUser.uid, { role: 'MEMBER' });
 
     const result = await Member.create({
