@@ -19,10 +19,19 @@ const createMember = async (req, res) => {
 
   try {
     const existingMember = await Member.findOne({ email });
+    const existingDNIMember = await Member.findOne({ dni });
 
     if (existingMember) {
       return res.status(400).json({
         message: 'Email already exists',
+        data: null,
+        error: true,
+      });
+    }
+
+    if (existingDNIMember) {
+      return res.status(400).json({
+        message: 'This DNI is registered',
         data: null,
         error: true,
       });

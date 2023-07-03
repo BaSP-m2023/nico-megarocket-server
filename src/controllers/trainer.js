@@ -148,10 +148,18 @@ const postTrainer = async (req, res) => {
   let firebaseUid;
   try {
     const existingTrainer = await trainer.findOne({ email });
+    const existingDNITrainer = await trainer.findOne({ dni });
 
     if (existingTrainer) {
       return res.status(400).json({
         message: 'Email already exists',
+        data: null,
+        error: true,
+      });
+    }
+    if (existingDNITrainer) {
+      return res.status(400).json({
+        message: 'This DNI is registered',
         data: null,
         error: true,
       });
