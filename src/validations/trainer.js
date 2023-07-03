@@ -22,6 +22,7 @@ const validateUpdate = (req, res, next) => {
         'string.pattern.base':
         'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
       }),
+    repeatPassword: Joi.string().ref('password'),
   });
   const validation = trainerValidation.validate(req.body);
 
@@ -58,8 +59,9 @@ const validateCreation = (req, res, next) => {
       .required()
       .messages({
         'string.pattern.base':
-      'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
+        'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
       }),
+    repeatPassword: Joi.string().ref('password'),
   });
 
   const validation = trainerValidation.validate(req.body);
