@@ -51,6 +51,7 @@ const validateCreation = (req, res, next) => {
       .messages({
         'any.only': 'Membership must be one of Black, Classic, or Only Classes',
       }),
+    picture: Joi.string(),
   });
 
   const validation = memberValidation.validate(req.body);
