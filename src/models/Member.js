@@ -12,14 +12,14 @@ const memberSchema = new Schema({
     required: true,
     minLength: 3,
     maxLength: 15,
-    match: /^[A-Za-z]+$/,
+    match: /^\w+(?:\s+\w+)*$/,
   },
   lastName: {
     type: String,
     required: true,
     minLength: 3,
     maxLength: 15,
-    match: /^[A-Za-z]+$/,
+    match: /^\w+(?:\s+\w+)*$/,
   },
   dni: {
     type: Number,
