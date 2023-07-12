@@ -42,6 +42,9 @@ const adminsSchema = new Schema({
     maxLength: 10,
     required: true,
   },
+  picture: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('Admin', adminsSchema);

@@ -96,6 +96,7 @@ const validateUpdate = (req, res, next) => {
     isActive: Joi.boolean(),
     membership: Joi.string()
       .valid('Black', 'Classic', 'Only Classes'),
+    picture: Joi.string(),
   });
 
   const validation = memberValidation.validate(req.body);

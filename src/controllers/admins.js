@@ -4,7 +4,7 @@ const firebaseApp = require('../helper/firebase');
 const updateAdmin = async (req, res) => {
   const { id } = req.params;
   const {
-    firstName, lastName, dni, phone, email, city,
+    firstName, lastName, dni, phone, email, city, picture,
   } = req.body;
 
   try {
@@ -31,6 +31,7 @@ const updateAdmin = async (req, res) => {
       phone,
       email,
       city,
+      picture,
     }, { new: true });
 
     if (!result) {
@@ -56,7 +57,7 @@ const updateAdmin = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   const {
-    firstName, lastName, dni, phone, email, city,
+    firstName, lastName, dni, phone, email, city, picture,
   } = req.body;
 
   let firebaseUid;
@@ -88,6 +89,7 @@ const createAdmin = async (req, res) => {
       phone,
       email,
       city,
+      picture,
     });
 
     return res.status(201).json({

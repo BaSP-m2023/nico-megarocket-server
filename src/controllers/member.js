@@ -96,6 +96,7 @@ const updateMember = async (req, res) => {
     postalCode,
     isActive,
     membership,
+    picture,
   } = req.body;
 
   try {
@@ -126,6 +127,7 @@ const updateMember = async (req, res) => {
       postalCode,
       isActive,
       membership,
+      picture,
     }, { new: true });
 
     if (!result) {

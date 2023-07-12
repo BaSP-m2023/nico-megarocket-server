@@ -49,7 +49,7 @@ const getTrainerById = async (req, res) => {
 const updateTrainer = async (req, res) => {
   const { id } = req.params;
   const {
-    firstName, lastName, dni, phone, email, city, salary, isActive,
+    firstName, lastName, dni, phone, email, city, salary, isActive, picture,
   } = req.body;
 
   try {
@@ -78,6 +78,7 @@ const updateTrainer = async (req, res) => {
       city,
       salary,
       isActive,
+      picture,
     }, { new: true });
 
     if (!result) {
@@ -142,7 +143,7 @@ const deleteTrainer = async (req, res) => {
 
 const postTrainer = async (req, res) => {
   const {
-    firstName, lastName, dni, phone, email, city, salary, isActive,
+    firstName, lastName, dni, phone, email, city, salary, isActive, picture,
   } = req.body;
 
   let firebaseUid;
@@ -184,6 +185,7 @@ const postTrainer = async (req, res) => {
       city,
       salary,
       isActive,
+      picture,
     });
 
     return res.status(201).json({

@@ -52,6 +52,9 @@ const trainerSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  picture: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('Trainer', trainerSchema);
