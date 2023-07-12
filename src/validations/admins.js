@@ -14,6 +14,7 @@ const validateUpdate = (req, res, next) => {
     password: Joi.string()
       .min(8)
       .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
+    picture: Joi.string(),
   });
 
   const validation = adminValidation.validate(req.body);
@@ -66,6 +67,7 @@ const validateCreation = (req, res, next) => {
         'string.pattern.base':
           'The password must contain at least one lowercase letter, one uppercase letter, and one digit',
       }),
+    picture: Joi.string(),
   });
   const validation = adminValidation.validate(req.body);
   if (!validation.error) return next();

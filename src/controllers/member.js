@@ -13,6 +13,7 @@ const createMember = async (req, res) => {
     postalCode,
     isActive,
     membership,
+    picture,
   } = req.body;
 
   let firebaseUid;
@@ -58,6 +59,7 @@ const createMember = async (req, res) => {
       postalCode,
       isActive,
       membership,
+      picture,
     });
 
     return res.status(201).json({
@@ -94,6 +96,7 @@ const updateMember = async (req, res) => {
     postalCode,
     isActive,
     membership,
+    picture,
   } = req.body;
 
   try {
@@ -124,6 +127,7 @@ const updateMember = async (req, res) => {
       postalCode,
       isActive,
       membership,
+      picture,
     }, { new: true });
 
     if (!result) {

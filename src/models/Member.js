@@ -64,6 +64,9 @@ const memberSchema = new Schema({
     enum: ['Black', 'Classic', 'Only Classes'],
     required: true,
   },
+  picture: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('member', memberSchema);
