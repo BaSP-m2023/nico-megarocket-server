@@ -14,7 +14,7 @@ const validateUpdate = (req, res, next) => {
     password: Joi.string()
       .min(8)
       .pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/),
-    picture: Joi.string(),
+    picture: Joi.string().allow(''),
   });
 
   const validation = adminValidation.validate(req.body);
