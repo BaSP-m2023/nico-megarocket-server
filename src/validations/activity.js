@@ -5,6 +5,7 @@ const validateCreation = (req, res, next) => {
     name: Joi.string().required(),
     isActive: Joi.boolean().default(true),
     description: Joi.string().required(),
+    picture: Joi.string().allow(''),
   });
 
   const validation = activityValidation.validate(req.body);
@@ -23,6 +24,7 @@ const validateUpdate = (req, res, next) => {
     }),
     description: Joi.string().min(2).max(100),
     isActive: Joi.boolean(),
+    picture: Joi.string().allow(''),
   });
 
   const validation = activityValidation.validate(req.body);
