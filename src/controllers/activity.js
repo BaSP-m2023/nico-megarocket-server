@@ -44,13 +44,16 @@ const getActivityById = async (req, res) => {
 };
 
 const createActivity = async (req, res) => {
-  const { name, isActive, description } = req.body;
+  const {
+    name, isActive, description, picture,
+  } = req.body;
 
   try {
     const result = await activity.create({
       name,
       isActive,
       description,
+      picture,
     });
 
     return res.status(201).json({
@@ -70,7 +73,7 @@ const createActivity = async (req, res) => {
 const updateActivity = async (req, res) => {
   const { id } = req.params;
   const {
-    name, description, isActive,
+    name, description, isActive, picture,
   } = req.body;
 
   try {
@@ -80,6 +83,7 @@ const updateActivity = async (req, res) => {
         name,
         description,
         isActive,
+        picture,
       },
       { new: true },
     );

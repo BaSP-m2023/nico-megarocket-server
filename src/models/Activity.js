@@ -15,6 +15,9 @@ const activitySchema = new Schema({
     type: Boolean,
     default: true,
   },
+  picture: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('Activity', activitySchema);
