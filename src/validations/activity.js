@@ -22,7 +22,7 @@ const validateUpdate = (req, res, next) => {
     name: Joi.string().pattern(/^[A-Za-z\s]{2,30}$/).messages({
       'string.pattern.base': 'The name must contain only letters(between 2 and 30',
     }),
-    description: Joi.string().min(2).max(100),
+    description: Joi.string().min(2).max(1000),
     isActive: Joi.boolean(),
     picture: Joi.string().allow(''),
   });
